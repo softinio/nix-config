@@ -149,7 +149,6 @@
       set JAVA_HOME /Users/salar/.nix-profile/bin/java
 
       set -x FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
-      set -x SKIM_DEFAULT_COMMAND "rg --files || fd || find ."
       '';
 
     promptInit = ''
