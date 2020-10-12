@@ -75,6 +75,14 @@
     enableFishIntegration = true;
   };
 
+  programs.kitty = {
+    enable = true;
+    font.name = "SF Mono";
+    settings = {
+      font_size = 20;
+    };
+  };
+
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
