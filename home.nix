@@ -156,7 +156,7 @@
 
       set JAVA_HOME /Users/salar/.nix-profile/bin/java
 
-      set -x FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
+      set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
       '';
 
     promptInit = ''
@@ -209,8 +209,6 @@
 
 
   home.packages = [
-    pkgs.fish
-    pkgs.git
     pkgs.awscli
     pkgs.pgcli
     pkgs.tig
