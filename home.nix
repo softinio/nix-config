@@ -18,7 +18,7 @@
   home.stateVersion = "20.09";
 
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   programs.git = {
@@ -75,14 +75,6 @@
     enableFishIntegration = true;
   };
 
-  programs.kitty = {
-    enable = true;
-    font.name = "SF Mono";
-    settings = {
-      font_size = 20;
-    };
-  };
-
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
@@ -104,6 +96,98 @@
     settings = {
       character.symbol = "λ";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    plugins = with pkgs.vimPlugins; [
+      vim-fish
+      vim-nix
+      fzf-vim
+      seoul256-vim
+      vim-polyglot
+      vim-gitgutter
+      rainbow
+      ack-vim
+    ];
+    extraConfig = ''
+        set encoding=utf-8
+        syntax on
+        set expandtab
+        set hidden
+        set showmatch
+        set textwidth=150
+        set colorcolumn=120
+        set cursorcolumn
+        set cursorline
+        set cmdheight=2
+        set smarttab
+        set linebreak
+        set guifont=SF\ Mono:h12
+        set termguicolors
+        let g:clipboard = {
+              \ 'name': 'pbcopy',
+              \ 'copy': {
+              \    '+': 'pbcopy',
+              \    '*': 'pbcopy',
+              \  },
+              \ 'paste': {
+              \    '+': 'pbpaste',
+              \    '*': 'pbpaste',
+              \ },
+              \ 'cache_enabled': 0,
+              \ }
+        set clipboard=unnamed
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+        let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+        let g:seoul256_background = 233
+        let g:seoul256_srgb = 1
+        colorscheme seoul256
+        set background=dark
+        set number
+        let g:netrw_banner=0        " disable annoying banner
+        let g:netrw_browse_split=4  " open in prior window
+        let g:netrw_altv=1          " open splits to the right
+        let g:netrw_liststyle=3     " tree view
+        let g:netrw_list_hide=netrw_gitignore#Hide()
+        let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+        let g:netrw_list_hide= '.*\.pyc$'
+        au BufRead,BufNewFile *.sbt set filetype=scala
+        if executable("rg")
+            set grepprg=rg\ --vimgrep\ --no-heading
+            set grepformat=%f:%l:%c:%m,%f:%l:%m
+        endif
+        let g:ackprg='rg --vimgrep --no-heading'
+        set grepprg=rg\ --vimgrep
+        let g:rg_command = 'rg --vimgrep -S'
+        nnoremap <C-p> :FZF<CR>
+        let g:rainbow_active = 1
+        let g:rainbow_conf = {
+            \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+            \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+            \   'operators': '_,_',
+            \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+            \   'separately': {
+            \       '*': {},
+            \       'tex': {
+            \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+            \       },
+            \       'lisp': {
+            \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+            \       },
+            \       'vim': {
+            \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+            \       },
+            \       'html': {
+            \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+            \       },
+            \       'css': 0,
+            \   }
+            \}
+        '';
   };
 
   programs.fish = {
@@ -152,9 +236,9 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set PATH $HOME/.emacs.d/bin /opt/local/bin $HOME/bin $PATH
+      set -xg PATH $HOME/.emacs.d/bin /opt/local/bin $HOME/bin $PATH
 
-      set JAVA_HOME /Users/salar/.nix-profile/bin/java
+      set -xg JAVA_HOME /Users/salar/.nix-profile/bin
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
       '';
@@ -189,7 +273,6 @@
       nixdaemon="sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist && launchctl start org.nixos.nix-daemon";
       v="emacs -nw";
       vc="emacsclient -c -a ''";
-      em="emacsclient -t -a ''";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
       moshfre1="mosh salar@fre1.softinio.net";
@@ -264,5 +347,12 @@
     pkgs.ncdu
     pkgs.prettyping
     pkgs.rnix-lsp
+    pkgs.aspell
+    pkgs.procs
+    pkgs.dust
+    pkgs.tokei
+    pkgs.tealdeer
+    pkgs.hyperfine
+    pkgs.graphviz
   ];
 }
