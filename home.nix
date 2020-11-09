@@ -42,7 +42,7 @@
     ];
     extraConfig = {
       core = {
-        editor = "emacs -nw";
+        editor = "nvim";
       };
       merge.tool = "intellij";
       mergetool = {
@@ -81,6 +81,12 @@
     enableNixDirenvIntegration = true;
   };
 
+  programs.gh = {
+    enable = true;
+    editor = "nvim";
+    gitProtocol = "ssh";
+  };
+
   programs.htop = {
     enable = true;
     sortDescending = true;
@@ -104,16 +110,18 @@
     vimAlias = true;
     vimdiffAlias = true;
     plugins = with pkgs.vimPlugins; [
-      vim-fish
-      vim-nix
       fzf-vim
       seoul256-vim
       vim-polyglot
       vim-gitgutter
       rainbow
       ack-vim
+      auto-pairs
+      lightline-vim
+      vim-fugitive
     ];
     extraConfig = ''
+        set t_Co=256
         set encoding=utf-8
         syntax on
         set expandtab
@@ -187,6 +195,16 @@
             \       'css': 0,
             \   }
             \}
+            let g:lightline = {
+              \ 'colorscheme': 'seoul256',
+              \ 'active': {
+              \   'left': [ [ 'mode', 'paste' ],
+              \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+              \ },
+              \ 'component_function': {
+              \   'gitbranch': 'FugitiveHead'
+              \ },
+            \ }
         '';
   };
 
@@ -224,6 +242,7 @@
     ];
 
     loginShellInit = ''
+      set -xg TERM xterm-256color
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
       end
@@ -239,6 +258,8 @@
       set -xg PATH $HOME/.emacs.d/bin /opt/local/bin $HOME/bin $PATH
 
       set -xg JAVA_HOME /Users/salar/.nix-profile/bin
+
+      set -xg NIX_PATH $HOME/.nix-defexpr/channels $NIX_PATH
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
       '';
@@ -271,7 +292,7 @@
       nixup="nix-env -u";
       nixversion="nix eval nixpkgs.lib.version";
       nixdaemon="sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist && launchctl start org.nixos.nix-daemon";
-      v="emacs -nw";
+      v="nvim";
       vc="emacsclient -c -a ''";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
