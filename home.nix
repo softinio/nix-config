@@ -18,7 +18,9 @@
   home.stateVersion = "20.09";
 
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "$HOME/bin/run-emacsclient-cli";
+    VISUAL = "$EDITOR";
+    ALTERNATE_EDITOR = "nvim";
   };
 
   programs.git = {
@@ -171,6 +173,16 @@
         let g:ackprg='rg --vimgrep --no-heading'
         set grepprg=rg\ --vimgrep
         let g:rg_command = 'rg --vimgrep -S'
+        let mapleader = "\<space>"
+        map! jj <ESC>
+        " FZF
+        set rtp+=/Users/salar/.nix-profile/bin/fzf
+        imap <c-x><c-o> <plug>(fzf-complete-line)
+        map <leader>b :Buffers<cr>
+        map <leader>f :Files<cr>
+        map <leader>g :GFiles<cr>
+        map <leader>y :Tags<cr>
+        autocmd! FileType fzf tnoremap <buffer> <leader>q <c-c>
         nnoremap <C-p> :FZF<CR>
         let g:rainbow_active = 1
         let g:rainbow_conf = {
@@ -293,11 +305,14 @@
       nixversion="nix eval nixpkgs.lib.version";
       nixdaemon="sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist && launchctl start org.nixos.nix-daemon";
       v="nvim";
-      vc="emacsclient -c -a ''";
+      e="$HOME/bin/run-emacsclient-cli";
+      ew="$HOME/bin/run-emacsclient";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
       moshfre1="mosh salar@fre1.softinio.net";
       portsupdate="sudo port -v selfupdate";
+      emacsload="launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist";
+      emacsunload="launchctl unload ~/Library/LaunchAgents/gnu.emacs.daemon.plist";
     };
   };
 
@@ -335,6 +350,7 @@
     pkgs.scalafmt
     pkgs.coursier
     pkgs.ammonite
+    pkgs.mill
     pkgs.bloop
     pkgs.yarn
     pkgs.openssl
@@ -375,5 +391,6 @@
     pkgs.tealdeer
     pkgs.hyperfine
     pkgs.graphviz
+    pkgs.metals
   ];
 }
