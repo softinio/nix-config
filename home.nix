@@ -15,7 +15,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "20.09";
+  home.stateVersion = "21.05";
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -444,13 +444,6 @@
     pkgs.tree
     pkgs.exa
     pkgs.mosh
-    pkgs.sbt
-    pkgs.scala
-    pkgs.scalafmt
-    pkgs.coursier
-    pkgs.ammonite
-    pkgs.mill
-    pkgs.bloop
     pkgs.yarn
     pkgs.openssl
     pkgs.xz
