@@ -122,11 +122,13 @@
       coc-python
       coc-tabnine
       fzf-vim
+      git-messenger-vim
       lightline-vim
       nerdtree
       nerdtree-git-plugin
       rainbow
       seoul256-vim
+      split-term-vim
       vim-fugitive
       vim-gitgutter
       vim-polyglot
@@ -492,6 +494,7 @@
       gc="git commit -m";
       gca="git commit -am";
       gws="git status";
+      ghauth="gh auth login --with-token < ~/.ghauth";
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
       grep="grep --color=auto";
       new-sbt="sbt new scala/scala-seed.g8";
