@@ -22,6 +22,27 @@
     VISUAL = "$EDITOR";
   };
 
+  programs.bat = {
+      enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableFishIntegration = true;
+    enableNixDirenvIntegration = true;
+  };
+
+  programs.gh = {
+    enable = true;
+    editor = "nvim";
+    gitProtocol = "ssh";
+  };
+
   programs.git = {
     enable = true;
     userEmail = "code@softinio.com";
@@ -45,6 +66,7 @@
       core = {
         editor = "nvim";
       };
+      github.user = "softinio";
       merge.tool = "intellij";
       mergetool = {
         cmd = "idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"";
@@ -65,27 +87,6 @@
         rebase = true;
       };
     };
-  };
-
-  programs.bat = {
-      enable = true;
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
-  programs.direnv = {
-    enable = true;
-    enableFishIntegration = true;
-    enableNixDirenvIntegration = true;
-  };
-
-  programs.gh = {
-    enable = true;
-    editor = "nvim";
-    gitProtocol = "ssh";
   };
 
   programs.htop = {
@@ -115,11 +116,15 @@
       ack-vim
       auto-pairs
       coc-nvim
+      coc-java
       coc-json
+      coc-metals
       coc-python
       coc-tabnine
       fzf-vim
       lightline-vim
+      nerdtree
+      nerdtree-git-plugin
       rainbow
       seoul256-vim
       vim-fugitive
@@ -127,13 +132,25 @@
       vim-polyglot
     ];
     extraConfig = ''
+        set directory=$HOME/.vim/swapfiles/swap//
+        set undodir=~/.vim/swapfiles/undo//
+        set backupdir=~/.vim/swapfiles/backup//
+        " Make those folders automatically if they don't already exist.
+        if !isdirectory(expand(&undodir))
+            call mkdir(expand(&undodir), "p")
+        endif
+        if !isdirectory(expand(&backupdir))
+            call mkdir(expand(&backupdir), "p")
+        endif
+        if !isdirectory(expand(&directory))
+            call mkdir(expand(&directory), "p")
+        endif
         set t_Co=256
         set encoding=utf-8
         syntax on
         set expandtab
         set hidden
         set showmatch
-        set textwidth=150
         set colorcolumn=120
         set cursorcolumn
         set cursorline
@@ -226,11 +243,42 @@
               \ },
             \ }
 
+        " Nerdtree Configuration
+        let NERDTreeIgnore=['\.pyc$', '\~$', 'target'] "ignore files in NERDTree
+        let NERDTreeRespectWildIgnore=1
+        let NERDTreeQuitOnOpen=1
+        map <leader>m :NERDTreeToggle<CR>
+        " jump back to nerdtree
+        map <leader>n :NERDTree<CR>
+        " reveal in side bar
+        map <leader>e :NERDTreeFind<CR>
+        let NERDTreeShowHidden=1
+        "nerdtree-git-plugin
+        let g:NERDTreeGitStatusIndicatorMapCustom= {
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "✭",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "═",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ "Unknown"   : "?"
+            \ }
+
+        " Switch to previous buffer mapped to tab
+        function SwitchBuffer()
+          b#
+        endfunction
+
+        nmap <A-Tab> :call SwitchBuffer()<CR>
+
+        " split-term
+        let g:split_term_default_shell = "fish"
+        let g:split_term_vertical = 1
+
         " START Configuration for coc.nvim
         " --------------------------------
-        set nobackup
-        set nowritebackup
-
         " Better display for messages
         set cmdheight=2
 
@@ -313,6 +361,59 @@
         " Fix autofix problem of current line
         nmap <leader>qf  <Plug>(coc-fix-current)
 
+        " Create mappings for function text object, requires document symbols feature of languageserver.
+        xmap if <Plug>(coc-funcobj-i)
+        xmap af <Plug>(coc-funcobj-a)
+        omap if <Plug>(coc-funcobj-i)
+        omap af <Plug>(coc-funcobj-a)
+
+        " Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+        nmap <silent> <TAB> <Plug>(coc-range-select)
+        xmap <silent> <TAB> <Plug>(coc-range-select)
+
+        " Use `:Format` to format current buffer
+        command! -nargs=0 Format :call CocAction('format')
+
+        " Use `:Fold` to fold current buffer
+        command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+        " use `:OR` for organize import of current buffer
+        command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+        " Using CocList
+        " Show all diagnostics
+        nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+        " Manage extensions
+        nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+        " Show commands
+        nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+        " Find symbol of current document
+        nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+        " Search workspace symbols
+        nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+        " Do default action for next item.
+        nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+        " Do default action for previous item.
+        nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+        " Resume latest coc list
+        nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+        " Notify coc.nvim that <enter> has been pressed.
+        " Currently used for the formatOnType feature.
+        inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+        " Toggle panel with Tree Views
+        nnoremap <silent> <space>t :<C-u>CocCommand metals.tvp<CR>
+        " Toggle Tree View 'metalsBuild'
+        nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+        " Toggle Tree View 'metalsCompile'
+        nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
+        " Reveal current current class (trait or object) in Tree View 'metalsBuild'
+        nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsBuild<CR>
+
+        nmap <Leader>ws <Plug>(coc-metals-expand-decoration)
+
         '';
   };
 
@@ -363,7 +464,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/.emacs.d/bin /opt/local/bin $HOME/bin $PATH
+      set -xg PATH $HOME/bin $PATH
 
       set -xg JAVA_HOME /Users/salar/.nix-profile/bin
 
@@ -395,6 +496,7 @@
       grep="grep --color=auto";
       new-sbt="sbt new scala/scala-seed.g8";
       nixre="home-manager switch";
+      nixedit="home-manager edit";
       nixgc="nix-collect-garbage -d";
       nixq="nix-env -qa";
       nixupdate="nix-channel --update";
@@ -403,15 +505,8 @@
       nixversion="nix eval nixpkgs.lib.version";
       nixdaemon="sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist && launchctl start org.nixos.nix-daemon";
       v="nvim";
-      e="$HOME/bin/run-emacsclient-cli";
-      ew="$HOME/bin/run-emacsclient";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
-      moshfre1="mosh salar@fre1.softinio.net";
-      sshls1="ssh -i pem/LightsailDefaultKey-us-west-2.pem admin@52.42.3.248";
-      portsupdate="sudo port -v selfupdate";
-      emacsload="launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist";
-      emacsunload="launchctl unload ~/Library/LaunchAgents/gnu.emacs.daemon.plist";
     };
   };
 
@@ -421,17 +516,11 @@
     end
     '';
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz))
-  ];
-
-
   home.packages = [
     pkgs.awscli
     pkgs.pgcli
     pkgs.tig
     pkgs.ripgrep
-    pkgs.go
     pkgs.hugo
     pkgs.jansson
     pkgs.universal-ctags
@@ -443,25 +532,16 @@
     pkgs.readline
     pkgs.tree
     pkgs.exa
-    pkgs.mosh
-    pkgs.yarn
     pkgs.openssl
     pkgs.xz
-    pkgs.gitAndTools.hub
     pkgs.gitAndTools.diff-so-fancy
-    pkgs.nodejs-12_x
-    pkgs.rustup
-    pkgs.jdk11
-    pkgs.mdbook
     pkgs.ranger
     pkgs.gnupg
-    pkgs.exercism
     pkgs.niv
     pkgs.ffmpeg
     pkgs.gradle
     pkgs.maven
     pkgs.procs
-    pkgs.emacsUnstable
     pkgs.shellcheck
     pkgs.cabal-install
     pkgs.hlint
@@ -483,7 +563,8 @@
     pkgs.tealdeer
     pkgs.hyperfine
     pkgs.graphviz
-    pkgs.metals
     pkgs.neofetch
+    pkgs.adoptopenjdk-openj9-bin-16
+    pkgs.vscodium
   ];
 }
