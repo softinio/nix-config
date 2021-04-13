@@ -22,6 +22,7 @@ let
     fzf-vim
     git-messenger-vim
     lightline-vim
+    mkdx
     nerdtree
     nerdtree-git-plugin
     rainbow
