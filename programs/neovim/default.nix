@@ -22,7 +22,6 @@ let
     fzf-vim
     git-messenger-vim
     lightline-vim
-    mkdx
     nerdtree
     nerdtree-git-plugin
     rainbow
@@ -31,6 +30,7 @@ let
     vim-fugitive
     vim-gitgutter
     vim-polyglot
+    vimwiki
   ] ++ overriddenPlugins;
 
   baseConfig    = builtins.readFile ./config.vim;

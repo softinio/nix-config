@@ -143,12 +143,9 @@ nmap <A-Tab> :call SwitchBuffer()<CR>
 let g:split_term_default_shell = "fish"
 let g:split_term_vertical = 1
 
-" mkdx settings
-let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
-                \ 'enter': { 'shift': 1 },
-                \ 'links': { 'external': { 'enable': 1 } },
-                \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
-                \ 'fold': { 'enable': 1 } }
 let g:polyglot_disabled = ['markdown']
 
+" vimwiki
+let g:vimwiki_list = [{'path': '~/Documents/Notes/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
