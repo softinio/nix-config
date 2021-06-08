@@ -39,8 +39,6 @@
 
   programs.htop = {
     enable = true;
-    sortDescending = true;
-    sortKey = "PERCENT_CPU";
   };
 
   programs.jq = {
@@ -50,7 +48,10 @@
   programs.starship = {
     enable = true;
     settings = {
-      character.symbol = "λ";
+      character = {
+        success_symbol = " [λ](bold green)";
+        error_symbol = " [λ](bold red)";
+      };
     };
   };
 
