@@ -9,7 +9,7 @@
   home = {
     username = "salar";
     homeDirectory = "/Users/salar";
-    stateVersion = "21.05";
+    stateVersion = "21.11";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
@@ -48,6 +48,7 @@
   programs.starship = {
     enable = true;
     settings = {
+      command_timeout = 1000;
       character = {
         success_symbol = " [λ](bold green)";
         error_symbol = " [λ](bold red)";
@@ -111,6 +112,8 @@
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
       set -xg TOOLCHAINS swift
+
+      set -xg XDG_CONFIG_HOME $HOME/.config
       '';
 
     promptInit = ''
@@ -121,6 +124,7 @@
     shellAliases = {
       cat="bat";
       du="ncdu --color dark -rr -x";
+      fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       ping="prettyping";
       ".." = "cd ..";
       pj="python -m json.tool";
@@ -136,6 +140,7 @@
       new-sbt="sbt new scala/scala-seed.g8";
       nixre="home-manager switch";
       nixedit="home-manager edit";
+      nixinfo="nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc="nix-collect-garbage -d";
       nixq="nix-env -qa";
       nixupdate="nix-channel --update";
@@ -143,6 +148,7 @@
       nixup="nix-env -u";
       nixversion="nix eval nixpkgs.lib.version";
       nixdaemon="sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist && launchctl start org.nixos.nix-daemon";
+      rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
