@@ -28,7 +28,7 @@
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
-    enableNixDirenvIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.gh = {
@@ -211,5 +211,6 @@
     pkgs.neofetch
     pkgs.adoptopenjdk-openj9-bin-16
     pkgs.vscodium
+    pkgs.nixFlakes
   ];
 }
