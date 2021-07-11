@@ -161,56 +161,63 @@
     end
     '';
 
+  # Neovim Configuration
+  xdg.configFile."nvim/lua/salargalaxyline.lua".source = programs/neovimlua/settings/salargalaxyline.lua;
+  xdg.configFile."nvim/init.lua".source = programs/neovimlua/init.lua;
+
   home.packages = [
-    pkgs.awscli
-    pkgs.pgcli
-    pkgs.tig
-    pkgs.ripgrep
-    pkgs.hugo
-    pkgs.jansson
-    pkgs.universal-ctags
-    pkgs.httpie
-    pkgs.global
-    pkgs.fd
-    pkgs.curlFull
-    pkgs.wget
-    pkgs.readline
-    pkgs.tree
-    pkgs.exa
-    pkgs.openssl
-    pkgs.xz
-    pkgs.gitAndTools.diff-so-fancy
-    pkgs.ranger
-    pkgs.gnupg
-    pkgs.niv
-    pkgs.ffmpeg
-    pkgs.gradle
-    pkgs.maven
-    pkgs.procs
-    pkgs.shellcheck
-    pkgs.cabal-install
-    pkgs.hlint
-    pkgs.ghcid
-    pkgs.pandoc
-    pkgs.multimarkdown
-    pkgs.direnv
-    pkgs.nixfmt
-    pkgs.cmake
+    pkgs.adoptopenjdk-bin
     pkgs.any-nix-shell
     pkgs.asciinema
-    pkgs.ncdu
-    pkgs.prettyping
-    pkgs.rnix-lsp
     pkgs.aspell
-    pkgs.procs
+    pkgs.awscli
+    pkgs.cabal-install
+    pkgs.cmake
+    pkgs.coursier
+    pkgs.curlFull
+    pkgs.direnv
     pkgs.dust
-    pkgs.tokei
-    pkgs.tealdeer
-    pkgs.hyperfine
+    pkgs.exa
+    pkgs.fd
+    pkgs.ffmpeg
+    pkgs.ghcid
+    pkgs.gitAndTools.diff-so-fancy
+    pkgs.global
+    pkgs.gnupg
+    pkgs.gradle
     pkgs.graphviz
+    pkgs.hlint
+    pkgs.httpie
+    pkgs.hugo
+    pkgs.hyperfine
+    pkgs.jansson
+    pkgs.maven
+    pkgs.multimarkdown
+    pkgs.ncdu
     pkgs.neofetch
-    pkgs.adoptopenjdk-openj9-bin-16
-    pkgs.vscodium
+    pkgs.neovim
+    pkgs.niv
     pkgs.nixFlakes
+    pkgs.nixfmt
+    pkgs.nodePackages.pyright
+    pkgs.openssl
+    pkgs.pandoc
+    pkgs.pgcli
+    pkgs.prettyping
+    pkgs.procs
+    pkgs.procs
+    pkgs.ranger
+    pkgs.readline
+    pkgs.ripgrep
+    pkgs.rnix-lsp
+    pkgs.shellcheck
+    pkgs.tealdeer
+    pkgs.tig
+    pkgs.tokei
+    pkgs.tree
+    pkgs.universal-ctags
+    pkgs.vscodium
+    pkgs.wget
+    pkgs.xz
   ];
 }
