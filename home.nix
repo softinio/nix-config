@@ -162,8 +162,8 @@
     '';
 
   # Neovim Configuration
-  xdg.configFile."nvim/lua/salargalaxyline.lua".source = programs/neovimlua/settings/salargalaxyline.lua;
-  xdg.configFile."nvim/init.lua".source = programs/neovimlua/init.lua;
+  xdg.configFile."nvim/lua/salargalaxyline.lua".source = programs/neovim/settings/salargalaxyline.lua;
+  xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
 
   home.packages = [
     pkgs.adoptopenjdk-bin

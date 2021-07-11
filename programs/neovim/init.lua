@@ -16,12 +16,12 @@ local function load_plugins()
     use 'folke/tokyonight.nvim'         -- Theme
     use 'windwp/nvim-autopairs'    -- Autopairs
     use 'kyazdani42/nvim-tree.lua' -- File explorer
-    use { 'glepnir/galaxyline.nvim', config = function() require'salargalaxyline' end, requires = {'kyazdani42/nvim-web-devicons'} }
+    use { 'glepnir/galaxyline.nvim', config = function() require'salargalaxyline' end, requires = 'kyazdani42/nvim-web-devicons' }
     use 'lukas-reineke/indent-blankline.nvim'
-    use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'} }
+    use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
     use 'neovim/nvim-lspconfig'        -- Collection of configurations for built-in LSP client
-    use { 'hrsh7th/nvim-compe', requires = { { 'L3MON4D3/LuaSnip' } } }  -- Autocompletion plugin
+    use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' }  -- Autocompletion plugin
     use 'kevinhwang91/nvim-bqf'
     use 'mfussenegger/nvim-dap'
     use 'sheerun/vim-polyglot'
