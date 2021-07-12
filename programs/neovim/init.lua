@@ -19,7 +19,7 @@ local function load_plugins()
     use { 'glepnir/galaxyline.nvim', config = function() require'salargalaxyline' end, requires = 'kyazdani42/nvim-web-devicons' }
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use { 'TimUntersberger/neogit', requires = {{'nvim-lua/plenary.nvim'}, {'sindrets/diffview.nvim'}} }
     use 'neovim/nvim-lspconfig'        -- Collection of configurations for built-in LSP client
     use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' }  -- Autocompletion plugin
     use 'kevinhwang91/nvim-bqf'
@@ -51,7 +51,7 @@ _G.load_config = function()
   -- neogit
   require('neogit').setup({
     integrations = {
-      diffview = false
+      diffview = true
     }
   })
 
