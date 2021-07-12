@@ -6,6 +6,10 @@
 
   imports = (import ./programs);
 
+  nixpkgs.overlays = [
+    (import ./overlays/sumneko-lua-language-server)
+  ];
+
   home = {
     username = "salar";
     homeDirectory = "/Users/salar";
@@ -211,6 +215,7 @@
     pkgs.ripgrep
     pkgs.rnix-lsp
     pkgs.shellcheck
+    pkgs.sumneko-lua-language-server
     pkgs.tealdeer
     pkgs.tig
     pkgs.tokei
