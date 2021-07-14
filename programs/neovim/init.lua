@@ -26,6 +26,8 @@ local function load_plugins()
     use 'mfussenegger/nvim-dap'
     use 'sheerun/vim-polyglot'
     use 'scalameta/nvim-metals'
+    use 'ray-x/lsp_signature.nvim'
+    use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   end)
 end
 
@@ -33,6 +35,7 @@ _G.load_config = function()
 
   require('nvim-autopairs').setup()
   require('which-key').setup()
+  require('trouble').setup()
   require('gitsigns').setup()
   require("salargalaxyline")
 
@@ -182,6 +185,8 @@ _G.load_config = function()
   -- LSP settings
   local nvim_lsp = require('lspconfig')
   local on_attach = function(_client, bufnr)
+    require('lsp_signature').on_attach()
+
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local opts = { noremap=true, silent=true }
