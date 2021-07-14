@@ -32,7 +32,7 @@ end
 _G.load_config = function()
 
   require('nvim-autopairs').setup()
-  require("which-key").setup()
+  require('which-key').setup()
   require('gitsigns').setup()
   require("salargalaxyline")
 
@@ -209,9 +209,8 @@ _G.load_config = function()
     nvim_lsp[lsp].setup { on_attach = on_attach }
   end
 
-  
 -- lua language server
-local sumneko_binary = vim.fn.getenv("HOME").."/.nix-profile/bin/lua-language-server" 
+local sumneko_binary = vim.fn.getenv("HOME").."/.nix-profile/bin/lua-language-server"
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
@@ -219,7 +218,6 @@ table.insert(runtime_path, 'lua/?/init.lua')
 require('lspconfig').sumneko_lua.setup {
   cmd = { sumneko_binary },
   on_attach = on_attach,
-  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
