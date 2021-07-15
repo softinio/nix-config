@@ -111,9 +111,9 @@
 
       set -xg JAVA_HOME /Users/salar/.nix-profile/bin
 
-      set -xg JDTLS_CONFIG /Users/salar/.config/nixpkgs/jdt-language-server/config_mac
+      set -xg JDTLS_CONFIG /Users/salar/.config/jdt-language-server/config_mac
 
-      set -xg JAR /Users/salar/.config/nixpkgs/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
+      set -xg JAR /Users/salar/.config/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
 
       set -xg WORKSPACE /Users/salar/Projects
 
