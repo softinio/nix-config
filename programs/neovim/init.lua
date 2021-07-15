@@ -1,27 +1,31 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 local function load_plugins()
-
   local use = require('packer').use
   require('packer').startup(function()
-    use 'wbthomason/packer.nvim'       -- Package manager
+    use 'wbthomason/packer.nvim' -- Package manager
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'folke/which-key.nvim'
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
-    use 'folke/tokyonight.nvim'         -- Theme
-    use 'windwp/nvim-autopairs'    -- Autopairs
+    use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+    use 'folke/tokyonight.nvim' -- Theme
+    use 'windwp/nvim-autopairs' -- Autopairs
     use 'kyazdani42/nvim-tree.lua' -- File explorer
-    use { 'glepnir/galaxyline.nvim', config = function() require'salargalaxyline' end, requires = 'kyazdani42/nvim-web-devicons' }
+    use {
+      'glepnir/galaxyline.nvim',
+      config = function()
+        require 'salargalaxyline'
+      end,
+      requires = 'kyazdani42/nvim-web-devicons',
+    }
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
-    use { 'TimUntersberger/neogit', requires = {{'nvim-lua/plenary.nvim'}, {'sindrets/diffview.nvim'}} }
-    use 'neovim/nvim-lspconfig'        -- Collection of configurations for built-in LSP client
-    use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' }  -- Autocompletion plugin
+    use { 'TimUntersberger/neogit', requires = { { 'nvim-lua/plenary.nvim' }, { 'sindrets/diffview.nvim' } } }
+    use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+    use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' } -- Autocompletion plugin
     use 'kevinhwang91/nvim-bqf'
     use 'mfussenegger/nvim-dap'
     use 'sheerun/vim-polyglot'
@@ -30,27 +34,26 @@ local function load_plugins()
     use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
     use 'nvim-treesitter/playground'
     use 'b3nj5m1n/kommentary'
+    use 'ckipp01/stylua-nvim'
   end)
 end
 
 _G.load_config = function()
-
   require('nvim-autopairs').setup()
   require('which-key').setup()
   require('trouble').setup()
   require('gitsigns').setup()
-  require("salargalaxyline")
+  require 'salargalaxyline'
   require('kommentary.config').use_extended_mappings()
-
 
   -- Treesitter
   require('nvim-treesitter.configs').setup {
     query_linter = {
       enable = true,
       use_virtual_text = true,
-      lint_events = { "BufWrite", "CursorHold" },
+      lint_events = { 'BufWrite', 'CursorHold' },
     },
-    ensure_installed = "maintained",
+    ensure_installed = 'maintained',
     highlight = { enable = true },
     incremental_selection = {
       enable = true,
@@ -114,18 +117,18 @@ _G.load_config = function()
         goto_node = '<cr>',
         show_help = '?',
       },
-    }
+    },
   }
 
   -- neogit
-  require('neogit').setup({
+  require('neogit').setup {
     integrations = {
-      diffview = true
-    }
-  })
+      diffview = true,
+    },
+  }
 
   --Incremental live completion
-  vim.o.inccommand = "nosplit"
+  vim.o.inccommand = 'nosplit'
 
   --Set highlight on search
   vim.o.hlsearch = false
@@ -138,7 +141,7 @@ _G.load_config = function()
   vim.o.hidden = true
 
   --Enable mouse mode
-  vim.o.mouse = "a"
+  vim.o.mouse = 'a'
 
   -- clipboard
   vim.o.clipboard = 'unnamedplus'
@@ -147,7 +150,7 @@ _G.load_config = function()
   vim.o.breakindent = true
 
   --Save undo history
-  vim.cmd[[set undofile]]
+  vim.cmd [[set undofile]]
 
   --Case insensitive searching UNLESS /C or capital in search
   vim.o.ignorecase = true
@@ -155,50 +158,49 @@ _G.load_config = function()
 
   --Decrease update time
   vim.o.updatetime = 250
-  vim.wo.signcolumn="yes"
+  vim.wo.signcolumn = 'yes'
 
   --Set colorscheme (order is important here)
-  vim.g.tokyonight_style = "night"
+  vim.g.tokyonight_style = 'night'
   vim.g.tokyonight_italic_functions = true
   vim.o.termguicolors = true
-  vim.cmd[[colorscheme tokyonight]]
-
+  vim.cmd [[colorscheme tokyonight]]
 
   --Remap space as leader key
-  vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
-  vim.g.mapleader = " "
-  vim.g.maplocalleader = " "
+  vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+  vim.g.mapleader = ' '
+  vim.g.maplocalleader = ' '
 
   --Remap for dealing with word wrap
-  vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true})
-  vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", {noremap= true, expr = true, silent = true})
+  vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
+  vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
   --Remap escape to leave terminal mode
-  vim.api.nvim_set_keymap('t', '<Esc>', [[<c-\><c-n>]], {noremap = true})
+  vim.api.nvim_set_keymap('t', '<Esc>', [[<c-\><c-n>]], { noremap = true })
 
   --Add map to enter paste mode
-  vim.o.pastetoggle="<F3>"
+  vim.o.pastetoggle = '<F3>'
 
   --Map blankline
-  vim.g.indent_blankline_char = "┊"
+  vim.g.indent_blankline_char = '┊'
   vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
-  vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile'}
+  vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
   vim.g.indent_blankline_char_highlight = 'LineNr'
 
   -- Toggle to disable mouse mode and indentlines for easier paste
   ToggleMouse = function()
     if vim.o.mouse == 'a' then
-      vim.cmd[[IndentBlanklineDisable]]
-      vim.wo.signcolumn='no'
+      vim.cmd [[IndentBlanklineDisable]]
+      vim.wo.signcolumn = 'no'
       vim.o.mouse = 'v'
       vim.wo.number = false
-      print("Mouse disabled")
+      print 'Mouse disabled'
     else
-      vim.cmd[[IndentBlanklineEnable]]
-      vim.wo.signcolumn='yes'
+      vim.cmd [[IndentBlanklineEnable]]
+      vim.wo.signcolumn = 'yes'
       vim.o.mouse = 'a'
       vim.wo.number = true
-      print("Mouse enabled")
+      print 'Mouse enabled'
     end
   end
 
@@ -209,53 +211,56 @@ _G.load_config = function()
     defaults = {
       mappings = {
         i = {
-          ["<C-u>"] = false,
-          ["<C-d>"] = false,
+          ['<C-u>'] = false,
+          ['<C-d>'] = false,
         },
       },
-      generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
-      file_sorter =  require'telescope.sorters'.get_fzy_sorter,
-    }
+      generic_sorter = require('telescope.sorters').get_fzy_sorter,
+      file_sorter = require('telescope.sorters').get_fzy_sorter,
+    },
   }
   --Add leader shortcuts
-  vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>l', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>t', [[<cmd>lua require('telescope.builtin').tags()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>o', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>m', [[<cmd>lua require('nvim-tree').toggle()<cr>]], { noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', '<leader>ng', [[<cmd>lua require('neogit').open({ kind = "split" })<cr>]], { noremap = true, silent = true})
+  vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>l', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>t', [[<cmd>lua require('telescope.builtin').tags()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>o', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>m', [[<cmd>lua require('nvim-tree').toggle()<cr>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>ng', [[<cmd>lua require('neogit').open({ kind = "split" })<cr>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>nu', ':PackerUpdate<CR>', { noremap = true, silent = true })
 
   -- Change preview window location
   vim.g.splitbelow = true
 
   -- Highlight on yank
-  vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
     augroup YankHighlight
       autocmd!
       autocmd TextYankPost * silent! lua vim.highlight.on_yank()
     augroup end
-  ]], false)
+  ]],
+    false
+  )
 
   -- Y yank until the end of line
-  vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})
+  vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
   --
   -- LSP settings
-  local nvim_lsp = require('lspconfig')
+  local nvim_lsp = require 'lspconfig'
   local on_attach = function(_client, bufnr)
     require('lsp_signature').on_attach()
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -275,85 +280,91 @@ _G.load_config = function()
   end
 
   -- Enable the following language servers
-  local servers = { 'jdtls', 'pyright', 'rnix','sourcekit' }
+  local servers = { 'jdtls', 'pyright', 'rnix', 'sourcekit' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = on_attach }
   end
 
--- lua language server
-local sumneko_binary = vim.fn.getenv("HOME").."/.nix-profile/bin/lua-language-server"
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+  -- lua language server
+  local sumneko_binary = vim.fn.getenv 'HOME' .. '/.nix-profile/bin/lua-language-server'
+  local runtime_path = vim.split(package.path, ';')
+  table.insert(runtime_path, 'lua/?.lua')
+  table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').sumneko_lua.setup {
-  cmd = { sumneko_binary },
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
+  require('lspconfig').sumneko_lua.setup {
+    cmd = { sumneko_binary },
+    commands = {
+      Format = {
+        function()
+          require('stylua-nvim').format_file()
+        end,
       },
     },
-  },
-}
-
+    on_attach = on_attach,
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = runtime_path,
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file('', true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
 
   -- metals
-  vim.opt_global.shortmess:remove("F"):append("c")
-  metals_config = require("metals").bare_config
-  metals_config.init_options.statusBarProvider = "on"
+  vim.opt_global.shortmess:remove('F'):append 'c'
+  metals_config = require('metals').bare_config
+  metals_config.init_options.statusBarProvider = 'on'
   vim.cmd [[augroup lsp]]
   vim.cmd [[au!]]
   vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
   vim.cmd [[augroup end]]
 
   -- Map :Format to vim.lsp.buf.formatting()
-  vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
   -- Set completeopt to have a better completion experience
-  vim.o.completeopt="menuone,noinsert"
+  vim.o.completeopt = 'menuone,noinsert'
 
   -- Compe setup
-  require'compe'.setup {
-    enabled = true;
-    autocomplete = true;
-    debug = false;
-    min_length = 1;
-    preselect = 'enable';
-    throttle_time = 80;
-    source_timeout = 200;
-    incomplete_delay = 400;
-    max_abbr_width = 100;
-    max_kind_width = 100;
-    max_menu_width = 100;
-    documentation = true;
+  require('compe').setup {
+    enabled = true,
+    autocomplete = true,
+    debug = false,
+    min_length = 1,
+    preselect = 'enable',
+    throttle_time = 80,
+    source_timeout = 200,
+    incomplete_delay = 400,
+    max_abbr_width = 100,
+    max_kind_width = 100,
+    max_menu_width = 100,
+    documentation = true,
 
     source = {
-      path = true;
+      path = true,
       nvim_lsp = {
         priority = 1000,
-        filetypes = { "scala", "sbt", "java" },
+        filetypes = { 'scala', 'sbt', 'java' },
       },
       nvim_lua = true,
       buffer = true,
       luasnip = true,
-    };
+    },
   }
 
   local t = function(str)
@@ -361,12 +372,12 @@ require('lspconfig').sumneko_lua.setup {
   end
 
   local check_back_space = function()
-      local col = vim.fn.col('.') - 1
-      if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-          return true
-      else
-          return false
-      end
+    local col = vim.fn.col '.' - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' then
+      return true
+    else
+      return false
+    end
   end
 
   -- Use (s-)tab to:
@@ -374,30 +385,29 @@ require('lspconfig').sumneko_lua.setup {
   --- jump to prev/next snippet's placeholder
   _G.tab_complete = function()
     if vim.fn.pumvisible() == 1 then
-      return t "<C-n>"
+      return t '<C-n>'
     elseif check_back_space() then
-      return t "<Tab>"
+      return t '<Tab>'
     else
       return vim.fn['compe#complete']()
     end
   end
   _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
-      return t "<C-p>"
+      return t '<C-p>'
     else
-      return t "<S-Tab>"
+      return t '<S-Tab>'
     end
   end
 
-  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
+  vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+  vim.api.nvim_set_keymap('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+  vim.api.nvim_set_keymap('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+  vim.api.nvim_set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 end
 
 if fn.isdirectory(install_path) == 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system { 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path }
   load_plugins()
   require('packer').sync()
   vim.cmd 'autocmd User PackerComplete ++once lua load_config()'

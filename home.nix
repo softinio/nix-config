@@ -221,6 +221,7 @@
     pkgs.ripgrep
     pkgs.rnix-lsp
     pkgs.shellcheck
+    pkgs.stylua
     pkgs.sumneko-lua-language-server
     pkgs.tealdeer
     pkgs.tig
