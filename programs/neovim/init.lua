@@ -12,7 +12,6 @@ local function load_plugins()
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'folke/which-key.nvim'
-    use 'tpope/vim-commentary'         -- "gc" to comment visual regions/lines
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
     use 'folke/tokyonight.nvim'         -- Theme
     use 'windwp/nvim-autopairs'    -- Autopairs
@@ -30,6 +29,7 @@ local function load_plugins()
     use 'ray-x/lsp_signature.nvim'
     use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
     use 'nvim-treesitter/playground'
+    use 'b3nj5m1n/kommentary'
   end)
 end
 
@@ -40,10 +40,11 @@ _G.load_config = function()
   require('trouble').setup()
   require('gitsigns').setup()
   require("salargalaxyline")
+  require('kommentary.config').use_extended_mappings()
+
 
   -- Treesitter
   require('nvim-treesitter.configs').setup {
-    playground = { enable = true },
     query_linter = {
       enable = true,
       use_virtual_text = true,
