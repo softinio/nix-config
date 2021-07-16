@@ -202,6 +202,8 @@
     pkgs.hyperfine
     pkgs.jansson
     pkgs.jq
+    pkgs.luajit
+    pkgs.luajitPackages.luarocks
     pkgs.maven
     pkgs.multimarkdown
     pkgs.ncdu
