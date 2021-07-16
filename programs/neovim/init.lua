@@ -37,18 +37,25 @@ local function load_plugins()
     use 'b3nj5m1n/kommentary'
     use 'ckipp01/stylua-nvim'
     use 'gennaro-tedesco/nvim-jqx'
+    use 'kristijanhusak/orgmode.nvim'
   end)
 end
 
 _G.load_config = function()
-  require('nvim-autopairs').setup()
-  require('which-key').setup()
-  require('trouble').setup()
   require('gitsigns').setup()
-  require 'salargalaxyline'
   require('kommentary.config').use_extended_mappings()
+  require('nvim-autopairs').setup()
+  require 'salargalaxyline'
+  require('trouble').setup()
+  require('which-key').setup()
 
   local luadev = require('lua-dev').setup()
+
+  -- orgmode.nvim
+  require('orgmode').setup({
+    org_agenda_files = {'~/Documents/org'},
+    org_default_notes_file = '~/Documents/org/notes.org'
+  })
 
   -- Treesitter
   require('nvim-treesitter.configs').setup {
@@ -371,6 +378,7 @@ _G.load_config = function()
       nvim_lua = true,
       buffer = true,
       luasnip = true,
+      orgmode = true,
     },
   }
 
