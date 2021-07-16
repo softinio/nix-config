@@ -7,11 +7,15 @@ local function load_plugins()
   local use = require('packer').use
   require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Package manager
+    use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/playground'
     use 'folke/which-key.nvim'
-    use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+    use 'folke/lua-dev.nvim'
     use 'folke/tokyonight.nvim' -- Theme
+    use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+    use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
     use 'windwp/nvim-autopairs' -- Autopairs
     use 'kyazdani42/nvim-tree.lua' -- File explorer
     use {
@@ -24,17 +28,15 @@ local function load_plugins()
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'TimUntersberger/neogit', requires = { { 'nvim-lua/plenary.nvim' }, { 'sindrets/diffview.nvim' } } }
-    use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
     use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' } -- Autocompletion plugin
     use 'kevinhwang91/nvim-bqf'
     use 'mfussenegger/nvim-dap'
     use 'sheerun/vim-polyglot'
     use 'scalameta/nvim-metals'
     use 'ray-x/lsp_signature.nvim'
-    use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
-    use 'nvim-treesitter/playground'
     use 'b3nj5m1n/kommentary'
     use 'ckipp01/stylua-nvim'
+    use 'gennaro-tedesco/nvim-jqx'
   end)
 end
 
@@ -45,6 +47,8 @@ _G.load_config = function()
   require('gitsigns').setup()
   require 'salargalaxyline'
   require('kommentary.config').use_extended_mappings()
+
+  local luadev = require('lua-dev').setup()
 
   -- Treesitter
   require('nvim-treesitter.configs').setup {
@@ -315,7 +319,10 @@ _G.load_config = function()
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file('', true),
+          library = {
+            vim.api.nvim_get_runtime_file('', true),
+            luadev,
+          },
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {

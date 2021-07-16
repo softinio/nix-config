@@ -201,6 +201,7 @@
     pkgs.hugo
     pkgs.hyperfine
     pkgs.jansson
+    pkgs.jq
     pkgs.maven
     pkgs.multimarkdown
     pkgs.ncdu
@@ -231,5 +232,6 @@
     pkgs.vscodium
     pkgs.wget
     pkgs.xz
+    pkgs.yq
   ];
 }
