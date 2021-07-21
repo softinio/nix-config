@@ -38,6 +38,7 @@ local function load_plugins()
     use 'ckipp01/stylua-nvim'
     use 'gennaro-tedesco/nvim-jqx'
     use 'kristijanhusak/orgmode.nvim'
+    use 'p00f/nvim-ts-rainbow'
   end)
 end
 
@@ -128,6 +129,11 @@ _G.load_config = function()
         goto_node = '<cr>',
         show_help = '?',
       },
+    },
+    rainbow = {
+      enable = true,
+      extended_mode = true,
+      max_file_lines = 1000,
     },
   }
 
