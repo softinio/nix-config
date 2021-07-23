@@ -347,8 +347,8 @@ _G.load_config = function()
 
   -- metals
   vim.opt_global.shortmess:remove('F'):append 'c'
-  metals_config = require('metals').bare_config
-  metals_config.init_options.statusBarProvider = 'on'
+  Metals_config = require('metals').bare_config
+  Metals_config.init_options.statusBarProvider = 'on'
   vim.cmd [[augroup lsp]]
   vim.cmd [[au!]]
   vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
@@ -379,7 +379,7 @@ _G.load_config = function()
       path = true,
       nvim_lsp = {
         priority = 1000,
-        filetypes = { 'scala', 'sbt', 'java' },
+        filetypes = { 'scala', 'sbt', 'java', 'python' },
       },
       nvim_lua = true,
       buffer = true,
