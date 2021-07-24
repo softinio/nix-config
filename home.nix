@@ -6,6 +6,10 @@
 
   imports = (import ./programs);
 
+  nixpkgs.overlays = [
+    (import ./overlays/sumneko-lua-language-server)
+  ];
+
   home = {
     username = "salar";
     homeDirectory = "/Users/salar";
@@ -107,6 +111,12 @@
 
       set -xg JAVA_HOME /Users/salar/.nix-profile/bin
 
+      set -xg JDTLS_CONFIG /Users/salar/.config/jdt-language-server/config_mac
+
+      set -xg JAR /Users/salar/.config/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
+
+      set -xg WORKSPACE /Users/salar/Projects
+
       set -xg NIX_PATH $HOME/.nix-defexpr/channels $NIX_PATH
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
@@ -161,56 +171,68 @@
     end
     '';
 
+  # Neovim Configuration
+  xdg.configFile."nvim/lua/salargalaxyline.lua".source = programs/neovim/settings/salargalaxyline.lua;
+  xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
+
   home.packages = [
-    pkgs.awscli
-    pkgs.pgcli
-    pkgs.tig
-    pkgs.ripgrep
-    pkgs.hugo
-    pkgs.jansson
-    pkgs.universal-ctags
-    pkgs.httpie
-    pkgs.global
-    pkgs.fd
-    pkgs.curlFull
-    pkgs.wget
-    pkgs.readline
-    pkgs.tree
-    pkgs.exa
-    pkgs.openssl
-    pkgs.xz
-    pkgs.gitAndTools.diff-so-fancy
-    pkgs.ranger
-    pkgs.gnupg
-    pkgs.niv
-    pkgs.ffmpeg
-    pkgs.gradle
-    pkgs.maven
-    pkgs.procs
-    pkgs.shellcheck
-    pkgs.cabal-install
-    pkgs.hlint
-    pkgs.ghcid
-    pkgs.pandoc
-    pkgs.multimarkdown
-    pkgs.direnv
-    pkgs.nixfmt
-    pkgs.cmake
+    pkgs.adoptopenjdk-bin
     pkgs.any-nix-shell
     pkgs.asciinema
-    pkgs.ncdu
-    pkgs.prettyping
-    pkgs.rnix-lsp
     pkgs.aspell
-    pkgs.procs
+    pkgs.awscli
+    pkgs.cabal-install
+    pkgs.cmake
+    pkgs.coursier
+    pkgs.curlFull
+    pkgs.direnv
     pkgs.dust
-    pkgs.tokei
-    pkgs.tealdeer
-    pkgs.hyperfine
+    pkgs.exa
+    pkgs.fd
+    pkgs.ffmpeg
+    pkgs.ghcid
+    pkgs.gitAndTools.diff-so-fancy
+    pkgs.global
+    pkgs.gnupg
+    pkgs.gradle
     pkgs.graphviz
+    pkgs.hlint
+    pkgs.httpie
+    pkgs.hugo
+    pkgs.hyperfine
+    pkgs.jansson
+    pkgs.luajit
+    pkgs.luajitPackages.luarocks
+    pkgs.maven
+    pkgs.multimarkdown
+    pkgs.ncdu
     pkgs.neofetch
-    pkgs.adoptopenjdk-openj9-bin-16
-    pkgs.vscodium
+    pkgs.neovim
+    pkgs.niv
     pkgs.nixFlakes
+    pkgs.nixfmt
+    pkgs.nodePackages.pyright
+    pkgs.openssl
+    pkgs.pandoc
+    pkgs.pgcli
+    pkgs.prettyping
+    pkgs.procs
+    pkgs.procs
+    pkgs.ranger
+    pkgs.readline
+    pkgs.ripgrep
+    pkgs.rnix-lsp
+    pkgs.shellcheck
+    pkgs.stylua
+    pkgs.sumneko-lua-language-server
+    pkgs.tealdeer
+    pkgs.tig
+    pkgs.tokei
+    pkgs.tree
+    pkgs.universal-ctags
+    pkgs.vscodium
+    pkgs.wget
+    pkgs.xz
+    pkgs.yq
   ];
 }
