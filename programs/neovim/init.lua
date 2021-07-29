@@ -38,6 +38,7 @@ local function load_plugins()
     use 'gennaro-tedesco/nvim-jqx'
     use 'kristijanhusak/orgmode.nvim'
     use 'p00f/nvim-ts-rainbow'
+    use 'christoomey/vim-tmux-navigator'
   end)
 end
 
