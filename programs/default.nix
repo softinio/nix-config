@@ -1,4 +1,5 @@
 [
   ./git
 #  ./neovim
+  ./tmux
 ]
