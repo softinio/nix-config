@@ -360,7 +360,7 @@ _G.load_config = function()
     },
     fallbackScalaVersion = "2.13.6",
     superMethodLensesEnabled = true,
-    javaHome = "~/.nix-profile"
+    javaHome = "/Users/salar/.nix-profile"
   }
   Metals_config.init_options.statusBarProvider = 'on'
   vim.cmd [[augroup lsp]]
