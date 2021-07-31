@@ -181,6 +181,7 @@
     pkgs.asciinema
     pkgs.aspell
     pkgs.awscli
+    pkgs.bloop
     pkgs.cabal-install
     pkgs.cmake
     pkgs.coursier
@@ -222,6 +223,7 @@
     pkgs.readline
     pkgs.ripgrep
     pkgs.rnix-lsp
+    pkgs.sbt
     pkgs.shellcheck
     pkgs.stylua
     pkgs.sumneko-lua-language-server

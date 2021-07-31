@@ -346,12 +346,26 @@ _G.load_config = function()
   }
 
   -- metals
+  vim.g.metals_server_version = '0.10.5+64-3c83447e-SNAPSHOT'
   vim.opt_global.shortmess:remove('F'):append 'c'
   Metals_config = require('metals').bare_config
+  Metals_config.settings = {
+    showImplicitArguments = true,
+    showInferredType = true,
+    bloopSbtAlreadyInstalled = true,
+    excludedPackages = {
+      "akka.actor.typed.javadsl",
+      "com.github.swagger.akka.javadsl",
+      "akka.stream.javadsl",
+    },
+    fallbackScalaVersion = "2.13.6",
+    superMethodLensesEnabled = true,
+    javaHome = "~/.nix-profile"
+  }
   Metals_config.init_options.statusBarProvider = 'on'
   vim.cmd [[augroup lsp]]
   vim.cmd [[au!]]
-  vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
+  vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]]
   vim.cmd [[augroup end]]
 
   -- Map :Format to vim.lsp.buf.formatting()
