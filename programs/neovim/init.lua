@@ -294,6 +294,11 @@ _G.load_config = function()
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<cmd>lua RELOAD("metals").open_all_diagnostics()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>tt', '<cmd>lua require("metals.tvp").toggle_tree_view()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>tr', '<cmd>lua require("metals.tvp").reveal_in_tree()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>mc', '<cmd>lua require("telescope").extensions.metals.commands()<CR>', opts)
   end
 
   -- Enable the following language servers
