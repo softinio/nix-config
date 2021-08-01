@@ -45,12 +45,21 @@ end
 _G.load_config = function()
   require('gitsigns').setup()
   require('kommentary.config').use_extended_mappings()
-  require('nvim-autopairs').setup()
   require 'salargalaxyline'
   require('trouble').setup()
   require('which-key').setup()
+  require('indent_blankline').setup({
+    indent_blankline_use_treesitter = true
+  })
 
   local luadev = require('lua-dev').setup()
+
+  -- nvim-autopairs
+  require('nvim-autopairs').setup()
+  require('nvim-autopairs.completion.compe').setup({
+    map_cr = true,
+    map_complete = true
+  })
 
   -- orgmode.nvim
   require('orgmode').setup({
