@@ -28,6 +28,7 @@ local function load_plugins()
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'TimUntersberger/neogit', requires = { { 'nvim-lua/plenary.nvim' }, { 'sindrets/diffview.nvim' } } }
     use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' } -- Autocompletion plugin
+    use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
     use 'kevinhwang91/nvim-bqf'
     use 'mfussenegger/nvim-dap'
     use 'sheerun/vim-polyglot'
@@ -413,6 +414,7 @@ _G.load_config = function()
       buffer = true,
       luasnip = true,
       orgmode = true,
+      tabnine = true,
     },
   }
 

@@ -162,6 +162,7 @@
       v="nvim";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
+      sshfre2="ssh salar@fre2.softinio.net";
     };
   };
 
