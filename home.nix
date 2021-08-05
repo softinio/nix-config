@@ -49,6 +49,14 @@
     enable = true;
   };
 
+  programs.kitty = {
+    enable = true;
+    font.name = "FiraCode Nerd Font Mono Retina";
+    settings = {
+      font_size = 20;
+    };
+  };
+
   programs.starship = {
     enable = true;
     settings = {
@@ -214,6 +222,10 @@
     pkgs.nixFlakes
     pkgs.nixfmt
     pkgs.nodePackages.pyright
+    pkgs.nodePackages.typescript-language-server
+    pkgs.nodePackages.vscode-html-languageserver-bin
+    pkgs.nodePackages.vscode-json-languageserver
+    pkgs.nodePackages.yaml-language-server
     pkgs.openssl
     pkgs.pandoc
     pkgs.pgcli

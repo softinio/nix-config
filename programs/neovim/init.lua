@@ -312,7 +312,7 @@ _G.load_config = function()
   end
 
   -- Enable the following language servers
-  local servers = { 'jdtls', 'pyright', 'rnix', 'sourcekit' }
+  local servers = { 'html', 'jdtls', 'jsonls', 'pyright', 'rnix', 'sourcekit', 'tsserver', 'yamlls' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = on_attach }
   end
