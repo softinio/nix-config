@@ -51,9 +51,13 @@
 
   programs.kitty = {
     enable = true;
-    font.name = "FiraCode Nerd Font Mono Retina";
+    font = { 
+      name = "FiraCode Nerd Font Mono Retina";
+      size = 16;
+    };
     settings = {
-      font_size = 20;
+      copy_on_select = true;
+      macos_quit_when_last_window_closed = true;
     };
   };
 
