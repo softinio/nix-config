@@ -244,6 +244,7 @@ _G.load_config = function()
       },
       generic_sorter = require('telescope.sorters').get_fzy_sorter,
       file_sorter = require('telescope.sorters').get_fzy_sorter,
+      file_ignore_patterns = { "node_modules", "target"}
     },
   }
   --Add leader shortcuts

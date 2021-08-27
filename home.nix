@@ -57,6 +57,7 @@
     };
     settings = {
       copy_on_select = true;
+      enabled_layouts = "*";
       macos_quit_when_last_window_closed = true;
     };
   };
