@@ -59,6 +59,7 @@
       copy_on_select = true;
       enabled_layouts = "*";
       macos_quit_when_last_window_closed = true;
+      scrollback_lines = 10000;
     };
   };
 
@@ -235,7 +236,6 @@
     pkgs.pandoc
     pkgs.pgcli
     pkgs.prettyping
-    pkgs.procs
     pkgs.procs
     pkgs.ranger
     pkgs.readline
