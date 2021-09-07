@@ -53,8 +53,6 @@ _G.load_config = function()
     indent_blankline_use_treesitter = true
   })
 
-  local luadev = require('lua-dev').setup()
-
   -- nvim-autopairs
   require('nvim-autopairs').setup()
   require('nvim-autopairs.completion.compe').setup({
@@ -324,42 +322,44 @@ _G.load_config = function()
   table.insert(runtime_path, 'lua/?.lua')
   table.insert(runtime_path, 'lua/?/init.lua')
 
-  require('lspconfig').sumneko_lua.setup {
-    cmd = { sumneko_binary },
-    commands = {
-      Format = {
-        function()
-          require('stylua-nvim').format_file()
-        end,
+  local luadev = require('lua-dev').setup{
+    lspconfig = {
+      cmd = { sumneko_binary },
+      commands = {
+        Format = {
+          function()
+            require('stylua-nvim').format_file()
+          end,
+        },
       },
-    },
-    on_attach = on_attach,
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = 'LuaJIT',
-          -- Setup your lua path
-          path = runtime_path,
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = { 'vim' },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = {
-            vim.api.nvim_get_runtime_file('', true),
-            luadev,
+      on_attach = on_attach,
+      settings = {
+        Lua = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT',
+            -- Setup your lua path
+            path = runtime_path,
           },
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = { 'vim' },
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = {
+              vim.api.nvim_get_runtime_file('', true),
+            },
+          },
+          -- Do not send telemetry data containing a randomized but unique identifier
+          telemetry = {
+            enable = false,
+          },
         },
       },
     },
   }
+  require('lspconfig').sumneko_lua.setup(luadev)
 
   -- metals
   vim.g.metals_server_version = '0.10.5+64-3c83447e-SNAPSHOT'

@@ -24,15 +24,15 @@
       enable = true;
   };
 
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.gh = {
@@ -71,6 +71,27 @@
         success_symbol = " [λ](bold green)";
         error_symbol = " [λ](bold red)";
       };
+    };
+  };
+
+  programs.vscode = {
+    enable = true;
+    extensions = [
+      pkgs.vscode-extensions.scalameta.metals
+      pkgs.vscode-extensions.usernamehw.errorlens
+      pkgs.vscode-extensions.golang.Go
+      pkgs.vscode-extensions.redhat.java
+      pkgs.vscode-extensions.xyz.local-history
+      pkgs.vscode-extensions.yzhang.markdown-all-in-one
+      pkgs.vscode-extensions.svsool.markdown-memo
+      pkgs.vscode-extensions.github.vscode-pull-request-github
+      pkgs.vscode-extensions.github.github-vscode-theme
+      pkgs.vscode-extensions.jnoortheen.nix-ide
+      pkgs.vscode-extensions.timonwong.shellcheck
+    ];
+    userSettings = {
+      telemetry.enableTelemetry = false;
+      workbench.colorTheme = "GitHub Dark Default";
     };
   };
 
@@ -123,6 +144,8 @@
 
       set -xg PATH $HOME/bin $PATH
 
+      set -xg PATH /Users/salar/.luarocks/bin:/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/nix/store/3qp71mhrpxxg080yc82k51nx7b5hkajr-kitty-0.21.2/Applications/kitty.app/Contents/MacOS $PATH
+
       set -xg JAVA_HOME /Users/salar/.nix-profile/bin
 
       set -xg JDTLS_CONFIG /Users/salar/.config/jdt-language-server/config_mac
@@ -138,6 +161,10 @@
       set -xg TOOLCHAINS swift
 
       set -xg XDG_CONFIG_HOME $HOME/.config
+
+      set -xg LUA_PATH "/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?.lua;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/share/lua/5.1/?.lua;/Users/salar/.luarocks/share/lua/5.1/?/init.lua"
+
+      set -xg LUA_CPATH "?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/lib/lua/5.1/?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/lib/lua/5.1/?.so"
       '';
 
     promptInit = ''
@@ -219,6 +246,7 @@
     pkgs.jansson
     pkgs.luajit
     pkgs.luajitPackages.luarocks
+    pkgs.luajitPackages.luasocket
     pkgs.maven
     pkgs.multimarkdown
     pkgs.ncdu
@@ -250,7 +278,6 @@
     pkgs.tokei
     pkgs.tree
     pkgs.universal-ctags
-    pkgs.vscodium
     pkgs.wget
     pkgs.xz
     pkgs.yq
