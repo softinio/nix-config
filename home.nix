@@ -8,6 +8,9 @@
 
   nixpkgs.overlays = [
     (import ./overlays/sumneko-lua-language-server)
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
   ];
 
   home = {
@@ -150,7 +153,7 @@
 
       set -xg PATH /Users/salar/.luarocks/bin:/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/nix/store/3qp71mhrpxxg080yc82k51nx7b5hkajr-kitty-0.21.2/Applications/kitty.app/Contents/MacOS $PATH
 
-      set -xg JAVA_HOME /Users/salar/.nix-profile/bin
+      set -xg JAVA_HOME /Users/salar/.nix-profile
 
       set -xg JDTLS_CONFIG /Users/salar/.config/jdt-language-server/config_mac
 
@@ -283,6 +286,7 @@
     pkgs.tig
     pkgs.tokei
     pkgs.tree
+    pkgs.tree-sitter
     pkgs.universal-ctags
     pkgs.wget
     pkgs.xz
