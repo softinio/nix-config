@@ -98,6 +98,10 @@
   programs.fish = {
     enable = true;
 
+    functions = {
+      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+    };
+
     plugins = [
       {
         name = "bass";
@@ -186,6 +190,7 @@
       gca="git commit -am";
       gws="git status";
       ghauth="gh auth login --with-token < ~/.ghauth";
+      giscala="gitignore scala,vim,java,sbt > .gitignore";
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
       grep="grep --color=auto";
       new-sbt="sbt new scala/scala-seed.g8";
@@ -265,6 +270,7 @@
     pkgs.pgcli
     pkgs.prettyping
     pkgs.procs
+    pkgs.python38Packages.debugpy
     pkgs.ranger
     pkgs.readline
     pkgs.ripgrep

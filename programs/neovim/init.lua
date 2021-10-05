@@ -15,6 +15,7 @@ local function load_plugins()
     use 'folke/tokyonight.nvim' -- Theme
     use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
     use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+    use 'nvim-telescope/telescope-dap.nvim'
     use 'windwp/nvim-autopairs' -- Autopairs
     use 'kyazdani42/nvim-tree.lua' -- File explorer
     use {
@@ -31,6 +32,9 @@ local function load_plugins()
     use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
     use 'kevinhwang91/nvim-bqf'
     use 'mfussenegger/nvim-dap'
+    use 'mfussenegger/nvim-dap-python'
+    use 'jbyuki/one-small-step-for-vimkind'
+    use {'theHamsta/nvim-dap-virtual-text'}
     use 'sheerun/vim-polyglot'
     use 'scalameta/nvim-metals'
     use 'ray-x/lsp_signature.nvim'
@@ -60,11 +64,75 @@ _G.load_config = function()
     map_complete = true
   })
 
+  -- nvim-dap
+  local dap = require('dap')
+  dap.configurations.lua = {
+    {
+      type = 'nlua',
+      request = 'attach',
+      name = "Attach to running Neovim instance",
+      host = function()
+        local value = vim.fn.input('Host [127.0.0.1]: ')
+        if value ~= "" then
+          return value
+        end
+        return '127.0.0.1'
+      end,
+      port = function()
+        local val = tonumber(vim.fn.input('Port: '))
+        assert(val, "Please provide a port number")
+        return val
+      end,
+    }
+  }
+
+  dap.adapters.nlua = function(callback, config)
+    callback({ type = 'server', host = config.host, port = config.port or 8088 })
+  end
+
+  dap.configurations.scala = {
+    {
+      type = "scala",
+      request = "launch",
+      name = "Run",
+      metals = {
+        runType = "run",
+        args = { "firstArg", "secondArg", "thirdArg" },
+      },
+    },
+    {
+      type = "scala",
+      request = "launch",
+      name = "Test File",
+      metals = {
+        runType = "testFile",
+      },
+    },
+    {
+      type = "scala",
+      request = "launch",
+      name = "Test Target",
+      metals = {
+        runType = "testTarget",
+      },
+    },
+  }
+
+
+  vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
+
+  require('dap-python').test_runner = 'pytest'
+
+
   -- orgmode.nvim
   require('orgmode').setup({
     org_agenda_files = {'~/Documents/org'},
     org_default_notes_file = '~/Documents/org/notes.org'
   })
+
+  -- nvim-tree
+  require('nvim-tree').setup()
 
   -- Treesitter
   require('nvim-treesitter.configs').setup {
@@ -245,6 +313,8 @@ _G.load_config = function()
       file_ignore_patterns = { "node_modules", "target"}
     },
   }
+  require('telescope').load_extension('dap')
+
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
@@ -308,6 +378,17 @@ _G.load_config = function()
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'dr', [[<cmd>lua require('dap').repl.toggle()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ds', [[<cmd>lua require('dap').ui.variables.scopes()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'dk', [[<cmd>lua require('dap').ui.widgets.hover()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'dl', [[<cmd>lua require('dap').run_last()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'db', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'dc', [[<cmd>lua require('dap').continue()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F7>', [[<cmd>lua require('dap').step_over()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F6>', [[<cmd>lua require('dap').step_out()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F5>', [[<cmd>lua require('dap').step_into()<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'B', [[<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'lp', [[<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>]], { noremap = true, silent = true })
   end
 
   -- Enable the following language servers
@@ -362,7 +443,7 @@ _G.load_config = function()
   require('lspconfig').sumneko_lua.setup(luadev)
 
   -- metals
-  vim.g.metals_server_version = '0.10.5+64-3c83447e-SNAPSHOT'
+  vim.g.metals_server_version = '0.10.7+84-9d4bcf78-SNAPSHOT'
   vim.opt_global.shortmess:remove('F'):append 'c'
   Metals_config = require('metals').bare_config
   Metals_config.settings = {
@@ -379,6 +460,13 @@ _G.load_config = function()
     javaHome = "/Users/salar/.nix-profile"
   }
   Metals_config.init_options.statusBarProvider = 'on'
+  Metals_config.on_attach = function(client, buffer)
+    vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
+    vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
+    vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
+
+    require("metals").setup_dap()
+  end
   vim.cmd [[augroup lsp]]
   vim.cmd [[au!]]
   vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]]
