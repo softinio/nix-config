@@ -96,6 +96,8 @@
       pkgs.vscode-extensions.davidanson.vscode-markdownlint
     ];
     userSettings = {
+      editor.fontFamily = "FiraCode Nerd Font Mono Retina";
+      editor.fontSize = 16;
       telemetry.enableTelemetry = false;
       workbench.colorTheme = "Solarized Light";
       workbench.iconTheme = "vscode-icons";
