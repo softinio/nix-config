@@ -91,10 +91,14 @@
       pkgs.vscode-extensions.github.github-vscode-theme
       pkgs.vscode-extensions.jnoortheen.nix-ide
       pkgs.vscode-extensions.timonwong.shellcheck
+      pkgs.vscode-extensions.skyapps.fish-vscode
+      pkgs.vscode-extensions.baccata.scaladex-search
+      pkgs.vscode-extensions.davidanson.vscode-markdownlint
     ];
     userSettings = {
       telemetry.enableTelemetry = false;
-      workbench.colorTheme = "GitHub Dark Default";
+      workbench.colorTheme = "Solarized Light";
+      workbench.iconTheme = "vscode-icons";
     };
   };
 
