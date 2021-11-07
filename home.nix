@@ -40,8 +40,10 @@
 
   programs.gh = {
     enable = true;
-    editor = "nvim";
-    gitProtocol = "ssh";
+    settings = {
+      editor = "nvim";
+      git_protocol = "ssh";
+    };
   };
 
   programs.htop = {
@@ -82,7 +84,6 @@
     extensions = [
       pkgs.vscode-extensions.scalameta.metals
       pkgs.vscode-extensions.usernamehw.errorlens
-      pkgs.vscode-extensions.golang.Go
       pkgs.vscode-extensions.redhat.java
       pkgs.vscode-extensions.xyz.local-history
       pkgs.vscode-extensions.yzhang.markdown-all-in-one
@@ -155,7 +156,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $PATH
+      set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
 
       set -xg PATH /Users/salar/.luarocks/bin:/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/nix/store/3qp71mhrpxxg080yc82k51nx7b5hkajr-kitty-0.21.2/Applications/kitty.app/Contents/MacOS $PATH
 
@@ -180,7 +181,7 @@
       set -xg LUA_CPATH "?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/lib/lua/5.1/?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/lib/lua/5.1/?.so"
       '';
 
-    promptInit = ''
+    interactiveShellInit = ''
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
     '';
@@ -234,11 +235,8 @@
   home.packages = [
     pkgs.adoptopenjdk-bin
     pkgs.any-nix-shell
-    pkgs.asciinema
     pkgs.aspell
-    pkgs.awscli
     pkgs.bloop
-    pkgs.cabal-install
     pkgs.cmake
     pkgs.coursier
     pkgs.curlFull
@@ -247,16 +245,11 @@
     pkgs.exa
     pkgs.fd
     pkgs.ffmpeg
-    pkgs.ghcid
     pkgs.gitAndTools.diff-so-fancy
     pkgs.global
     pkgs.gnupg
-    pkgs.gradle
-    pkgs.graphviz
-    pkgs.hlint
-    pkgs.httpie
+    pkgs.go
     pkgs.hugo
-    pkgs.hyperfine
     pkgs.jansson
     pkgs.luajit
     pkgs.luajitPackages.luarocks
@@ -276,15 +269,17 @@
     pkgs.nodePackages.yaml-language-server
     pkgs.openssl
     pkgs.pandoc
-    pkgs.pgcli
     pkgs.prettyping
     pkgs.procs
-    pkgs.python38Packages.debugpy
-    pkgs.ranger
+    pkgs.python3Full
+    pkgs.python39Packages.debugpy
     pkgs.readline
     pkgs.ripgrep
+    pkgs.ripgrep-all
     pkgs.rnix-lsp
+    pkgs.rustup
     pkgs.sbt
+    pkgs.scala-cli
     pkgs.shellcheck
     pkgs.stylua
     pkgs.sumneko-lua-language-server

@@ -16,6 +16,7 @@ local function load_plugins()
     use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
     use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
     use 'nvim-telescope/telescope-dap.nvim'
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use 'windwp/nvim-autopairs' -- Autopairs
     use 'kyazdani42/nvim-tree.lua' -- File explorer
     use {
@@ -41,7 +42,6 @@ local function load_plugins()
     use 'b3nj5m1n/kommentary'
     use 'ckipp01/stylua-nvim'
     use 'gennaro-tedesco/nvim-jqx'
-    use 'kristijanhusak/orgmode.nvim'
     use 'p00f/nvim-ts-rainbow'
     use 'christoomey/vim-tmux-navigator'
   end)
@@ -123,13 +123,6 @@ _G.load_config = function()
   vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 
   require('dap-python').test_runner = 'pytest'
-
-
-  -- orgmode.nvim
-  require('orgmode').setup({
-    org_agenda_files = {'~/Documents/org'},
-    org_default_notes_file = '~/Documents/org/notes.org'
-  })
 
   -- nvim-tree
   require('nvim-tree').setup()
@@ -308,12 +301,19 @@ _G.load_config = function()
           ['<C-d>'] = false,
         },
       },
-      generic_sorter = require('telescope.sorters').get_fzy_sorter,
-      file_sorter = require('telescope.sorters').get_fzy_sorter,
-      file_ignore_patterns = { "node_modules", "target"}
+      file_ignore_patterns = { "node_modules", "target"},
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case"
+          }
+        }
     },
   }
   require('telescope').load_extension('dap')
+  require('telescope').load_extension('fzf')
 
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
@@ -443,10 +443,10 @@ _G.load_config = function()
   require('lspconfig').sumneko_lua.setup(luadev)
 
   -- metals
-  vim.g.metals_server_version = '0.10.7+84-9d4bcf78-SNAPSHOT'
-  vim.opt_global.shortmess:remove('F'):append 'c'
-  Metals_config = require('metals').bare_config
-  Metals_config.settings = {
+  -- vim.g.metals_server_version = '0.10.7+84-9d4bcf78-SNAPSHOT'
+  -- vim.opt_global.shortmess:remove('F'):append 'c'
+  local metals_config = require('metals').bare_config()
+  metals_config.settings = {
     showImplicitArguments = true,
     showInferredType = true,
     bloopSbtAlreadyInstalled = true,
@@ -459,19 +459,19 @@ _G.load_config = function()
     superMethodLensesEnabled = true,
     javaHome = "/Users/salar/.nix-profile"
   }
-  Metals_config.init_options.statusBarProvider = 'on'
-  Metals_config.on_attach = function(client, bufnr)
---    vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
---    vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
---    vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
+  metals_config.init_options.statusBarProvider = 'on'
+  metals_config.on_attach = function(client, bufnr)
+   vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
+   vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
+   vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
 
-    require("metals").setup_dap()
+   require("metals").setup_dap()
   end
   vim.cmd [[augroup lsp]]
   vim.cmd [[au!]]
-  vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]]
+  vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
   vim.cmd [[augroup end]]
-
+  
   -- Map :Format to vim.lsp.buf.formatting()
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
@@ -502,7 +502,6 @@ _G.load_config = function()
       nvim_lua = true,
       buffer = true,
       luasnip = true,
-      orgmode = true,
       tabnine = true,
     },
   }
