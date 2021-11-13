@@ -17,6 +17,7 @@ local function load_plugins()
     use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
     use 'nvim-telescope/telescope-dap.nvim'
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { 'softinio/scaladex.nvim' }
     use 'windwp/nvim-autopairs' -- Autopairs
     use 'kyazdani42/nvim-tree.lua' -- File explorer
     use {
@@ -314,6 +315,7 @@ _G.load_config = function()
   }
   require('telescope').load_extension('dap')
   require('telescope').load_extension('fzf')
+  require('telescope').load_extension('scaladex')
 
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
@@ -336,6 +338,7 @@ _G.load_config = function()
   vim.api.nvim_set_keymap('n', '<leader>ws', [[<cmd>lua require"metals".worksheet_hover()<cr>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>a', [[<cmd>lua RELOAD("metals").open_all_diagnostics()<cr>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>nu', ':PackerUpdate<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>si', [[<cmd>lua require('telescope').extensions.scaladex.scaladex.search()<cr>]], { noremap = true, silent = true })
 
   -- Change preview window location
   vim.g.splitbelow = true
