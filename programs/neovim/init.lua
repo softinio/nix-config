@@ -340,7 +340,6 @@ _G.load_config = function()
   vim.api.nvim_set_keymap('n', '<leader>nu', ':PackerUpdate<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>si', [[<cmd>lua require('telescope').extensions.scaladex.scaladex.search()<cr>]], { noremap = true, silent = true })
 
-
   -- Change preview window location
   vim.g.splitbelow = true
 
