@@ -14,8 +14,8 @@
   ];
 
   home = {
-    username = "salar";
-    homeDirectory = "/Users/salar";
+    # username = "salar";
+    # homeDirectory = "/Users/salar";
     stateVersion = "21.11";
     sessionVariables = {
       EDITOR = "nvim";
@@ -54,6 +54,7 @@
       niv
       nix-index
       nixfmt
+      nixFlakes
       nodePackages.pyright
       nodePackages.typescript-language-server
       nodePackages.vscode-html-languageserver-bin
@@ -63,7 +64,6 @@
       pandoc
       patchelf
       poetry
-      procs
       rclone
       readline
       ripgrep
