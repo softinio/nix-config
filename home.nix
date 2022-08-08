@@ -13,9 +13,11 @@
     # }))
   ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode"
+  ];
+
   home = {
-    # username = "salar";
-    # homeDirectory = "/Users/salar";
     stateVersion = "21.11";
     sessionVariables = {
       EDITOR = "nvim";
