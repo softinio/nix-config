@@ -7,6 +7,7 @@ let
       pager  = "diff-so-fancy | less --tabs=4 -RFX";
     };
     init.defaultBranch = "main";
+    merge.conflictStyle = "diff3";
     merge.tool = "intellij";
     mergetool = {
       cmd = "idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"";
@@ -23,20 +24,24 @@ let
         insteadOf = "https://github.com/";
       };
     };
+    fetch.prune = true;
     pull = {
       rebase = true;
     };
   };
-in
-{
-  programs.git = {
-    enable = true;
-    userEmail = "code@softinio.com";
-    userName = "Salar Rahmanian";
-    ignores = [
+  myAliases = {
+    ci = "commit";
+    co = "checkout";
+    main = "checkout main";
+    master = "checkout master";
+  };
+  myIgnores = [
       "*~"
       ".DS_Store"
       "*.bloop"
+      ".direnv/"
+      ".idea/"
+      ".mypy_cache"
       "*.metals"
       "*.metals.sbt"
       "*metals.sbt"
@@ -47,7 +52,16 @@ in
       "*.idea"
       "*.vscode"
       "*.python-version"
+      "result"
     ];
+in
+{
+  programs.git = {
+    enable = true;
+    userEmail = "code@softinio.com";
+    userName = "Salar Rahmanian";
+    aliases = myAliases;
+    ignores = myIgnores;
     extraConfig = gitConfig;
   };
 }
