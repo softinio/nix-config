@@ -8,19 +8,86 @@
 
   nixpkgs.overlays = [
     (import ./overlays/sumneko-lua-language-server)
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
+    # (import (builtins.fetchTarball {
+    #   url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    # }))
+  ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode"
   ];
 
   home = {
-    username = "salar";
-    homeDirectory = "/Users/salar";
     stateVersion = "21.11";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
     };
+    packages = with pkgs; [
+      ( python39.withPackages (ps: with ps; [ pip flake8 black ]) )
+      adoptopenjdk-bin
+      any-nix-shell
+      aspell
+      bloop
+      cabal-install
+      cachix
+      cmake
+      coursier
+      curlFull
+      exa
+      fd
+      ffmpeg
+      gitAndTools.diff-so-fancy
+      gnupg
+      go
+      haskellPackages.implicit-hie
+      hugo
+      lazydocker
+      luajit
+      luajitPackages.luarocks
+      luajitPackages.luasocket
+      lorri
+      maven
+      multimarkdown
+      mypy
+      ncdu
+      neofetch
+      neovim
+      niv
+      nix-index
+      nixfmt
+      nixFlakes
+      nodePackages.pyright
+      nodePackages.typescript-language-server
+      nodePackages.vscode-html-languageserver-bin
+      nodePackages.vscode-json-languageserver
+      nodePackages.yaml-language-server
+      openssl
+      pandoc
+      patchelf
+      poetry
+      rclone
+      readline
+      ripgrep
+      ripgrep-all
+      rnix-lsp
+      rustup
+      sbt
+      scala-cli
+      shellcheck
+      sqlite
+      stylua
+      stack
+      # sumneko-lua-language-server
+      tealdeer
+      tig
+      tokei
+      tree
+      tree-sitter
+      wget
+      xz
+      yq
+    ];
   };
 
   programs.bat = {
@@ -29,7 +96,6 @@
 
   programs.direnv = {
     enable = true;
-    enableFishIntegration = true;
     nix-direnv.enable = true;
   };
 
@@ -218,7 +284,7 @@
       v="nvim";
       tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
-      sshfre2="ssh salar@fre2.softinio.net";
+      sshfre2="ssh -p 2022 salar@fre2.softinio.net";
     };
   };
 
@@ -231,66 +297,4 @@
   # Neovim Configuration
   xdg.configFile."nvim/lua/salargalaxyline.lua".source = programs/neovim/settings/salargalaxyline.lua;
   xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
-
-  home.packages = [
-    pkgs.adoptopenjdk-bin
-    pkgs.any-nix-shell
-    pkgs.aspell
-    pkgs.bloop
-    pkgs.cmake
-    pkgs.coursier
-    pkgs.curlFull
-    pkgs.direnv
-    pkgs.dust
-    pkgs.exa
-    pkgs.fd
-    pkgs.ffmpeg
-    pkgs.gitAndTools.diff-so-fancy
-    pkgs.global
-    pkgs.gnupg
-    pkgs.go
-    pkgs.hugo
-    pkgs.jansson
-    pkgs.luajit
-    pkgs.luajitPackages.luarocks
-    pkgs.luajitPackages.luasocket
-    pkgs.maven
-    pkgs.multimarkdown
-    pkgs.ncdu
-    pkgs.neofetch
-    pkgs.neovim
-    pkgs.niv
-    pkgs.nixFlakes
-    pkgs.nixfmt
-    pkgs.nodePackages.pyright
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.vscode-html-languageserver-bin
-    pkgs.nodePackages.vscode-json-languageserver
-    pkgs.nodePackages.yaml-language-server
-    pkgs.openssl
-    pkgs.pandoc
-    pkgs.prettyping
-    pkgs.procs
-    pkgs.python3Full
-    pkgs.python39Packages.debugpy
-    pkgs.readline
-    pkgs.ripgrep
-    pkgs.ripgrep-all
-    pkgs.rnix-lsp
-    pkgs.rustup
-    pkgs.sbt
-    pkgs.scala-cli
-    pkgs.shellcheck
-    pkgs.stylua
-    pkgs.sumneko-lua-language-server
-    pkgs.tealdeer
-    pkgs.tig
-    pkgs.tokei
-    pkgs.tree
-    pkgs.tree-sitter
-    pkgs.universal-ctags
-    pkgs.wget
-    pkgs.xz
-    pkgs.yq
-  ];
 }
