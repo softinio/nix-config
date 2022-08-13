@@ -30,8 +30,20 @@ local function load_plugins()
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'TimUntersberger/neogit', requires = { { 'nvim-lua/plenary.nvim' }, { 'sindrets/diffview.nvim' } } }
-    use { 'hrsh7th/nvim-compe', requires = 'L3MON4D3/LuaSnip' } -- Autocompletion plugin
-    use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
+    use {
+      'hrsh7th/nvim-cmp',
+      requires = {
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-nvim-lua',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+      }
+    }
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
     use 'kevinhwang91/nvim-bqf'
     use 'mfussenegger/nvim-dap'
     use 'mfussenegger/nvim-dap-python'
@@ -39,7 +51,6 @@ local function load_plugins()
     use {'theHamsta/nvim-dap-virtual-text'}
     use 'sheerun/vim-polyglot'
     use 'scalameta/nvim-metals'
-    use 'ray-x/lsp_signature.nvim'
     use 'b3nj5m1n/kommentary'
     use 'ckipp01/stylua-nvim'
     use 'gennaro-tedesco/nvim-jqx'
@@ -60,10 +71,6 @@ _G.load_config = function()
 
   -- nvim-autopairs
   require('nvim-autopairs').setup()
-  require('nvim-autopairs.completion.compe').setup({
-    map_cr = true,
-    map_complete = true
-  })
 
   -- nvim-dap
   local dap = require('dap')
@@ -371,8 +378,6 @@ _G.load_config = function()
   -- LSP settings
   local nvim_lsp = require 'lspconfig'
   local on_attach = function(_client, bufnr)
-    require('lsp_signature').on_attach()
-
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local opts = { noremap = true, silent = true }
@@ -485,40 +490,37 @@ _G.load_config = function()
   vim.cmd [[au!]]
   vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
   vim.cmd [[augroup end]]
-  
+
   -- Map :Format to vim.lsp.buf.formatting()
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
   -- Set completeopt to have a better completion experience
   vim.o.completeopt = 'menuone,noinsert'
 
-  -- Compe setup
-  require('compe').setup {
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = 'enable',
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-
-    source = {
-      path = true,
-      nvim_lsp = {
-        priority = 1000,
-        filetypes = { 'scala', 'sbt', 'java', 'python' },
-      },
-      nvim_lua = true,
-      buffer = true,
-      luasnip = true,
-      tabnine = true,
+  -- nvim-cmp
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp = require("cmp")
+  cmp.setup {
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
     },
+    sources = {
+      { name = "nvim_lsp", priority = 10 },
+      { name = "buffer" },
+      { name = "luasnip" },
+      { name = "cmp_tabnine" },
+      { name = "path" },
+      { name = 'nvim_lua' },
+      { name = 'nvim_lsp_signature_help' }
+    }
   }
+  cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+  )
+--
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -542,7 +544,7 @@ _G.load_config = function()
     elseif check_back_space() then
       return t '<Tab>'
     else
-      return vim.fn['compe#complete']()
+      return vim.fn['cmp#complete']()
     end
   end
   _G.s_tab_complete = function()
