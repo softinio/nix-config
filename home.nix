@@ -78,7 +78,7 @@
       sqlite
       stylua
       stack
-      # sumneko-lua-language-server
+      sumneko-lua-language-server
       tealdeer
       tig
       tokei
@@ -270,19 +270,14 @@
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
       grep="grep --color=auto";
       new-sbt="sbt new scala/scala-seed.g8";
-      nixre="home-manager switch";
-      nixedit="home-manager edit";
+      nixre="nix build && sudo ./result/activate";
       nixinfo="nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc="nix-collect-garbage -d";
       nixq="nix-env -qa";
-      nixupdate="nix-channel --update";
-      nixupgrade="nix upgrade-nix";
-      nixup="nix-env -u";
+      nixupdate="sudo nix-channel --update";
       nixversion="nix eval nixpkgs.lib.version";
-      nixdaemon="sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist && launchctl start org.nixos.nix-daemon";
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
-      tabninecfg="vc /Users/salar/Library/Preferences/TabNine/TabNine.toml";
       sshfre1="ssh salar@fre1.softinio.net";
       sshfre2="ssh -p 2022 salar@fre2.softinio.net";
     };
