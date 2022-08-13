@@ -7,7 +7,7 @@ local function load_plugins()
   require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Package manager
     use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-    use 'nvim-treesitter/nvim-treesitter'
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
     use 'folke/which-key.nvim'
@@ -135,7 +135,7 @@ _G.load_config = function()
       use_virtual_text = true,
       lint_events = { 'BufWrite', 'CursorHold' },
     },
-    ensure_installed = 'maintained',
+    -- ensure_installed = 'maintained',
     highlight = { enable = true },
     incremental_selection = {
       enable = true,
@@ -206,6 +206,17 @@ _G.load_config = function()
       max_file_lines = 1000,
     },
   }
+  -- vim.opt.foldmethod     = 'expr'
+  -- vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+  ---WORKAROUND
+  vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
+    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+    callback = function()
+      vim.opt.foldmethod     = 'expr'
+      vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+    end
+  })
+  ---ENDWORKAROUND
 
   -- neogit
   require('neogit').setup {
