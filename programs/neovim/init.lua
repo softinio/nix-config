@@ -462,19 +462,20 @@ _G.load_config = function()
   require('lspconfig').sumneko_lua.setup(luadev)
 
   -- metals
-  -- vim.g.metals_server_version = '0.10.7+84-9d4bcf78-SNAPSHOT'
-  -- vim.opt_global.shortmess:remove('F'):append 'c'
+  vim.g.metals_server_version = '0.11.8'
+  vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
+  vim.opt_global.shortmess:remove("F"):append("c")
   local metals_config = require('metals').bare_config()
   metals_config.settings = {
     showImplicitArguments = true,
     showInferredType = true,
-    bloopSbtAlreadyInstalled = true,
+    bloopSbtAlreadyInstalled = false,
     excludedPackages = {
       "akka.actor.typed.javadsl",
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.6",
+    fallbackScalaVersion = "2.13.8",
     superMethodLensesEnabled = true,
     javaHome = "/Users/salar/.nix-profile"
   }
@@ -486,10 +487,17 @@ _G.load_config = function()
 
    require("metals").setup_dap()
   end
-  vim.cmd [[augroup lsp]]
-  vim.cmd [[au!]]
-  vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
-  vim.cmd [[augroup end]]
+  metals_config.init_options.statusBarProvider = "on"
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+  local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "scala", "sbt" },
+    callback = function()
+      require("metals").initialize_or_attach(metals_config)
+    end,
+    group = nvim_metals_group,
+  })
 
   -- Map :Format to vim.lsp.buf.formatting()
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
@@ -514,7 +522,29 @@ _G.load_config = function()
       { name = "path" },
       { name = 'nvim_lua' },
       { name = 'nvim_lsp_signature_help' }
-    }
+    },
+    mapping = cmp.mapping.preset.insert({
+      -- None of this made sense to me when first looking into this since there
+      -- is no vim docs, but you can't have select = true here _unless_ you are
+      -- also using the snippet stuff. So keep in mind that if you remove
+      -- snippets you need to remove this select
+      ["<CR>"] = cmp.mapping.confirm({ select = true }),
+      -- I use tabs... some say you should stick to ins-completion but this is just here as an example
+      ["<Tab>"] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+      ["<S-Tab>"] = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+    }),
   }
   cmp.event:on(
     'confirm_done',
