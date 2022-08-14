@@ -42,7 +42,6 @@
       go
       haskellPackages.implicit-hie
       hugo
-      lazydocker
       luajit
       luajitPackages.luarocks
       luajitPackages.luasocket
