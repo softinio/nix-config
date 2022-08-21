@@ -174,7 +174,18 @@ gls.right[3] = {
 gls.right[4] = {
   ScrollBar = {
     provider = 'ScrollBar',
+    separator_highlight = { colors.purple, colors.bg },
     highlight = { colors.yellow, colors.purple },
+  },
+}
+gls.right[5] = {
+  BatteryNvim = {
+    provider = function()
+        return require 'battery'.get_status_line()
+    end,
+    separator = '',
+    separator_highlight = { colors.bg, colors.purple },
+    highlight = { colors.grey, colors.purple },
   },
 }
 

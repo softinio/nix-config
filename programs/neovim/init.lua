@@ -14,6 +14,7 @@ local function load_plugins()
     use 'folke/lua-dev.nvim'
     use 'folke/tokyonight.nvim' -- Theme
     use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+    use { 'justinhj/battery.nvim', requires = {{'kyazdani42/nvim-web-devicons'}, {'nvim-lua/plenary.nvim'}}}
     use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
     use 'nvim-telescope/telescope-dap.nvim'
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -71,6 +72,17 @@ _G.load_config = function()
 
   -- nvim-autopairs
   require('nvim-autopairs').setup()
+
+  -- battery.nvim
+  local battery = require("battery")
+  battery.setup({
+    update_rate_seconds = 30, -- Number of seconds between checking battery status
+    show_status_when_no_battery = true, -- Don't show any icon or text when no battery found (desktop for example)
+    show_plugged_icon = true, -- If true show a cable icon alongside the battery icon when plugged in
+    show_unplugged_icon = true, -- When true show a diconnected cable icon when not plugged in
+    show_percent = false, -- Whether or not to show the percent charge remaining in digits
+    vertical_icons = true, -- When true icons are vertical, otherwise shows horizontal battery icon
+  })
 
   -- nvim-dap
   local dap = require('dap')
