@@ -37,6 +37,7 @@
       exa
       fd
       ffmpeg
+      font-awesome
       gitAndTools.diff-so-fancy
       gnupg
       go
@@ -70,6 +71,7 @@
       ripgrep
       ripgrep-all
       rnix-lsp
+      rust-analyzer
       rustup
       sbt
       scala-cli
@@ -79,6 +81,8 @@
       stack
       sumneko-lua-language-server
       tealdeer
+      tectonic
+      texlab
       tig
       tokei
       tree
@@ -278,7 +282,7 @@
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
       sshfre1="ssh salar@fre1.softinio.net";
-      sshfre2="ssh -p 2022 salar@fre2.softinio.net";
+      sshfre2="ssh -p 22 salar@fre2.softinio.net";
     };
   };
 

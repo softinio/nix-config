@@ -57,6 +57,11 @@ local function load_plugins()
     use 'gennaro-tedesco/nvim-jqx'
     use 'p00f/nvim-ts-rainbow'
     use 'christoomey/vim-tmux-navigator'
+    use 'lervag/vimtex'
+    use {
+      'f3fora/nvim-texlabconfig',
+      run = 'go build'
+    }
   end)
 end
 
@@ -143,6 +148,40 @@ _G.load_config = function()
   vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 
   require('dap-python').test_runner = 'pytest'
+
+  -- vimtex
+  vim.g.vimtex_view_method = 'skim'
+  vim.g.vimtex_compiler_method = 'tectonic'
+
+  -- nvim-texlabconfig
+  local tex_preview_executable = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+  local tex_preview_args = {"%l", "%p", "%f"}
+  local texlab_build_executable = 'tectonic'
+  local texlab_build_args = {
+    '-X',
+    'compile',
+    '%f',
+    '--synctex',
+    '--keep-logs',
+    '--keep-intermediates'
+  }
+  require('texlabconfig').setup {
+    cache_activate = true,
+    cache_filetypes = { 'tex', 'bib' },
+    reverse_search_edit_cmd = 'split',
+    settings = {
+      texlab = {
+        build = {
+          executable = texlab_build_executable,
+          args = texlab_build_args
+        },
+        forwardSearch = {
+          executable = tex_preview_executable,
+          args = tex_preview_args
+        }
+      }
+    }
+  }
 
   -- nvim-tree
   require('nvim-tree').setup()
@@ -397,7 +436,7 @@ _G.load_config = function()
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -423,7 +462,7 @@ _G.load_config = function()
   end
 
   -- Enable the following language servers
-  local servers = { 'html', 'jdtls', 'jsonls', 'pyright', 'rnix', 'sourcekit', 'tsserver', 'yamlls' }
+  local servers = { 'html', 'jdtls', 'jsonls', 'pyright', 'rnix', 'rust_analyzer','sourcekit', 'tsserver', 'yamlls' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = on_attach }
   end
@@ -471,7 +510,7 @@ _G.load_config = function()
       },
     },
   }
-  require('lspconfig').sumneko_lua.setup(luadev)
+  nvim_lsp.sumneko_lua.setup(luadev)
 
   -- metals
   vim.g.metals_server_version = '0.11.8'
