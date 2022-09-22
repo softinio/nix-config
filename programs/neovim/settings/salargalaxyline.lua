@@ -181,7 +181,9 @@ gls.right[4] = {
 gls.right[5] = {
   BatteryNvim = {
     provider = function()
-        return require 'battery'.get_status_line()
+        local status = require 'battery'.get_status_line()
+        local formatted = string.format(status)
+        return formatted
     end,
     separator = '',
     separator_highlight = { colors.bg, colors.purple },

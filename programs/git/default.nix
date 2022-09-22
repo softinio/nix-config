@@ -7,16 +7,16 @@ let
       pager  = "diff-so-fancy | less --tabs=4 -RFX";
     };
     init.defaultBranch = "main";
-    merge.conflictStyle = "diff3";
-    merge.tool = "intellij";
-    mergetool = {
-      cmd = "idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"";
-      trustExitCode = true;
+    merge.conflictstyle = "diff3";
+    merge.tool = "nvim";
+    mergetool.nvim = {
+      cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"";
       prompt = false;
+      keepBackup = false;
     };
-    diff.tool = "intellij";
-    difftool = {
-      cmd = "idea diff \"$LOCAL\" \"$REMOTE\"";
+    diff.tool = "nvim";
+    difftool.nvim = {
+      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
       prompt = false;
     };
     url = {
