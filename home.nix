@@ -24,12 +24,14 @@
       VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
-      ( python39.withPackages (ps: with ps; [ pip flake8 black ]) )
-      adoptopenjdk-bin
+      ( python310.withPackages (ps: with ps; [ pip flake8 black ]) )
+#      adoptopenjdk-hotspot-bin-17
+      jdk
       any-nix-shell
       aspell
       bloop
       cabal-install
+      cabal2nix
       cachix
       cmake
       coursier
@@ -39,9 +41,11 @@
       ffmpeg
       font-awesome
       gitAndTools.diff-so-fancy
+      ghc
+      ghcid
       gnupg
       go
-      haskellPackages.implicit-hie
+      haskell-language-server
       hugo
       luajit
       luajitPackages.luarocks
@@ -56,7 +60,7 @@
       niv
       nix-index
       nixfmt
-      nixFlakes
+      nix-prefetch-git
       nodePackages.pyright
       nodePackages.typescript-language-server
       nodePackages.vscode-html-languageserver-bin
@@ -65,7 +69,7 @@
       openssl
       pandoc
       patchelf
-      poetry
+      # poetry
       rclone
       readline
       ripgrep

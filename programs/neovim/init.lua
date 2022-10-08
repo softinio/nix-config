@@ -62,6 +62,14 @@ local function load_plugins()
       'f3fora/nvim-texlabconfig',
       run = 'go build'
     }
+    use {
+    'phaazon/mind.nvim',
+    branch = 'v2.2',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require'mind'.setup()
+    end
+  }
   end)
 end
 
@@ -462,7 +470,7 @@ _G.load_config = function()
   end
 
   -- Enable the following language servers
-  local servers = { 'html', 'jdtls', 'jsonls', 'pyright', 'rnix', 'rust_analyzer','sourcekit', 'tsserver', 'yamlls' }
+  local servers = { 'hls', 'html', 'jdtls', 'jsonls', 'pyright', 'rnix', 'rust_analyzer','sourcekit', 'tsserver', 'yamlls' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = on_attach }
   end
@@ -513,9 +521,7 @@ _G.load_config = function()
   nvim_lsp.sumneko_lua.setup(luadev)
 
   -- metals
-  vim.g.metals_server_version = '0.11.8'
-  vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
-  vim.opt_global.shortmess:remove("F"):append("c")
+  vim.g.metals_server_version = '0.11.9'
   local metals_config = require('metals').bare_config()
   metals_config.settings = {
     showImplicitArguments = true,
