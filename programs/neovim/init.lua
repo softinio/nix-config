@@ -13,18 +13,16 @@ local function load_plugins()
     use 'folke/which-key.nvim'
     use 'folke/neodev.nvim'
     use 'folke/tokyonight.nvim' -- Theme
-    use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
-    use { 'justinhj/battery.nvim', requires = {{'kyazdani42/nvim-web-devicons'}, {'nvim-lua/plenary.nvim'}}}
+    use { 'folke/trouble.nvim' }
+    use { 'justinhj/battery.nvim', requires = 'nvim-lua/plenary.nvim'}
     use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
     use 'nvim-telescope/telescope-dap.nvim'
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use { 'softinio/scaladex.nvim' }
     use 'windwp/nvim-autopairs' -- Autopairs
+    use 'nvim-tree/nvim-web-devicons'
     use {
       'nvim-tree/nvim-tree.lua',
-      requires = {
-        'nvim-tree/nvim-web-devicons', -- optional, for file icons
-      },
       tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
     use {
@@ -32,7 +30,6 @@ local function load_plugins()
       config = function()
         require 'salargalaxyline'
       end,
-      requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
@@ -459,6 +456,7 @@ _G.load_config = function()
 
   -- Y yank until the end of line
   vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
+
   --
   -- LSP settings
   local nvim_lsp = require 'lspconfig'
@@ -507,44 +505,24 @@ _G.load_config = function()
   table.insert(runtime_path, 'lua/?.lua')
   table.insert(runtime_path, 'lua/?/init.lua')
 
-  local neodev = require('neodev').setup{
-    lspconfig = {
-      cmd = { sumneko_binary },
-      commands = {
-        Format = {
-          function()
-            require('stylua-nvim').format_file()
-          end,
-        },
-      },
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = 'LuaJIT',
-            -- Setup your lua path
-            path = runtime_path,
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { 'vim' },
-          },
-          workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = {
-              vim.api.nvim_get_runtime_file('', true),
-            },
-          },
-          -- Do not send telemetry data containing a randomized but unique identifier
-          telemetry = {
-            enable = false,
-          },
-        },
-      },
-    },
-  }
-  nvim_lsp.sumneko_lua.setup(neodev)
+  require("neodev").setup({
+    override = function(root_dir, library)
+      if require("neodev.util").has_file(root_dir, "/etc/nixos") then
+        library.enabled = true
+        library.plugins = true
+      end
+    end,
+  })
+
+  nvim_lsp.sumneko_lua.setup({
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = "Replace"
+        }
+      }
+    }
+  })
 
   -- metals
   vim.g.metals_server_version = '0.11.9'
