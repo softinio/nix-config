@@ -11,7 +11,7 @@ local function load_plugins()
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
     use 'folke/which-key.nvim'
-    use 'folke/lua-dev.nvim'
+    use 'folke/neodev.nvim'
     use 'folke/tokyonight.nvim' -- Theme
     use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
     use { 'justinhj/battery.nvim', requires = {{'kyazdani42/nvim-web-devicons'}, {'nvim-lua/plenary.nvim'}}}
@@ -20,7 +20,13 @@ local function load_plugins()
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use { 'softinio/scaladex.nvim' }
     use 'windwp/nvim-autopairs' -- Autopairs
-    use 'kyazdani42/nvim-tree.lua' -- File explorer
+    use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+        'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      },
+      tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    }
     use {
       'glepnir/galaxyline.nvim',
       config = function()
@@ -192,7 +198,27 @@ _G.load_config = function()
   }
 
   -- nvim-tree
-  require('nvim-tree').setup()
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+  require("nvim-tree").setup({
+    sort_by = "case_sensitive",
+    disable_netrw = true,
+    view = {
+      adaptive_size = true,
+      mappings = {
+        list = {
+          { key = "u", action = "dir_up" },
+        },
+      },
+    },
+    renderer = {
+      highlight_git = true,
+      group_empty = true,
+    },
+    filters = {
+      dotfiles = false,
+    },
+  })
 
   -- Treesitter
   require('nvim-treesitter.configs').setup {
@@ -481,7 +507,7 @@ _G.load_config = function()
   table.insert(runtime_path, 'lua/?.lua')
   table.insert(runtime_path, 'lua/?/init.lua')
 
-  local luadev = require('lua-dev').setup{
+  local neodev = require('neodev').setup{
     lspconfig = {
       cmd = { sumneko_binary },
       commands = {
@@ -518,7 +544,7 @@ _G.load_config = function()
       },
     },
   }
-  nvim_lsp.sumneko_lua.setup(luadev)
+  nvim_lsp.sumneko_lua.setup(neodev)
 
   -- metals
   vim.g.metals_server_version = '0.11.9'
@@ -546,7 +572,7 @@ _G.load_config = function()
   end
   metals_config.init_options.statusBarProvider = "on"
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+  metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
   local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
   vim.api.nvim_create_autocmd("FileType", {
     pattern = { "scala", "sbt" },
