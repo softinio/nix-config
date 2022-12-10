@@ -18,7 +18,7 @@
   ];
 
   home = {
-    stateVersion = "21.11";
+    stateVersion = "22.11";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
@@ -45,6 +45,7 @@
       ghcid
       gnupg
       go
+      graphviz
       haskell-language-server
       hugo
       luajit
@@ -69,7 +70,7 @@
       openssl
       pandoc
       patchelf
-      # poetry
+      pijul
       rclone
       readline
       ripgrep
