@@ -179,7 +179,7 @@ _G.load_config = function()
   require('texlabconfig').setup {
     cache_activate = true,
     cache_filetypes = { 'tex', 'bib' },
-    reverse_search_edit_cmd = 'split',
+    reverse_search_edit_cmd = vim.cmd.edit,
     settings = {
       texlab = {
         build = {
@@ -519,7 +519,11 @@ _G.load_config = function()
       Lua = {
         completion = {
           callSnippet = "Replace"
-        }
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'}
+        },
       }
     }
   })

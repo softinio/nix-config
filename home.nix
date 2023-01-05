@@ -71,6 +71,7 @@
       pandoc
       patchelf
       pijul
+      prettyping
       rclone
       readline
       ripgrep
@@ -234,6 +235,8 @@
 
       set -xg PATH /Users/salar/.luarocks/bin:/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/nix/store/3qp71mhrpxxg080yc82k51nx7b5hkajr-kitty-0.21.2/Applications/kitty.app/Contents/MacOS $PATH
 
+      set -xg PATH "/Users/salar/Library/Application Support/Coursier/bin" $PATH
+
       set -xg JAVA_HOME /Users/salar/.nix-profile
 
       set -xg JDTLS_CONFIG /Users/salar/.config/jdt-language-server/config_mac
@@ -295,6 +298,14 @@
     for f in $plugin_dir/*.fish
       source $f
     end
+    '';
+
+  # pijul config
+  xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
+    [author]
+    name = "softinio"
+    full_name = "Salar Rahmanian"
+    email = "code@softinio.com"
     '';
 
   # Neovim Configuration

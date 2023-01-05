@@ -178,18 +178,6 @@ gls.right[4] = {
     highlight = { colors.yellow, colors.purple },
   },
 }
-gls.right[5] = {
-  BatteryNvim = {
-    provider = function()
-        local status = require 'battery'.get_status_line()
-        local formatted = string.format(status)
-        return formatted
-    end,
-    separator = '',
-    separator_highlight = { colors.bg, colors.purple },
-    highlight = { colors.grey, colors.purple },
-  },
-}
 
 gls.short_line_left[1] = {
   BufferType = {
