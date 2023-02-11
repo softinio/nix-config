@@ -6,12 +6,12 @@
 
   imports = (import ./programs);
 
-  nixpkgs.overlays = [
-    (import ./overlays/sumneko-lua-language-server)
+  # nixpkgs.overlays = [
+    # (import ./overlays/sumneko-lua-language-server)
     # (import (builtins.fetchTarball {
     #   url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
     # }))
-  ];
+  # ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vscode"
@@ -25,7 +25,6 @@
     };
     packages = with pkgs; [
       ( python310.withPackages (ps: with ps; [ pip flake8 black ]) )
-#      adoptopenjdk-hotspot-bin-17
       jdk
       any-nix-shell
       aspell
@@ -55,13 +54,14 @@
       maven
       multimarkdown
       mypy
-      ncdu
+      # ncdu
       neofetch
       neovim
       niv
       nix-index
       nixfmt
       nix-prefetch-git
+      nodejs
       nodePackages.pyright
       nodePackages.typescript-language-server
       nodePackages.vscode-html-languageserver-bin
@@ -85,7 +85,6 @@
       sqlite
       stylua
       stack
-      sumneko-lua-language-server
       tealdeer
       tectonic
       texlab
@@ -121,6 +120,10 @@
     };
   };
 
+  programs.gitui = {
+    enable = true;
+  };
+
   programs.htop = {
     enable = true;
   };
@@ -152,6 +155,19 @@
         error_symbol = " [λ](bold red)";
       };
     };
+  };
+
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local wezterm = require 'wezterm'
+      return {
+        color_scheme = "tokyonight",
+        font = wezterm.font("JetBrains Mono"),
+        font_size = 16,
+        dpi = 144,
+      }
+    '';
   };
 
   programs.vscode = {
@@ -290,7 +306,7 @@
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
       sshfre1="ssh salar@fre1.softinio.net";
-      sshfre2="ssh -p 22 salar@fre2.softinio.net";
+      sshfre2="ssh -p 2022 salar@fre2.softinio.net";
     };
   };
 
@@ -309,6 +325,9 @@
     '';
 
   # Neovim Configuration
-  xdg.configFile."nvim/lua/salargalaxyline.lua".source = programs/neovim/settings/salargalaxyline.lua;
-  xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
+  xdg.configFile."nvim".source = builtins.fetchGit {
+    url = "https://git.softinio.com/softinio/nvim-config.git";
+    rev = "9431d011d164289f0f16b851dd8605a0bf334c46";
+  };
 }
+
