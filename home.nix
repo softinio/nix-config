@@ -157,19 +157,6 @@
     };
   };
 
-  programs.wezterm = {
-    enable = true;
-    extraConfig = ''
-      local wezterm = require 'wezterm'
-      return {
-        color_scheme = "tokyonight",
-        font = wezterm.font("JetBrains Mono"),
-        font_size = 16,
-        dpi = 144,
-      }
-    '';
-  };
-
   programs.vscode = {
     enable = true;
     extensions = [
@@ -281,7 +268,7 @@
 
     shellAliases = {
       cat="bat";
-      du="ncdu --color dark -rr -x";
+      # du="ncdu --color dark -rr -x";
       fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       ping="prettyping";
       ".." = "cd ..";
@@ -292,6 +279,7 @@
       gc="git commit -m";
       gca="git commit -am";
       gws="git status";
+      gu="gitui";
       ghauth="gh auth login --with-token < ~/.ghauth";
       giscala="gitignore scala,vim,java,sbt > .gitignore";
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
@@ -305,6 +293,7 @@
       nixversion="nix eval nixpkgs.lib.version";
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
+      wezk="wezterm show-keys --lua";
       sshfre1="ssh salar@fre1.softinio.net";
       sshfre2="ssh -p 2022 salar@fre2.softinio.net";
     };
