@@ -196,7 +196,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "edc";
           repo = "bass";
-          rev = "50eba266b0d8a952c7230fca1114cbc9fbbdfbd4";
+          rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
           sha256 = "0ppmajynpb9l58xbrcnbp41b66g7p0c9l2nlsvyjwk6d16g4p4gy";
         };
       }
@@ -205,7 +205,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "plugin-foreign-env";
-          rev = "dddd9213272a0ab848d474d0cbde12ad034e65bc";
+          rev = "3ee95536106c11073d6ff466c1681cde31001383";
           sha256 = "00xqlyl3lffc5l0viin1nyp819wf81fncqyz87jx8ljjdhilmgbs";
         };
       }
@@ -214,7 +214,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "theme-bobthefish";
-          rev = "a2ad38aa051aaed25ae3bd6129986e7f27d42d7b";
+          rev = "2dcfcab653ae69ae95ab57217fe64c97ae05d8de";
           sha256 = "1fssb5bqd2d7856gsylf93d28n3rw4rlqkhbg120j5ng27c7v7lq";
         };
       }
