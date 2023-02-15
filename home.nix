@@ -7,7 +7,6 @@
   imports = (import ./programs);
 
   # nixpkgs.overlays = [
-    # (import ./overlays/sumneko-lua-language-server)
     # (import (builtins.fetchTarball {
     #   url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
     # }))
@@ -134,6 +133,7 @@
 
   programs.kitty = {
     enable = true;
+    theme = "Tokyo Night";
     font = { 
       name = "FiraCode Nerd Font Mono Retina";
       size = 16;
@@ -285,6 +285,7 @@
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
       grep="grep --color=auto";
       new-sbt="sbt new scala/scala-seed.g8";
+      nixc="cd ~/.config/nixpkgs";
       nixre="nix build && sudo ./result/activate";
       nixinfo="nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc="nix-collect-garbage -d";
@@ -298,12 +299,6 @@
       sshfre2="ssh -p 2022 salar@fre2.softinio.net";
     };
   };
-
-  xdg.configFile."fish/conf.d/plugin-bobthefish.fish".text = lib.mkAfter ''
-    for f in $plugin_dir/*.fish
-      source $f
-    end
-    '';
 
   # pijul config
   xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
