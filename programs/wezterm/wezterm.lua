@@ -1,6 +1,10 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace())
+end)
+
 return {
   check_for_updates = false,
   color_scheme = "tokyonight",
@@ -8,7 +12,7 @@ return {
   font_size = 16,
   dpi = 144,
   enable_kitty_keyboard = true,
-  leader = { key="b", mods="CTRL", timeout_milliseconds = 1000 },
+  leader = { key="b", mods="SUPER|CTRL", timeout_milliseconds = 1000 },
   disable_default_key_bindings = true,
   default_prog = { "/Users/salar/.nix-profile/bin/fish" },
   keys = {
@@ -41,6 +45,14 @@ return {
     { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
     { key = 't', mods = 'SUPER', action = act.SpawnTab 'CurrentPaneDomain' },
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
+    { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
+    {
+      key = '9',
+      mods = 'ALT',
+      action = act.ShowLauncherArgs {
+        flags = 'FUZZY|WORKSPACES',
+      },
+    },
   }
 }
 
