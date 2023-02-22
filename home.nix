@@ -311,7 +311,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/softinio/nvim-config.git";
-    rev = "9431d011d164289f0f16b851dd8605a0bf334c46";
+    rev = "30228420ad22efcbb313fe1da744701ce347bb9f";
   };
 }
 
