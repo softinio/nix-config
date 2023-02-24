@@ -24,7 +24,7 @@
     };
     packages = with pkgs; [
       ( python310.withPackages (ps: with ps; [ pip flake8 black ]) )
-      jdk
+      jdk17
       any-nix-shell
       aspell
       bloop
@@ -311,7 +311,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/softinio/nvim-config.git";
-    rev = "30228420ad22efcbb313fe1da744701ce347bb9f";
+    rev = "a8853c25bb1c257ee6f0e6d5ba9d317fbdde6b7f";
   };
 }
 
