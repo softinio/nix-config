@@ -41,6 +41,7 @@
       gitAndTools.diff-so-fancy
       ghc
       ghcid
+      glow
       gnupg
       go
       graphviz
@@ -50,6 +51,7 @@
       luajitPackages.luarocks
       luajitPackages.luasocket
       lorri
+      marksman
       maven
       multimarkdown
       mypy
@@ -311,7 +313,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/softinio/nvim-config.git";
-    rev = "a8853c25bb1c257ee6f0e6d5ba9d317fbdde6b7f";
+    rev = "f1ca602f8d25d9bd18648acc9b61c1356ec24fd0";
   };
 }
 
