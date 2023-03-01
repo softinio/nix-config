@@ -34,6 +34,7 @@
       cmake
       coursier
       curlFull
+      delta
       exa
       fd
       ffmpeg
@@ -299,6 +300,8 @@
       wezk="wezterm show-keys --lua";
       sshfre1="ssh salar@fre1.softinio.net";
       sshfre2="ssh -p 2022 salar@fre2.softinio.net";
+      sshhcloud1="ssh salar@hcloud1.softinio.net";
+      sshhcloud1r="ssh root@hcloud1.softinio.net";
     };
   };
 
@@ -313,7 +316,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/softinio/nvim-config.git";
-    rev = "ff03b6eaaf55fa6d50a8c03a8747043636a6c0a4";
+    rev = "e7dfc75b15c3dfecb736809815db09896529bf6d";
   };
 }
 

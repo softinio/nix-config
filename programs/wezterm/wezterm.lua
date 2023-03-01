@@ -11,7 +11,6 @@ return {
   font = wezterm.font("JetBrains Mono"),
   font_size = 16,
   dpi = 144,
-  enable_kitty_keyboard = true,
   leader = { key="b", mods="SUPER|CTRL", timeout_milliseconds = 1000 },
   disable_default_key_bindings = true,
   default_prog = { "/Users/salar/.nix-profile/bin/fish" },
