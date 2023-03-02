@@ -270,6 +270,7 @@
     '';
 
     shellAliases = {
+      addsshmac="ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
       cat="bat";
       # du="ncdu --color dark -rr -x";
       fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
