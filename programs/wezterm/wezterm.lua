@@ -16,6 +16,14 @@ return {
   initial_rows = 80,
   leader = { key="b", mods="SUPER", timeout_milliseconds = 1000 },
   default_prog = { "/Users/salar/.nix-profile/bin/fish" },
+  ssh_domains = {
+    {
+      name = "hcloud1",
+      remote_address = "hcloud1.softinio.net",
+      username = "salar",
+      remote_wezterm_path = "/run/current-system/sw/bin/wezterm"
+    }
+  },
   keys = {
     { key = "-", mods = "LEADER",       action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
     { key = "'", mods = "LEADER",       action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},

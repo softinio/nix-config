@@ -42,7 +42,6 @@
       gitAndTools.diff-so-fancy
       ghc
       ghcid
-      glow
       gnupg
       go
       graphviz
@@ -51,12 +50,11 @@
       luajit
       luajitPackages.luarocks
       luajitPackages.luasocket
-      lorri
       marksman
       maven
       multimarkdown
       mypy
-      # ncdu
+      ncdu
       neofetch
       neovim
       niv
@@ -102,6 +100,10 @@
 
   programs.bat = {
       enable = true;
+  };
+
+  programs.btop = {
+    enable = true;
   };
 
   programs.direnv = {
@@ -272,7 +274,7 @@
     shellAliases = {
       addsshmac="ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
       cat="bat";
-      # du="ncdu --color dark -rr -x";
+      du="ncdu --color dark -rr -x";
       fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       ping="prettyping";
       ".." = "cd ..";
