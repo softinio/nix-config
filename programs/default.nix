@@ -1,5 +1,5 @@
 [
   ./git
   ./tmux
-  ./wezterm
+  # ./wezterm
 ]

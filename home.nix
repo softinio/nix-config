@@ -147,7 +147,7 @@
       copy_on_select = true;
       enabled_layouts = "*";
       macos_quit_when_last_window_closed = true;
-      scrollback_lines = 10000;
+      scrollback_lines = 50000;
     };
   };
 
@@ -269,6 +269,7 @@
     interactiveShellInit = ''
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
+      ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain
     '';
 
     shellAliases = {
@@ -287,6 +288,8 @@
       gws="git status";
       gu="gitui";
       ghauth="gh auth login --with-token < ~/.ghauth";
+      gitpurgemain=''git branch --merged | grep -v "\*" | grep -v "main" | xargs -n 1 git branch -d'';
+      gitpurgemaster=''git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'';
       giscala="gitignore scala,vim,java,sbt > .gitignore";
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
       grep="grep --color=auto";
@@ -318,7 +321,7 @@
 
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
-    url = "https://git.softinio.com/softinio/nvim-config.git";
+    url = "https://git.softinio.com/nvim-config.git";
     rev = "3c5cdb2304a76e942cfb126e5ad0c93076626c7a";
   };
 }
