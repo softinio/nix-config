@@ -128,6 +128,13 @@
     enable = true;
   };
 
+  programs.helix = {
+    enable = true;
+    settings = {
+      theme = "tokyonight";
+    };
+  };
+
   programs.htop = {
     enable = true;
   };
@@ -148,6 +155,7 @@
       enabled_layouts = "*";
       macos_quit_when_last_window_closed = true;
       scrollback_lines = 50000;
+      kitty_mod = "ctrl+cmd";
     };
   };
 
