@@ -77,7 +77,6 @@
       ripgrep
       ripgrep-all
       rnix-lsp
-      rust-analyzer
       rustup
       sbt
       scala-cli
@@ -275,6 +274,7 @@
       '';
 
     interactiveShellInit = ''
+      set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
       ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain
@@ -330,7 +330,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/nvim-config.git";
-    rev = "3c5cdb2304a76e942cfb126e5ad0c93076626c7a";
+    rev = "bc2b71fa94386902cddf145b556575ab7381f827";
   };
 }
 

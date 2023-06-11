@@ -19,11 +19,11 @@ let
       cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
       prompt = false;
     };
-    url = {
-      "git@github.com:" = {
-        insteadOf = "https://github.com/";
-      };
-    };
+    # url = {
+    #   "git@github.com:" = {
+    #     insteadOf = "https://github.com/";
+    #   };
+    # };
     fetch.prune = true;
     pull = {
       rebase = true;
