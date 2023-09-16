@@ -35,7 +35,7 @@
       coursier
       curlFull
       delta
-      exa
+      eza
       fd
       ffmpeg
       font-awesome
@@ -75,7 +75,7 @@
       rclone
       readline
       ripgrep
-      ripgrep-all
+      # ripgrep-all
       rnix-lsp
       rustup
       sbt
@@ -157,6 +157,16 @@
       kitty_mod = "ctrl+cmd";
     };
   };
+
+  # programs.nheko = {
+  #   enable = true;
+  #   settings = {
+  #     scaleFactor = 1.0;
+  #     user = {
+  #       alertOnNotification = true;
+  #     };
+  #   };
+  # };
 
   programs.starship = {
     enable = true;
@@ -288,7 +298,7 @@
       ping="prettyping";
       ".." = "cd ..";
       pj="python -m json.tool";
-      l="exa --long --header --git --all";
+      l="eza --long --header --git --all";
       g="git";
       gl="git log";
       gc="git commit -m";
