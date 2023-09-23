@@ -17,7 +17,7 @@
       VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
-      ( python310.withPackages (ps: with ps; [ pip flake8 black ]) )
+      # ( python310.withPackages (ps: with ps; [ pip flake8 black ]) )
       jdk17
       any-nix-shell
       aspell
@@ -63,7 +63,6 @@
       openssl
       pandoc
       patchelf
-      pijul
       prettyping
       rclone
       readline
@@ -339,14 +338,6 @@
       sshhcloud1r="ssh root@hcloud1.softinio.net";
     };
   };
-
-  # pijul config
-  xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
-    [author]
-    name = "softinio"
-    full_name = "Salar Rahmanian"
-    email = "code@softinio.com"
-    '';
 
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
