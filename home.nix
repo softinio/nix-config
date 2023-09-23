@@ -134,6 +134,10 @@
     };
   };
 
+  programs.gh-dash = {
+    enable = true;
+  };
+
   programs.gitui = {
     enable = true;
   };
