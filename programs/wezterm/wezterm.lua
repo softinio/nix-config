@@ -6,6 +6,7 @@ wezterm.on('update-right-status', function(window, pane)
 end)
 
 return {
+  adjust_window_size_when_changing_font_size = false,
   check_for_updates = false,
   color_scheme = "tokyonight",
   font = wezterm.font("FiraCode Nerd Font Mono"),

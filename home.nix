@@ -6,18 +6,12 @@
 
   imports = (import ./programs);
 
-  # nixpkgs.overlays = [
-    # (import (builtins.fetchTarball {
-    #   url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    # }))
-  # ];
-
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vscode"
   ];
 
   home = {
-    stateVersion = "22.11";
+    stateVersion = "23.05";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
@@ -35,7 +29,6 @@
       coursier
       curlFull
       delta
-      eza
       fd
       ffmpeg
       font-awesome
@@ -81,6 +74,7 @@
       sbt
       scala-cli
       shellcheck
+      slides
       sqlite
       stylua
       stack
@@ -105,9 +99,27 @@
     enable = true;
   };
 
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacsMacport; 
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+  programs.eza = {
+    enable = true;
+    enableAliases = true;
+    git = true;
+    icons = true;
+    extraOptions = [
+      "--group-directories-first"
+      "--long"
+      "--header"
+      "--all"
+    ];
   };
 
   programs.fzf = {
@@ -298,7 +310,7 @@
       ping="prettyping";
       ".." = "cd ..";
       pj="python -m json.tool";
-      l="eza --long --header --git --all";
+      l="ll";
       g="git";
       gl="git log";
       gc="git commit -m";
@@ -317,8 +329,7 @@
       nixinfo="nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc="nix-collect-garbage -d";
       nixq="nix-env -qa";
-      nixupdate="sudo nix-channel --update";
-      nixversion="nix eval nixpkgs.lib.version";
+      nixupgrade="nix upgrade-nix";
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
       wezk="wezterm show-keys --lua";
