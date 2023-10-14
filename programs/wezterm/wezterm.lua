@@ -8,11 +8,12 @@ end)
 return {
   adjust_window_size_when_changing_font_size = false,
   check_for_updates = false,
+  -- color_scheme = "Gruvbox Light";
   color_scheme = "tokyonight",
   font = wezterm.font("FiraCode Nerd Font Mono"),
   font_size = 16,
   dpi = 144,
-  scrollback_lines = 10000,
+  scrollback_lines = 50000,
   initial_cols = 400,
   initial_rows = 80,
   leader = { key="b", mods="SUPER", timeout_milliseconds = 1000 },

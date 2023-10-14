@@ -26,9 +26,10 @@
       "nixpkgs=${nixpkgs}"
     ];
     package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    settings = {
+      experimental-features = "nix-command flakes repl-flake";
+      trusted-users = [ "root" "salar" ];
+    };
     distributedBuilds = false;
   };
   services.nix-daemon.enable = true;

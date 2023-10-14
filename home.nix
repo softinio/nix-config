@@ -84,7 +84,7 @@
       tokei
       tree
       tree-sitter
-      wget
+      # wget
       xz
       yq
     ];
@@ -346,7 +346,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/nvim-config.git";
-    rev = "bc2b71fa94386902cddf145b556575ab7381f827";
+    rev = "c2d6d6379dba1c85381e8f18ff5bd1127255306c";
   };
 }
 
