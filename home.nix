@@ -17,8 +17,7 @@
       VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
-      # ( python310.withPackages (ps: with ps; [ pip flake8 black ]) )
-      jdk17
+      jdk21
       any-nix-shell
       aspell
       bloop
@@ -31,6 +30,9 @@
       delta
       fd
       ffmpeg
+      fishPlugins.bass
+      fishPlugins.foreign-env
+      fishPlugins.bobthefish
       font-awesome
       gitAndTools.diff-so-fancy
       ghc
@@ -56,6 +58,7 @@
       nix-prefetch-git
       nodejs
       nodePackages.pyright
+      nodePackages.bash-language-server
       nodePackages.typescript-language-server
       nodePackages.vscode-html-languageserver-bin
       nodePackages.vscode-json-languageserver
@@ -96,11 +99,6 @@
 
   programs.btop = {
     enable = true;
-  };
-
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacsMacport; 
   };
 
   programs.direnv = {
@@ -227,35 +225,7 @@
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
     };
 
-    plugins = [
-      {
-        name = "bass";
-        src = pkgs.fetchFromGitHub {
-          owner = "edc";
-          repo = "bass";
-          rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
-          sha256 = "0ppmajynpb9l58xbrcnbp41b66g7p0c9l2nlsvyjwk6d16g4p4gy";
-        };
-      }
-      {
-        name = "foreign-env";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "plugin-foreign-env";
-          rev = "3ee95536106c11073d6ff466c1681cde31001383";
-          sha256 = "00xqlyl3lffc5l0viin1nyp819wf81fncqyz87jx8ljjdhilmgbs";
-        };
-      }
-      {
-        name = "bobthefish";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "theme-bobthefish";
-          rev = "2dcfcab653ae69ae95ab57217fe64c97ae05d8de";
-          sha256 = "1fssb5bqd2d7856gsylf93d28n3rw4rlqkhbg120j5ng27c7v7lq";
-        };
-      }
-    ];
+    plugins = [ ];
 
     loginShellInit = ''
       set -xg TERM xterm-256color
@@ -346,7 +316,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/nvim-config.git";
-    rev = "c2d6d6379dba1c85381e8f18ff5bd1127255306c";
+    rev = "543a87b647e771b58941bc6cbf461a9da7b5459a";
   };
 }
 
