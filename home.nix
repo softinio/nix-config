@@ -303,6 +303,7 @@
       nixgc="nix-collect-garbage -d";
       nixq="nix-env -qa";
       nixupgrade="nix upgrade-nix";
+      obsidian="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes";
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
       wezk="wezterm show-keys --lua";
@@ -316,7 +317,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/nvim-config.git";
-    rev = "543a87b647e771b58941bc6cbf461a9da7b5459a";
+    rev = "a2a4948626b84eb5115d2826afc76978c659e535";
   };
 }
 
