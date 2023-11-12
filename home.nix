@@ -212,6 +212,7 @@
     userSettings = {
       editor.fontFamily = "FiraCode Nerd Font Mono Retina";
       editor.fontSize = 16;
+      editor.copyWithSyntaxHighlighting = true;
       telemetry.enableTelemetry = false;
       workbench.colorTheme = "Solarized Light";
       workbench.iconTheme = "vscode-icons";
@@ -303,7 +304,6 @@
       nixgc="nix-collect-garbage -d";
       nixq="nix-env -qa";
       nixupgrade="nix upgrade-nix";
-      obsidian="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes";
       rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
       v="nvim";
       wezk="wezterm show-keys --lua";
@@ -317,7 +317,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/nvim-config.git";
-    rev = "a2a4948626b84eb5115d2826afc76978c659e535";
+    rev = "eb9068022763edafca9ac280ab3553fafc59ee5b";
   };
 }
 
