@@ -7,11 +7,15 @@
   imports = (import ./programs);
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+    "idea-ultimate"
+    "slack"
     "vscode"
+    "zoom"
   ];
 
   home = {
-    stateVersion = "23.05";
+    stateVersion = "23.11";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
@@ -20,17 +24,19 @@
       jdk21
       any-nix-shell
       aspell
-      bloop
+      #bloop
       cabal-install
       cabal2nix
       cachix
+      cargo
       cmake
       coursier
-      curlFull
+      #curlFull
       delta
+      discord
       fd
       ffmpeg
-      fishPlugins.bass
+      #fishPlugins.bass
       fishPlugins.foreign-env
       fishPlugins.bobthefish
       font-awesome
@@ -40,6 +46,7 @@
       gnupg
       go
       graphviz
+      jetbrains.idea-ultimate
       haskell-language-server
       hugo
       luajit
@@ -70,12 +77,13 @@
       rclone
       readline
       ripgrep
-      # ripgrep-all
+      ripgrep-all
       rnix-lsp
-      rustup
+      rustc
       sbt
       scala-cli
       shellcheck
+      slack
       slides
       sqlite
       stylua
@@ -87,9 +95,10 @@
       tokei
       tree
       tree-sitter
-      # wget
+      wget
       xz
       yq
+      zoom-us
     ];
   };
 
@@ -159,7 +168,7 @@
     enable = true;
     theme = "Tokyo Night";
     font = { 
-      name = "FiraCode Nerd Font Mono Retina";
+      name = "SF Mono";
       size = 16;
     };
     settings = {
@@ -170,16 +179,6 @@
       kitty_mod = "ctrl+cmd";
     };
   };
-
-  # programs.nheko = {
-  #   enable = true;
-  #   settings = {
-  #     scaleFactor = 1.0;
-  #     user = {
-  #       alertOnNotification = true;
-  #     };
-  #   };
-  # };
 
   programs.starship = {
     enable = true;
@@ -198,24 +197,37 @@
       pkgs.vscode-extensions.scalameta.metals
       pkgs.vscode-extensions.usernamehw.errorlens
       pkgs.vscode-extensions.redhat.java
+      pkgs.vscode-extensions.redhat.vscode-yaml
       pkgs.vscode-extensions.xyz.local-history
       pkgs.vscode-extensions.yzhang.markdown-all-in-one
       pkgs.vscode-extensions.svsool.markdown-memo
       pkgs.vscode-extensions.github.vscode-pull-request-github
+      pkgs.vscode-extensions.github.vscode-github-actions
+      pkgs.vscode-extensions.vscode-icons-team.vscode-icons
       pkgs.vscode-extensions.github.github-vscode-theme
       pkgs.vscode-extensions.jnoortheen.nix-ide
       pkgs.vscode-extensions.timonwong.shellcheck
       pkgs.vscode-extensions.skyapps.fish-vscode
       pkgs.vscode-extensions.baccata.scaladex-search
       pkgs.vscode-extensions.davidanson.vscode-markdownlint
+      pkgs.vscode-extensions.ms-python.python
+      pkgs.vscode-extensions.mechatroner.rainbow-csv
+      pkgs.vscode-extensions.mkhl.direnv
+      pkgs.vscode-extensions.asvetliakov.vscode-neovim
     ];
     userSettings = {
-      editor.fontFamily = "FiraCode Nerd Font Mono Retina";
+      editor.fontFamily = "SF Mono";
       editor.fontSize = 16;
       editor.copyWithSyntaxHighlighting = true;
       telemetry.enableTelemetry = false;
       workbench.colorTheme = "Solarized Light";
       workbench.iconTheme = "vscode-icons";
+      workbench.sideBar.location = "right";
+      "githubPullRequests.pullBranch" = "never";
+      "markdown.extension.preview.autoShowPreviewToSide" = true;
+      "extensions.experimental.affinity" = {
+        "asvetliakov.vscode-neovim" = 1;
+      };
     };
   };
 
@@ -249,10 +261,6 @@
       set -xg PATH "/Users/salar/Library/Application Support/Coursier/bin" $PATH
 
       set -xg JAVA_HOME /Users/salar/.nix-profile
-
-      set -xg JDTLS_CONFIG /Users/salar/.config/jdt-language-server/config_mac
-
-      set -xg JAR /Users/salar/.config/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
 
       set -xg WORKSPACE /Users/salar/Projects
 
