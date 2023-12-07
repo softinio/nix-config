@@ -110,6 +110,19 @@
     enable = true;
   };
 
+  programs.darcs = {
+    enable = true;
+    author = [
+      "Salar Rahmanian <code@softinio.com>"
+    ];
+    boring = [
+      "^.idea$"
+      "^.direnv$"
+      "^.envrc$"
+      "^.vscode$"
+    ];
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
