@@ -64,6 +64,7 @@ return {
         flags = 'FUZZY|WORKSPACES',
       },
     },
+    { key = 'Tab', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
   }
 }
 

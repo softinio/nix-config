@@ -54,6 +54,7 @@
       luajitPackages.luasocket
       marksman
       maven
+      metals
       multimarkdown
       mypy
       ncdu
@@ -273,8 +274,6 @@
 
       set -xg PATH "/Users/salar/Library/Application Support/Coursier/bin" $PATH
 
-      set -xg JAVA_HOME /Users/salar/.nix-profile
-
       set -xg WORKSPACE /Users/salar/Projects
 
       set -xg NIX_PATH $HOME/.nix-defexpr/channels $NIX_PATH
@@ -338,7 +337,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://git.softinio.com/nvim-config.git";
-    rev = "eb9068022763edafca9ac280ab3553fafc59ee5b";
+    rev = "49af022e9a5fbf4d5a87a4fabafb42fd4890cfed";
   };
 }
 
