@@ -107,9 +107,9 @@
       enable = true;
   };
 
-  programs.btop = {
-    enable = true;
-  };
+  # programs.btop = {
+  #   enable = true;
+  # };
 
   programs.darcs = {
     enable = true;
@@ -152,6 +152,11 @@
     settings = {
       editor = "nvim";
       git_protocol = "ssh";
+      prompt = "enabled";
+      aliases = {
+        co = "pr checkout";
+        pv = "pr view";
+      };
     };
   };
 
@@ -181,7 +186,7 @@
   programs.kitty = {
     enable = true;
     theme = "Tokyo Night";
-    font = { 
+    font = {
       name = "SF Mono";
       size = 16;
     };
@@ -192,6 +197,10 @@
       scrollback_lines = 50000;
       kitty_mod = "ctrl+cmd";
     };
+  };
+
+  programs.lazygit = {
+    enable = true;
   };
 
   programs.starship = {
