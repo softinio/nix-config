@@ -74,6 +74,7 @@
       openssl
       pandoc
       patchelf
+      pngpaste
       prettyping
       rclone
       readline
@@ -326,6 +327,7 @@
       giscala="gitignore scala,vim,java,sbt > .gitignore";
       gforksync="git fetch upstream && git merge upstream/master && git push origin master";
       grep="grep --color=auto";
+      lg="lazygit";
       new-sbt="sbt new scala/scala-seed.g8";
       nixc="cd ~/.config/nixpkgs";
       nixre="nix build && sudo ./result/activate";
@@ -345,8 +347,8 @@
 
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
-    url = "https://git.softinio.com/nvim-config.git";
-    rev = "49af022e9a5fbf4d5a87a4fabafb42fd4890cfed";
+    url = "https://code.softinio.com/softinio/nvim-config";
+    rev = "a58443e9e5b6afdaa2d23a54d6abe81c6496b3a6";
   };
 }
 
