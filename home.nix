@@ -71,11 +71,14 @@
       nodePackages.vscode-html-languageserver-bin
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
+      ollama
       openssl
+      oterm
       pandoc
       patchelf
       pngpaste
       prettyping
+      python3Packages.huggingface-hub
       rclone
       readline
       ripgrep
@@ -98,6 +101,7 @@
       tree
       tree-sitter
       wget
+      xcodes
       xz
       yq
       zoom-us
@@ -108,9 +112,9 @@
       enable = true;
   };
 
-  # programs.btop = {
-  #   enable = true;
-  # };
+  programs.btop = {
+    enable = true;
+  };
 
   programs.darcs = {
     enable = true;
@@ -202,6 +206,11 @@
 
   programs.lazygit = {
     enable = true;
+  };
+
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.starship = {
