@@ -79,6 +79,7 @@
       pngpaste
       prettyping
       python3Packages.huggingface-hub
+      python3Packages.jupyterlab
       rclone
       readline
       ripgrep
