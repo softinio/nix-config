@@ -8,9 +8,9 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "discord"
-    "idea-ultimate"
     "slack"
     "vscode"
+    "vscode-extension-MS-python-vscode-pylance"
     "zoom"
   ];
 
@@ -25,30 +25,22 @@
       any-nix-shell
       aspell
       #bloop
-      cabal-install
-      cabal2nix
       cachix
-      cargo
       cmake
       coursier
-      #curlFull
+      curlFull
       delta
+      deno
       discord
       fd
       ffmpeg
-      #fishPlugins.bass
       fishPlugins.foreign-env
       fishPlugins.bobthefish
       font-awesome
       gitAndTools.diff-so-fancy
-      ghc
-      ghcid
       gnupg
       go
       graphviz
-      jetbrains.idea-ultimate
-      haskell-language-server
-      hugo
       luajit
       luajitPackages.luarocks
       luajitPackages.luasocket
@@ -73,7 +65,7 @@
       nodePackages.yaml-language-server
       ollama
       openssl
-      oterm
+      # oterm
       pandoc
       patchelf
       pngpaste
@@ -84,8 +76,7 @@
       readline
       ripgrep
       ripgrep-all
-      rnix-lsp
-      rustc
+      rustup
       sbt
       scala-cli
       shellcheck
@@ -93,7 +84,6 @@
       slides
       sqlite
       stylua
-      stack
       tealdeer
       tectonic
       texlab
@@ -110,7 +100,7 @@
   };
 
   programs.bat = {
-      enable = true;
+    enable = true;
   };
 
   programs.btop = {
@@ -137,7 +127,7 @@
 
   programs.eza = {
     enable = true;
-    enableAliases = true;
+    enableFishIntegration = true;
     git = true;
     icons = true;
     extraOptions = [
@@ -244,10 +234,12 @@
       pkgs.vscode-extensions.skyapps.fish-vscode
       pkgs.vscode-extensions.baccata.scaladex-search
       pkgs.vscode-extensions.davidanson.vscode-markdownlint
-      pkgs.vscode-extensions.ms-python.python
+      pkgs.vscode-extensions.ms-python.vscode-pylance
+      # pkgs.vscode-extensions.ms-python.python
       pkgs.vscode-extensions.mechatroner.rainbow-csv
       pkgs.vscode-extensions.mkhl.direnv
       pkgs.vscode-extensions.asvetliakov.vscode-neovim
+      pkgs.vscode-extensions.rust-lang.rust-analyzer
     ];
     userSettings = {
       editor.fontFamily = "SF Mono";
@@ -307,7 +299,7 @@
       set -xg LUA_PATH "/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?.lua;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/share/lua/5.1/?.lua;/Users/salar/.luarocks/share/lua/5.1/?/init.lua"
 
       set -xg LUA_CPATH "?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/lib/lua/5.1/?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/lib/lua/5.1/?.so"
-      '';
+    '';
 
     interactiveShellInit = ''
       set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
@@ -317,48 +309,49 @@
     '';
 
     shellAliases = {
-      addsshmac="ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
-      cat="bat";
-      du="ncdu --color dark -rr -x";
-      fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
-      ping="prettyping";
+      addsshmac = "ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
+      cat = "bat";
+      du = "ncdu --color dark -rr -x";
+      fzfp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
+      ping = "prettyping";
       ".." = "cd ..";
-      pj="python -m json.tool";
-      l="ll";
-      g="git";
-      gl="git log";
-      gc="git commit -m";
-      gca="git commit -am";
-      gws="git status";
-      gu="gitui";
-      ghauth="gh auth login --with-token < ~/.ghauth";
-      gitpurgemain=''git branch --merged | grep -v "\*" | grep -v "main" | xargs -n 1 git branch -d'';
-      gitpurgemaster=''git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'';
-      giscala="gitignore scala,vim,java,sbt > .gitignore";
-      gforksync="git fetch upstream && git merge upstream/master && git push origin master";
-      grep="grep --color=auto";
-      lg="lazygit";
-      new-sbt="sbt new scala/scala-seed.g8";
-      nixc="cd ~/.config/nixpkgs";
-      nixre="nix build && sudo ./result/activate";
-      nixinfo="nix-shell -p nix-info --run \"nix-info -m\"";
-      nixgc="nix-collect-garbage -d";
-      nixq="nix-env -qa";
-      nixupgrade="nix upgrade-nix";
-      rmxcodederived="rm -fr ~/Library/Developer/Xcode/DerivedData";
-      v="nvim";
-      wezk="wezterm show-keys --lua";
-      sshfre1="ssh salar@fre1.softinio.net";
-      sshfre2="ssh -p 2022 salar@fre2.softinio.net";
-      sshhcloud1="ssh salar@hcloud1.softinio.net";
-      sshhcloud1r="ssh root@hcloud1.softinio.net";
+      pj = "python -m json.tool";
+      l = "ll";
+      g = "git";
+      gl = "git log";
+      gc = "git commit -m";
+      gca = "git commit -am";
+      gws = "git status";
+      gu = "gitui";
+      ghauth = "gh auth login --with-token < ~/.ghauth";
+      gitpurgemain = ''git branch --merged | grep -v "\*" | grep -v "main" | xargs -n 1 git branch -d'';
+      gitpurgemaster = ''git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'';
+      giscala = "gitignore scala,vim,java,sbt > .gitignore";
+      gforksync = "git fetch upstream && git merge upstream/master && git push origin master";
+      grep = "grep --color=auto";
+      lg = "lazygit";
+      new-sbt = "sbt new scala/scala-seed.g8";
+      nixc = "cd ~/.config/nixpkgs";
+      nixre = "nix build && sudo ./result/activate";
+      nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
+      nixgc = "nix-collect-garbage -d";
+      nixq = "nix-env -qa";
+      nixstorerepair = "nix-store --repair --verify --check-contents";
+      nixupgrade = "nix upgrade-nix";
+      rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
+      v = "nvim";
+      wezk = "wezterm show-keys --lua";
+      sshfre1 = "ssh salar@fre1.softinio.net";
+      sshfre2 = "ssh -p 2022 salar@fre2.softinio.net";
+      sshhcloud1 = "ssh salar@hcloud1.softinio.net";
+      sshhcloud1r = "ssh root@hcloud1.softinio.net";
     };
   };
 
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "6f0048ce70cc3c6f0f7a7ad44fe0aafde5006bad";
+    rev = "20abfd7ad7a56d7a73d83f6443bb7fe9a72f6b1a";
   };
 }
 
