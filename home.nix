@@ -31,6 +31,7 @@
       curlFull
       delta
       deno
+      devenv
       discord
       fd
       ffmpeg
@@ -351,7 +352,7 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "20abfd7ad7a56d7a73d83f6443bb7fe9a72f6b1a";
+    rev = "12c5e919e829c067ba795fe7f1e02037cbc0b4e9";
   };
 }
 
