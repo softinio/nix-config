@@ -342,8 +342,6 @@
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
       wezk = "wezterm show-keys --lua";
-      sshfre1 = "ssh salar@fre1.softinio.net";
-      sshfre2 = "ssh -p 2022 salar@fre2.softinio.net";
       sshhcloud1 = "ssh salar@hcloud1.softinio.net";
       sshhcloud1r = "ssh root@hcloud1.softinio.net";
     };
