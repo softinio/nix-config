@@ -24,7 +24,6 @@
       jdk21
       any-nix-shell
       aspell
-      #bloop
       cachix
       cmake
       coursier
@@ -66,7 +65,7 @@
       nodePackages.yaml-language-server
       ollama
       openssl
-      # oterm
+      oterm
       pandoc
       patchelf
       pngpaste
@@ -83,6 +82,7 @@
       shellcheck
       slack
       slides
+      slumber
       sqlite
       stylua
       tealdeer
