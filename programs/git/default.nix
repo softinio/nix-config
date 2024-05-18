@@ -4,7 +4,7 @@ let
   gitConfig = {
     core = {
       editor = "nvim";
-      pager  = "diff-so-fancy | less --tabs=4 -RFX";
+      pager = "diff-so-fancy | less --tabs=4 -RFX";
     };
     init.defaultBranch = "main";
     merge.conflictstyle = "diff3";
@@ -36,22 +36,22 @@ let
     master = "checkout master";
   };
   myIgnores = [
-      "*~"
-      ".DS_Store"
-      "*.bloop"
-      ".direnv/"
-      ".idea/"
-      ".mypy_cache"
-      "*.metals"
-      "*.metals.sbt"
-      "*metals.sbt"
-      "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
-      "*hie.yaml" # ghcide files
-      "*.mill-version" # used by metals
-      "*.vscode"
-      "*.python-version"
-      "result"
-    ];
+    "*~"
+    ".DS_Store"
+    "*.bloop"
+    ".direnv/"
+    ".idea/"
+    ".mypy_cache"
+    "*.metals"
+    "*.metals.sbt"
+    "*metals.sbt"
+    "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
+    "*hie.yaml" # ghcide files
+    "*.mill-version" # used by metals
+    "*.vscode"
+    "*.python-version"
+    "result"
+  ];
 in
 {
   programs.git = {

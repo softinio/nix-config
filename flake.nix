@@ -7,63 +7,75 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = github:nix-community/nur;
+    nur.url = "github:nix-community/nur";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nix-darwin, home-manager, nur, nixpkgs, ... }:
+  outputs =
+    {
+      self,
+      nix-darwin,
+      home-manager,
+      nur,
+      nixpkgs,
+      ...
+    }:
     let
-      homeManagerConfFor = config: { ... }: {
-        nixpkgs.overlays = [ nur.overlay ];
-        imports = [ config ];
-      };
-
-      m3maxConfiguration = { pkgs, ... }: {
-        environment.systemPackages = with pkgs;
-          [
-            home-manager
-          ];
-
-        fonts = {
-          fontDir.enable = true;
-          fonts = with pkgs; [
-            fira-code
-          ];
+      homeManagerConfFor =
+        config:
+        { ... }:
+        {
+          nixpkgs.overlays = [ nur.overlay ];
+          imports = [ config ];
         };
 
-        services.nix-daemon.enable = true;
+      m3maxConfiguration =
+        { pkgs, ... }:
+        {
+          environment.systemPackages = with pkgs; [ home-manager ];
 
-        nix = {
-          nixPath = nixpkgs.lib.mkForce [
-            "nixpkgs=${nixpkgs}"
-          ];
-
-          package = pkgs.nixFlakes;
-          settings = {
-            experimental-features = "nix-command flakes";
-            extra-platforms = [ "x86_64-darwin" "aarch64-darwin" ];
-            trusted-users = [ "root" "salar" ];
+          fonts = {
+            fontDir.enable = true;
+            fonts = with pkgs; [ fira-code ];
           };
-          distributedBuilds = false;
-        };
 
-        programs.fish.enable = true;
+          services.nix-daemon.enable = true;
 
-        system.configurationRevision = self.rev or self.dirtyRev or null;
+          nix = {
+            nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
 
-        system.stateVersion = 4;
+            package = pkgs.nixFlakes;
+            settings = {
+              experimental-features = "nix-command flakes";
+              extra-platforms = [
+                "x86_64-darwin"
+                "aarch64-darwin"
+              ];
+              trusted-users = [
+                "root"
+                "salar"
+              ];
+            };
+            distributedBuilds = false;
+          };
 
-        nixpkgs.hostPlatform = "aarch64-darwin";
+          programs.fish.enable = true;
 
-        users = {
-          users.salar = {
-            home = /Users/salar;
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+
+          system.stateVersion = 4;
+
+          nixpkgs.hostPlatform = "aarch64-darwin";
+
+          users = {
+            users.salar = {
+              home = /Users/salar;
+            };
           };
         };
-      };
     in
     {
       darwinConfigurations.salarm3max = nix-darwin.lib.darwinSystem {
@@ -76,7 +88,9 @@
             home-manager.users.salar = homeManagerConfFor ./home.nix;
           }
         ];
-        specialArgs = { inherit nixpkgs; };
+        specialArgs = {
+          inherit nixpkgs;
+        };
       };
 
       darwinPackages = self.darwinConfigurations.salarm3max.pkgs;

@@ -22,16 +22,9 @@ in
         plugin = tmuxPlugins.continuum;
         extraConfig = "set -g @continuum-restore 'on'";
       }
-      {
-        plugin = tmuxPlugins.sensible;
-      }
-      {
-        plugin = tmuxPlugins.vim-tmux-navigator;
-      }
-      {
-        plugin = tmuxPlugins.onedark-theme;
-      }
+      { plugin = tmuxPlugins.sensible; }
+      { plugin = tmuxPlugins.vim-tmux-navigator; }
+      { plugin = tmuxPlugins.onedark-theme; }
     ];
   };
 }
-

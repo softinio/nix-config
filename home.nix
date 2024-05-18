@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # Let Home Manager install and manage itself.
@@ -6,13 +11,15 @@
 
   imports = (import ./programs);
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-    "slack"
-    "vscode"
-    "vscode-extension-MS-python-vscode-pylance"
-    "zoom"
-  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "slack"
+      "vscode"
+      "vscode-extension-MS-python-vscode-pylance"
+      "zoom"
+    ];
 
   home = {
     stateVersion = "23.11";
@@ -54,7 +61,7 @@
       neovim
       niv
       nix-index
-      nixfmt
+      nixfmt-rfc-style
       nix-prefetch-git
       nodejs
       nodePackages.pyright
@@ -110,9 +117,7 @@
 
   programs.darcs = {
     enable = true;
-    author = [
-      "Salar Rahmanian <code@softinio.com>"
-    ];
+    author = [ "Salar Rahmanian <code@softinio.com>" ];
     boring = [
       "^.idea$"
       "^.direnv$"
@@ -353,4 +358,3 @@
     rev = "12c5e919e829c067ba795fe7f1e02037cbc0b4e9";
   };
 }
-

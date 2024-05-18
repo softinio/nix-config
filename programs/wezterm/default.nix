@@ -6,6 +6,6 @@ in
 {
   programs.wezterm = {
     enable = true;
-    extraConfig = weztermConfig; 
+    extraConfig = weztermConfig;
   };
 }
