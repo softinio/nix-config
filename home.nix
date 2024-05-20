@@ -87,6 +87,7 @@
       sbt
       scala-cli
       shellcheck
+      skimpdf
       slack
       slides
       slumber
@@ -355,6 +356,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "f875590278de306462a02ba6bdd3181fd63e5b45";
+    rev = "d5b436ac78b01c2548edbb7e7ca5c70770a6cd8c";
   };
 }
