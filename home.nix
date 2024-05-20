@@ -167,10 +167,6 @@
     enable = true;
   };
 
-  programs.gitui = {
-    enable = true;
-  };
-
   programs.helix = {
     enable = true;
     settings = {
@@ -184,22 +180,6 @@
 
   programs.jq = {
     enable = true;
-  };
-
-  programs.kitty = {
-    enable = true;
-    theme = "Tokyo Night";
-    font = {
-      name = "SF Mono";
-      size = 16;
-    };
-    settings = {
-      copy_on_select = true;
-      enabled_layouts = "*";
-      macos_quit_when_last_window_closed = true;
-      scrollback_lines = 50000;
-      kitty_mod = "ctrl+cmd";
-    };
   };
 
   programs.lazygit = {
@@ -242,7 +222,7 @@
       pkgs.vscode-extensions.baccata.scaladex-search
       pkgs.vscode-extensions.davidanson.vscode-markdownlint
       pkgs.vscode-extensions.ms-python.vscode-pylance
-      # pkgs.vscode-extensions.ms-python.python
+      pkgs.vscode-extensions.ms-python.python
       pkgs.vscode-extensions.mechatroner.rainbow-csv
       pkgs.vscode-extensions.mkhl.direnv
       pkgs.vscode-extensions.asvetliakov.vscode-neovim
@@ -289,23 +269,13 @@
 
       set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
 
-      set -xg PATH /Users/salar/.luarocks/bin:/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/nix/store/3qp71mhrpxxg080yc82k51nx7b5hkajr-kitty-0.21.2/Applications/kitty.app/Contents/MacOS $PATH
-
-      set -xg PATH "/Users/salar/Library/Application Support/Coursier/bin" $PATH
+      set -xg PATH /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin $PATH
 
       set -xg WORKSPACE /Users/salar/Projects
-
-      set -xg NIX_PATH $HOME/.nix-defexpr/channels $NIX_PATH
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
       set -xg TOOLCHAINS swift
-
-      set -xg XDG_CONFIG_HOME $HOME/.config
-
-      set -xg LUA_PATH "/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?.lua;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/share/lua/5.1/?.lua;/Users/salar/.luarocks/share/lua/5.1/?/init.lua"
-
-      set -xg LUA_CPATH "?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/share/lua/5.1/?/init.lua;/Users/salar/.luarocks/lib/lua/5.1/?.so;/nix/store/95wpywsjf5iiw77f6n9rw347lk1sly15-luarocks-3.2.1/lib/lua/5.1/?.so"
     '';
 
     interactiveShellInit = ''
