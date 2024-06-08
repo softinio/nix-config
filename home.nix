@@ -39,6 +39,7 @@
       deno
       devenv
       discord
+      dua
       fd
       ffmpeg
       fishPlugins.foreign-env
@@ -56,7 +57,6 @@
       metals
       multimarkdown
       mypy
-      ncdu
       neofetch
       neovim
       niv
@@ -288,7 +288,7 @@
     shellAliases = {
       addsshmac = "ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
       cat = "bat";
-      du = "ncdu --color dark -rr -x";
+      du = "dua i";
       fzfp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       ping = "prettyping";
       ".." = "cd ..";
