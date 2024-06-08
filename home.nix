@@ -59,6 +59,7 @@
       mypy
       neofetch
       neovim
+      nil
       niv
       nix-index
       nixfmt-rfc-style
@@ -205,28 +206,28 @@
   programs.vscode = {
     enable = true;
     extensions = [
-      pkgs.vscode-extensions.scalameta.metals
-      pkgs.vscode-extensions.usernamehw.errorlens
-      pkgs.vscode-extensions.redhat.java
-      pkgs.vscode-extensions.redhat.vscode-yaml
-      pkgs.vscode-extensions.xyz.local-history
-      pkgs.vscode-extensions.yzhang.markdown-all-in-one
-      pkgs.vscode-extensions.svsool.markdown-memo
-      pkgs.vscode-extensions.github.vscode-pull-request-github
-      pkgs.vscode-extensions.github.vscode-github-actions
-      pkgs.vscode-extensions.vscode-icons-team.vscode-icons
-      pkgs.vscode-extensions.github.github-vscode-theme
-      pkgs.vscode-extensions.jnoortheen.nix-ide
-      pkgs.vscode-extensions.timonwong.shellcheck
-      pkgs.vscode-extensions.skyapps.fish-vscode
+      pkgs.vscode-extensions.asvetliakov.vscode-neovim
       pkgs.vscode-extensions.baccata.scaladex-search
       pkgs.vscode-extensions.davidanson.vscode-markdownlint
-      pkgs.vscode-extensions.ms-python.vscode-pylance
-      pkgs.vscode-extensions.ms-python.python
+      pkgs.vscode-extensions.github.github-vscode-theme
+      pkgs.vscode-extensions.github.vscode-github-actions
+      pkgs.vscode-extensions.github.vscode-pull-request-github
+      pkgs.vscode-extensions.jnoortheen.nix-ide
       pkgs.vscode-extensions.mechatroner.rainbow-csv
       pkgs.vscode-extensions.mkhl.direnv
-      pkgs.vscode-extensions.asvetliakov.vscode-neovim
+      pkgs.vscode-extensions.ms-python.python
+      pkgs.vscode-extensions.ms-python.vscode-pylance
+      pkgs.vscode-extensions.redhat.java
+      pkgs.vscode-extensions.redhat.vscode-yaml
       pkgs.vscode-extensions.rust-lang.rust-analyzer
+      pkgs.vscode-extensions.scalameta.metals
+      pkgs.vscode-extensions.skyapps.fish-vscode
+      pkgs.vscode-extensions.svsool.markdown-memo
+      pkgs.vscode-extensions.timonwong.shellcheck
+      pkgs.vscode-extensions.usernamehw.errorlens
+      pkgs.vscode-extensions.vscode-icons-team.vscode-icons
+      pkgs.vscode-extensions.xyz.local-history
+      pkgs.vscode-extensions.yzhang.markdown-all-in-one
     ];
     userSettings = {
       editor.fontFamily = "SF Mono";
@@ -326,6 +327,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "71648bb0f862e67287ad34d4681740cec03901b2";
+    rev = "fed5967077d0bd7f41e009ff22290b043379c1d7";
   };
 }
