@@ -65,10 +65,8 @@
       nixfmt-rfc-style
       nix-prefetch-git
       nodejs
-      nodePackages.pyright
       nodePackages.bash-language-server
       nodePackages.typescript-language-server
-      nodePackages.vscode-html-languageserver-bin
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
       ollama
@@ -80,6 +78,7 @@
       prettyping
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
+      pyright
       rclone
       readline
       ripgrep
@@ -102,6 +101,7 @@
       tree
       tree-sitter
       wget
+      vscode-langservers-extracted
       xcodes
       xz
       yq
