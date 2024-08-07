@@ -17,6 +17,8 @@
       "discord"
       "slack"
       "vscode"
+      "vscode-extension-github-copilot"
+      "vscode-extension-github-copilot-chat"
       "vscode-extension-MS-python-vscode-pylance"
       "zoom"
     ];
@@ -71,7 +73,7 @@
       nodePackages.yaml-language-server
       ollama
       openssl
-      oterm
+      # oterm
       pandoc
       patchelf
       pngpaste
@@ -209,6 +211,9 @@
       pkgs.vscode-extensions.asvetliakov.vscode-neovim
       pkgs.vscode-extensions.baccata.scaladex-search
       pkgs.vscode-extensions.davidanson.vscode-markdownlint
+      pkgs.vscode-extensions.enkia.tokyo-night
+      pkgs.vscode-extensions.github.copilot
+      pkgs.vscode-extensions.github.copilot-chat
       pkgs.vscode-extensions.github.github-vscode-theme
       pkgs.vscode-extensions.github.vscode-github-actions
       pkgs.vscode-extensions.github.vscode-pull-request-github
@@ -217,6 +222,8 @@
       pkgs.vscode-extensions.mkhl.direnv
       pkgs.vscode-extensions.ms-python.python
       pkgs.vscode-extensions.ms-python.vscode-pylance
+      pkgs.vscode-extensions.ms-vscode.makefile-tools
+      pkgs.vscode-extensions.ms-toolsai.jupyter
       pkgs.vscode-extensions.redhat.java
       pkgs.vscode-extensions.redhat.vscode-yaml
       pkgs.vscode-extensions.rust-lang.rust-analyzer
@@ -225,16 +232,18 @@
       pkgs.vscode-extensions.svsool.markdown-memo
       pkgs.vscode-extensions.timonwong.shellcheck
       pkgs.vscode-extensions.usernamehw.errorlens
+      pkgs.vscode-extensions.visualstudioexptteam.vscodeintellicode
       pkgs.vscode-extensions.vscode-icons-team.vscode-icons
+      pkgs.vscode-extensions.vscjava.vscode-java-pack
       pkgs.vscode-extensions.xyz.local-history
       pkgs.vscode-extensions.yzhang.markdown-all-in-one
     ];
     userSettings = {
       editor.fontFamily = "SF Mono";
-      editor.fontSize = 16;
+      editor.fontSize = 13;
       editor.copyWithSyntaxHighlighting = true;
       telemetry.enableTelemetry = false;
-      workbench.colorTheme = "Solarized Light";
+      workbench.colorTheme = "Tokyo Night";
       workbench.iconTheme = "vscode-icons";
       workbench.sideBar.location = "right";
       "githubPullRequests.pullBranch" = "never";
@@ -327,6 +336,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "fed5967077d0bd7f41e009ff22290b043379c1d7";
+    rev = "11c5aecb3adc0195642ad35f89c04798f26a9076";
   };
 }
