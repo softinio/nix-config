@@ -73,7 +73,6 @@
       nodePackages.yaml-language-server
       ollama
       openssl
-      # oterm
       pandoc
       patchelf
       pngpaste
@@ -207,36 +206,40 @@
 
   programs.vscode = {
     enable = true;
-    extensions = [
-      pkgs.vscode-extensions.asvetliakov.vscode-neovim
-      pkgs.vscode-extensions.baccata.scaladex-search
-      pkgs.vscode-extensions.davidanson.vscode-markdownlint
-      pkgs.vscode-extensions.enkia.tokyo-night
-      pkgs.vscode-extensions.github.copilot
-      pkgs.vscode-extensions.github.copilot-chat
-      pkgs.vscode-extensions.github.github-vscode-theme
-      pkgs.vscode-extensions.github.vscode-github-actions
-      pkgs.vscode-extensions.github.vscode-pull-request-github
-      pkgs.vscode-extensions.jnoortheen.nix-ide
-      pkgs.vscode-extensions.mechatroner.rainbow-csv
-      pkgs.vscode-extensions.mkhl.direnv
-      pkgs.vscode-extensions.ms-python.python
-      pkgs.vscode-extensions.ms-python.vscode-pylance
-      pkgs.vscode-extensions.ms-vscode.makefile-tools
-      pkgs.vscode-extensions.ms-toolsai.jupyter
-      pkgs.vscode-extensions.redhat.java
-      pkgs.vscode-extensions.redhat.vscode-yaml
-      pkgs.vscode-extensions.rust-lang.rust-analyzer
-      pkgs.vscode-extensions.scalameta.metals
-      pkgs.vscode-extensions.skyapps.fish-vscode
-      pkgs.vscode-extensions.svsool.markdown-memo
-      pkgs.vscode-extensions.timonwong.shellcheck
-      pkgs.vscode-extensions.usernamehw.errorlens
-      pkgs.vscode-extensions.visualstudioexptteam.vscodeintellicode
-      pkgs.vscode-extensions.vscode-icons-team.vscode-icons
-      pkgs.vscode-extensions.vscjava.vscode-java-pack
-      pkgs.vscode-extensions.xyz.local-history
-      pkgs.vscode-extensions.yzhang.markdown-all-in-one
+    enableUpdateCheck = false;
+    enableExtensionUpdateCheck = false;
+    mutableExtensionsDir = false;
+    extensions = with pkgs.vscode-extensions; [
+      asvetliakov.vscode-neovim
+      baccata.scaladex-search
+      davidanson.vscode-markdownlint
+      enkia.tokyo-night
+      github.copilot
+      github.copilot-chat
+      github.github-vscode-theme
+      github.vscode-github-actions
+      github.vscode-pull-request-github
+      humao.rest-client
+      jnoortheen.nix-ide
+      mechatroner.rainbow-csv
+      mkhl.direnv
+      ms-python.python
+      ms-python.vscode-pylance
+      ms-vscode.makefile-tools
+      ms-toolsai.jupyter
+      redhat.java
+      redhat.vscode-yaml
+      rust-lang.rust-analyzer
+      scalameta.metals
+      skyapps.fish-vscode
+      svsool.markdown-memo
+      timonwong.shellcheck
+      usernamehw.errorlens
+      visualstudioexptteam.vscodeintellicode
+      vscode-icons-team.vscode-icons
+      vscjava.vscode-java-pack
+      xyz.local-history
+      yzhang.markdown-all-in-one
     ];
     userSettings = {
       editor.fontFamily = "SF Mono";
