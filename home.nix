@@ -242,18 +242,28 @@
       yzhang.markdown-all-in-one
     ];
     userSettings = {
-      editor.fontFamily = "SF Mono";
-      editor.fontSize = 13;
-      editor.copyWithSyntaxHighlighting = true;
-      telemetry.enableTelemetry = false;
-      workbench.colorTheme = "Tokyo Night";
-      workbench.iconTheme = "vscode-icons";
-      workbench.sideBar.location = "right";
-      "githubPullRequests.pullBranch" = "never";
-      "markdown.extension.preview.autoShowPreviewToSide" = true;
+      "editor.fontFamily" = "SF Mono";
+      "editor.fontSize" = 13;
+      "editor.copyWithSyntaxHighlighting" = true;
       "extensions.experimental.affinity" = {
         "asvetliakov.vscode-neovim" = 1;
       };
+      "files.autoSave" = "afterDelay";
+      "git.autoSave" = "afterDelay";
+      "git.rebaseWhenSync" = true;
+      "github.gitProtocol" = "ssh";
+      "githubPullRequests.notifications" = "pullRequests";
+      "githubPullRequests.pullBranch" = "never";
+      "markdown.extension.preview.autoShowPreviewToSide" = true;
+      # Install paste image manually as not in nix ( https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image )
+      "pasteImage.insertPattern" = "![[\${imageFileName}]]";
+      "pasteImage.path" = "\${projectRoot}/Attachments";
+      "python.analysis.extraPaths" = [ "src" ];
+      "telemetry.telemetryLevel" = "off";
+      "window.openFoldersInNewWindow" = "on";
+      "workbench.colorTheme" = "Tokyo Night";
+      "workbench.iconTheme" = "vscode-icons";
+      "workbench.sideBar.location" = "right";
     };
   };
 
