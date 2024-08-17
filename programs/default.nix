@@ -2,4 +2,5 @@
   ./git
   ./tmux
   ./wezterm
+  ./vscode
 ]
