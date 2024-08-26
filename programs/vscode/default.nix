@@ -24,6 +24,7 @@ let
     rust-lang.rust-analyzer
     scalameta.metals
     skyapps.fish-vscode
+    sswg.swift-lang
     svsool.markdown-memo
     timonwong.shellcheck
     usernamehw.errorlens
@@ -36,6 +37,7 @@ let
   ];
   myUserSettings = {
     "editor.fontFamily" = "SF Mono";
+    "editor.fontLigatures" = true;
     "editor.fontSize" = 13;
     "editor.copyWithSyntaxHighlighting" = true;
     "extensions.experimental.affinity" = {
