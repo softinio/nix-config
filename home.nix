@@ -33,6 +33,8 @@
       jdk21
       any-nix-shell
       aspell
+      basedpyright
+      bash-language-server
       cachix
       cmake
       coursier
@@ -51,9 +53,11 @@
       gnupg
       go
       graphviz
+      jq-lsp
       luajit
       luajitPackages.luarocks
       luajitPackages.luasocket
+      lua-language-server
       marksman
       maven
       metals
@@ -63,14 +67,11 @@
       neovim
       nil
       niv
+      nixd
       nix-index
       nixfmt-rfc-style
       nix-prefetch-git
       nodejs
-      nodePackages.bash-language-server
-      nodePackages.typescript-language-server
-      nodePackages.vscode-json-languageserver
-      nodePackages.yaml-language-server
       ollama
       openssl
       pandoc
@@ -101,10 +102,13 @@
       tokei
       tree
       tree-sitter
+      typescript
+      typescript-language-server
       wget
       vscode-langservers-extracted
       xcodes
       xz
+      yaml-language-server
       yq
       zoom-us
     ];
@@ -287,6 +291,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "f59b6eedae27085f7430e6d4237f7d3041377d0e";
+    rev = "754a8bb8a7161e9f04596081a166722d3ec4a408";
   };
 }
