@@ -30,7 +30,6 @@
       VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
-      jdk21
       any-nix-shell
       aspell
       basedpyright
@@ -181,6 +180,10 @@
   };
 
   programs.htop = {
+    enable = true;
+  };
+
+  programs.java = {
     enable = true;
   };
 
