@@ -54,8 +54,6 @@
       graphviz
       jq-lsp
       luajit
-      luajitPackages.luarocks
-      luajitPackages.luasocket
       lua-language-server
       marksman
       maven
@@ -294,6 +292,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "1949d31e980fbd3418f1aaab7f092b619e3f82fc";
+    rev = "9452693037960f28f00c4df74691eb418957cf6a";
   };
 }
