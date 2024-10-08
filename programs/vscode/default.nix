@@ -33,7 +33,6 @@ let
     vscjava.vscode-java-pack
     xyz.local-history
     yzhang.markdown-all-in-one
-
   ];
   myUserSettings = {
     "editor.fontFamily" = "SF Mono";
