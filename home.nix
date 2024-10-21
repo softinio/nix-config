@@ -77,11 +77,10 @@
       prettyping
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
-      pyright
       rclone
       readline
       ripgrep
-      ripgrep-all
+      # ripgrep-all
       rustup
       sbt
       scala-cli
@@ -139,7 +138,7 @@
     enable = true;
     enableFishIntegration = true;
     git = true;
-    icons = true;
+    icons = "auto";
     extraOptions = [
       "--group-directories-first"
       "--long"
@@ -292,6 +291,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "0baf336e89c9b80182e70a14b0795dd31f004037";
+    rev = "2a385cac5852cc8b090f29b2f3ef68be7935c3ea";
   };
 }
