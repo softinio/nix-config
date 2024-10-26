@@ -56,6 +56,7 @@
       luajit
       lua-language-server
       marksman
+      marp-cli
       maven
       metals
       multimarkdown

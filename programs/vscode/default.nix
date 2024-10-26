@@ -13,6 +13,7 @@ let
     github.vscode-pull-request-github
     humao.rest-client
     jnoortheen.nix-ide
+    marp-team.marp-vscode
     mechatroner.rainbow-csv
     mkhl.direnv
     ms-python.python
