@@ -102,7 +102,7 @@
       typescript-language-server
       wget
       vscode-langservers-extracted
-      xcodes
+      # xcodes
       xz
       yaml-language-server
       yq

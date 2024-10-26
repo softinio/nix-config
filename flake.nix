@@ -46,7 +46,7 @@
           nix = {
             nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
 
-            package = pkgs.nixFlakes;
+            package = pkgs.nixVersions.stable;
             settings = {
               experimental-features = "nix-command flakes";
               extra-platforms = [
