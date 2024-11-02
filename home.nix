@@ -81,7 +81,7 @@
       rclone
       readline
       ripgrep
-      # ripgrep-all
+      ripgrep-all
       rustup
       sbt
       scala-cli
@@ -292,6 +292,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "2b0701c8a09c0c720faa89598725e8f7120ed676";
+    rev = "902fbd939c74ece8fabe543e511af36471a1a197";
   };
 }

@@ -1,6 +1,39 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
+local function is_vim(pane)
+  -- this is set by the plugin, and unset on ExitPre in Neovim
+  return pane:get_user_vars().IS_NVIM == 'true'
+end
+
+local direction_keys = {
+  a = 'Left',
+  o = 'Down',
+  e = 'Up',
+  u = 'Right',
+}
+
+local function split_nav(resize_or_move, key)
+  return {
+    key = key,
+    mods = resize_or_move == 'resize' and 'META' or 'CTRL',
+    action = wezterm.action_callback(function(win, pane)
+      if is_vim(pane) then
+        -- pass the keys through to vim/nvim
+        win:perform_action({
+          SendKey = { key = key, mods = resize_or_move == 'resize' and 'META' or 'CTRL' },
+        }, pane)
+      else
+        if resize_or_move == 'resize' then
+          win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
+        else
+          win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
+        end
+      end
+    end),
+  }
+end
+
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
@@ -10,6 +43,7 @@ return {
   check_for_updates = false,
   -- color_scheme = "Gruvbox Light";
   color_scheme = 'tokyonight',
+  default_gui_startup_args = { 'connect', 'unix' },
   font = wezterm.font 'SF Mono',
   font_size = 16,
   dpi = 144,
@@ -26,11 +60,15 @@ return {
       remote_wezterm_path = '/run/current-system/sw/bin/wezterm',
     },
   },
+  unix_domains = {
+    {
+      name = 'unix',
+    },
+  },
   keys = {
     { key = '-', mods = 'LEADER', action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
     { key = "'", mods = 'LEADER', action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
     { key = 'k', mods = 'SUPER', action = act.TogglePaneZoomState },
-    { key = 'c', mods = 'LEADER', action = wezterm.action { SpawnTab = 'CurrentPaneDomain' } },
     { key = 'h', mods = 'LEADER', action = wezterm.action { ActivatePaneDirection = 'Left' } },
     { key = 'j', mods = 'LEADER', action = wezterm.action { ActivatePaneDirection = 'Down' } },
     { key = 'k', mods = 'LEADER', action = wezterm.action { ActivatePaneDirection = 'Up' } },
@@ -58,6 +96,50 @@ return {
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
     { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
     {
+      key = 'S',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action_callback(function(window, pane)
+        -- Here you can dynamically construct a longer list if needed
+
+        local home = wezterm.home_dir
+        local workspaces = {
+          { id = home, label = 'Home' },
+          { id = home .. '/Projects', label = 'My Projects' },
+          { id = home .. '/OpenSource', label = 'Open Source Projects' },
+          { id = home .. '/.config/nixpkgs', label = 'Nix Config' },
+          { id = home .. '/Projects/scalanews', label = 'Scala News' },
+        }
+
+        window:perform_action(
+          act.InputSelector {
+            action = wezterm.action_callback(function(inner_window, inner_pane, id, label)
+              if not id and not label then
+                wezterm.log_info 'cancelled'
+              else
+                wezterm.log_info('id = ' .. id)
+                wezterm.log_info('label = ' .. label)
+                inner_window:perform_action(
+                  act.SwitchToWorkspace {
+                    name = label,
+                    spawn = {
+                      label = 'Workspace: ' .. label,
+                      cwd = id,
+                    },
+                  },
+                  inner_pane
+                )
+              end
+            end),
+            title = 'Choose Workspace',
+            choices = workspaces,
+            fuzzy = true,
+            fuzzy_description = 'Fuzzy find and/or make a workspace',
+          },
+          pane
+        )
+      end),
+    },
+    {
       key = '9',
       mods = 'ALT',
       action = act.ShowLauncherArgs {
@@ -65,6 +147,16 @@ return {
       },
     },
     { key = 'Tab', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
+    -- move between split panes
+    split_nav('move', 'a'),
+    split_nav('move', 'o'),
+    split_nav('move', 'e'),
+    split_nav('move', 'u'),
+    -- resize panes
+    split_nav('resize', 'a'),
+    split_nav('resize', 'o'),
+    split_nav('resize', 'e'),
+    split_nav('resize', 'u'),
   },
   -- temp fix
   front_end = 'WebGpu',
