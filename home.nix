@@ -248,6 +248,7 @@
       set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
+      eval (ssh-agent -c)
       ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain
     '';
 

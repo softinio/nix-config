@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local mux = wezterm.mux
 local act = wezterm.action
 
 local function is_vim(pane)
@@ -36,6 +37,12 @@ end
 
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
+end)
+
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+  pane:split { size = 0.2 }
 end)
 
 return {
@@ -96,8 +103,8 @@ return {
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
     { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
     {
-      key = 'S',
-      mods = 'CTRL|SHIFT',
+      key = '8',
+      mods = 'ALT',
       action = wezterm.action_callback(function(window, pane)
         -- Here you can dynamically construct a longer list if needed
 
