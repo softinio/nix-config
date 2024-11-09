@@ -92,6 +92,7 @@
       slumber
       sqlite
       stylua
+      swift-format
       tealdeer
       tectonic
       texlab
@@ -103,7 +104,6 @@
       typescript-language-server
       wget
       vscode-langservers-extracted
-      # xcodes
       xz
       yaml-language-server
       yq
@@ -290,6 +290,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "902fbd939c74ece8fabe543e511af36471a1a197";
+    rev = "b535afb6d9259e0ec18e2e7fda54384b48264746";
   };
 }
