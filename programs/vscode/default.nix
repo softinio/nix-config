@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   myExtensions = with pkgs.vscode-extensions; [
