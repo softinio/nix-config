@@ -1,4 +1,5 @@
 [
+  ./broot
   ./fish
   ./git
   ./tmux
