@@ -48,7 +48,6 @@
       fishPlugins.foreign-env
       fishPlugins.bobthefish
       font-awesome
-      gitAndTools.diff-so-fancy
       gnupg
       go
       graphviz
@@ -259,11 +258,6 @@
       pj = "python -m json.tool";
       l = "ll";
       g = "git";
-      gl = "git log";
-      gc = "git commit -m";
-      gca = "git commit -am";
-      gws = "git status";
-      gu = "gitui";
       ghauth = "gh auth login --with-token < ~/.ghauth";
       gitpurgemain = ''git branch --merged | grep -v "\*" | grep -v "main" | xargs -n 1 git branch -d'';
       gitpurgemaster = ''git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'';
@@ -281,7 +275,6 @@
       nixupgrade = "nix upgrade-nix";
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
-      wezk = "wezterm show-keys --lua";
       sshhcloud1 = "ssh salar@hcloud1.softinio.net";
       sshhcloud1r = "ssh root@hcloud1.softinio.net";
     };

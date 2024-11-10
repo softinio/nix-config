@@ -4,9 +4,26 @@ let
   gitConfig = {
     core = {
       editor = "nvim";
-      pager = "diff-so-fancy | less --tabs=4 -RFX";
+      pager = "delta";
     };
+    delta = {
+      "line-numbers" = true;
+      "hyperlinks" = true;
+      "side-by-side" = true;
+    };
+    diff = {
+      colorMoved = "default";
+      tool = "nvim";
+    };
+    difftool.nvim = {
+      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
+      prompt = false;
+    };
+    fetch.prune = true;
     init.defaultBranch = "main";
+    interactive = {
+      diffFilter = "delta --color-only";
+    };
     merge.conflictstyle = "diff3";
     merge.tool = "nvim";
     mergetool.nvim = {
@@ -14,26 +31,26 @@ let
       prompt = false;
       keepBackup = false;
     };
-    diff.tool = "nvim";
-    difftool.nvim = {
-      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
-      prompt = false;
-    };
     # url = {
     #   "git@github.com:" = {
     #     insteadOf = "https://github.com/";
     #   };
     # };
-    fetch.prune = true;
     pull = {
       rebase = true;
     };
   };
   myAliases = {
     ci = "commit";
+    cim = "commit -m";
+    cia = "commit -am";
     co = "checkout";
+    cob = "checkout -b";
+    di = "diff";
+    gpo = "push origin";
     main = "checkout main";
     master = "checkout master";
+    st = "status";
   };
   myIgnores = [
     "*~"
