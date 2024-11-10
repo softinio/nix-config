@@ -29,7 +29,9 @@
         { ... }:
         {
           nixpkgs.overlays = [ nur.overlay ];
-          imports = [ config ];
+          imports = [
+            config
+          ];
         };
 
       m3maxConfiguration =
