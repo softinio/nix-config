@@ -5,4 +5,5 @@
   ./tmux
   ./wezterm
   ./vscode
+  ./zed
 ]
