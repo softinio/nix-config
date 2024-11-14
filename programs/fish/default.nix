@@ -42,6 +42,7 @@
     '';
 
     interactiveShellInit = ''
+      jj util completion fish | source
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
     '';

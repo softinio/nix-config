@@ -19,6 +19,7 @@
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
       "vscode-extension-MS-python-vscode-pylance"
+      "vscode-extension-visualjj-visualjj"
       "zoom"
     ];
 
@@ -49,6 +50,7 @@
       go
       graphviz
       jq-lsp
+      lazyjj
       luajit
       lua-language-server
       marksman
@@ -183,6 +185,19 @@
 
   programs.jq = {
     enable = true;
+  };
+
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Salar Rahmanian";
+        email = "code@softinio.com";
+      };
+      ui = {
+        editor = "nvim";
+      };
+    };
   };
 
   programs.lazygit = {
