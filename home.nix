@@ -56,6 +56,7 @@
       marksman
       marp-cli
       maven
+      meld
       metals
       multimarkdown
       mypy
@@ -84,7 +85,6 @@
       sbt
       scala-cli
       shellcheck
-      skimpdf
       slack
       slides
       slumber
@@ -190,12 +190,34 @@
   programs.jujutsu = {
     enable = true;
     settings = {
+      signing = {
+        key = "~/.ssh/id_ed25519.pub";
+      };
       user = {
         name = "Salar Rahmanian";
         email = "code@softinio.com";
       };
       ui = {
+        diff.format = "git";
+        diff.tool = [
+          "delta"
+          "--color-only"
+          "--hyperlinks"
+          "--line-numbers"
+          "--side-by-side"
+          "$left"
+          "$right"
+        ];
         editor = "nvim";
+        merge-editor = [
+          "meld"
+          "$left"
+          "$base"
+          "$right"
+          "-o"
+          "$output"
+        ];
+        pager = "delta";
       };
     };
   };
@@ -224,6 +246,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "b535afb6d9259e0ec18e2e7fda54384b48264746";
+    rev = "a972cdf4f9067111d67f2f0b5655eede437cdff3";
   };
 }

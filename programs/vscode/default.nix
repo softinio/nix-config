@@ -60,10 +60,6 @@ let
     "githubPullRequests.pullBranch" = "never";
     "markdown.extension.preview.autoShowPreviewToSide" = true;
     "notebook.formatOnSave" = true;
-    "notebook.codeActionsOnSave" = {
-      "notebook.source.fixAll" = true;
-      "notebook.source.organizeImports" = true;
-    };
     # Install paste image manually as not in nix ( https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image )
     "pasteImage.insertPattern" = "![[\${imageFileName}]]";
     "pasteImage.path" = "\${projectRoot}/Attachments";

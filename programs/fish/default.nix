@@ -30,9 +30,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
-
-      set -xg PATH /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin $PATH
+      set -xg PATH /Applications/Ghostty.app/Contents/MacOS $HOME/bin $HOME/.cargo/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin $PATH
 
       set -xg WORKSPACE /Users/salar/Projects
 
