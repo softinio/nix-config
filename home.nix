@@ -20,7 +20,6 @@
       "vscode-extension-github-copilot-chat"
       "vscode-extension-MS-python-vscode-pylance"
       "vscode-extension-visualjj-visualjj"
-      "zoom"
     ];
 
   home = {
@@ -105,7 +104,6 @@
       xz
       yaml-language-server
       yq
-      zoom-us
     ];
   };
 
