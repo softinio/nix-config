@@ -195,6 +195,13 @@
         name = "Salar Rahmanian";
         email = "code@softinio.com";
       };
+      aliases = {
+        l = [
+          "log"
+          "-r"
+          "(main..@):: | (main..@)-"
+        ];
+      };
       ui = {
         diff.format = "git";
         diff.tool = [
@@ -233,7 +240,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      command_timeout = 1000;
+      command_timeout = 3000;
       character = {
         success_symbol = " [λ](bold green)";
         error_symbol = " [λ](bold red)";
