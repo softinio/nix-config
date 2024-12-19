@@ -37,9 +37,9 @@
       cmake
       coursier
       curlFull
-      delta
       deno
       devenv
+      difftastic
       discord
       dua
       fd
@@ -170,6 +170,7 @@
     enable = true;
     settings = {
       theme = "tokyonight";
+      editor.file-picker.hidden = false;
     };
   };
 
@@ -183,48 +184,6 @@
 
   programs.jq = {
     enable = true;
-  };
-
-  programs.jujutsu = {
-    enable = true;
-    settings = {
-      signing = {
-        key = "~/.ssh/id_ed25519.pub";
-      };
-      user = {
-        name = "Salar Rahmanian";
-        email = "code@softinio.com";
-      };
-      aliases = {
-        l = [
-          "log"
-          "-r"
-          "(main..@):: | (main..@)-"
-        ];
-      };
-      ui = {
-        diff.format = "git";
-        diff.tool = [
-          "delta"
-          "--color-only"
-          "--hyperlinks"
-          "--line-numbers"
-          "--side-by-side"
-          "$left"
-          "$right"
-        ];
-        editor = "nvim";
-        merge-editor = [
-          "meld"
-          "$left"
-          "$base"
-          "$right"
-          "-o"
-          "$output"
-        ];
-        pager = "delta";
-      };
-    };
   };
 
   programs.lazygit = {

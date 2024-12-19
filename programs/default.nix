@@ -2,6 +2,7 @@
   ./broot
   ./fish
   ./git
+  ./jujutsu
   ./tmux
   ./wezterm
   ./vscode

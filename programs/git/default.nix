@@ -4,16 +4,15 @@ let
   gitConfig = {
     core = {
       editor = "nvim";
-      pager = "delta";
-    };
-    delta = {
-      "line-numbers" = true;
-      "hyperlinks" = true;
-      "side-by-side" = true;
     };
     diff = {
       colorMoved = "default";
-      tool = "nvim";
+      external = "difft";
+      tool = "difftastic";
+    };
+    difftool.difftastic = {
+      cmd = "difft \"$MERGED\" \"$LOCAL\" \"abcdef1\" \"100644\" \"$REMOTE\" \"abcdef2\" \"100644\"";
+      prompt = false;
     };
     difftool.nvim = {
       cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
@@ -21,23 +20,23 @@ let
     };
     fetch.prune = true;
     init.defaultBranch = "main";
-    interactive = {
-      diffFilter = "delta --color-only";
-    };
-    merge.conflictstyle = "diff3";
+    merge.conflictstyle = "zdiff3";
     merge.tool = "nvim";
     mergetool.nvim = {
       cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"";
       prompt = false;
       keepBackup = false;
     };
-    # url = {
-    #   "git@github.com:" = {
-    #     insteadOf = "https://github.com/";
-    #   };
-    # };
+    pager = {
+      difftool = true;
+    };
     pull = {
       rebase = true;
+    };
+    url = {
+      "git@github.com:" = {
+        insteadOf = "https://github.com/";
+      };
     };
   };
   myAliases = {
@@ -53,7 +52,6 @@ let
     st = "status";
   };
   myIgnores = [
-    "*~"
     ".DS_Store"
     "*.bloop"
     ".direnv/"
