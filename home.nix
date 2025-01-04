@@ -49,7 +49,6 @@
       go
       graphviz
       jq-lsp
-      lazyjj
       luajit
       lua-language-server
       marksman
