@@ -100,6 +100,7 @@ return {
     { key = 'v', mods = 'SUPER', action = act.PasteFrom 'Clipboard' },
     { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
     { key = 't', mods = 'SUPER', action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 'h', mods = 'SUPER', action = act { SpawnCommandInNewTab = { cwd = wezterm.home_dir } } },
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
     { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
     {
@@ -166,5 +167,5 @@ return {
     split_nav('resize', 'u'),
   },
   -- temp fix
-  front_end = 'WebGpu',
+  -- front_end = 'WebGpu',
 }
