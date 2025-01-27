@@ -20,11 +20,12 @@ let
     };
     fetch.prune = true;
     init.defaultBranch = "main";
-    merge.conflictstyle = "zdiff3";
-    merge.tool = "nvim";
-    mergetool.nvim = {
-      cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"";
-      prompt = false;
+    merge.tool = "intellij";
+    mergetool = {
+      intellij = {
+        cmd = "'/Applications/IntelliJ IDEA.app/Contents/macOS/idea' merge \“$LOCAL\” \“$REMOTE\” \“$BASE\” \“$MERGED\”";
+        trustExitCode = true;
+      };
       keepBackup = false;
     };
     pager = {
