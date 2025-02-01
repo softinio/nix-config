@@ -29,6 +29,7 @@
       VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
+      aider-chat
       any-nix-shell
       aspell
       basedpyright
@@ -209,6 +210,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "60d7b84ede499785cc32c2a0dcdeabe3715f9ffe";
+    rev = "b205894edc350b5fe1b939939461b4e713478b97";
   };
 }
