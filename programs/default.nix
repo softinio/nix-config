@@ -1,4 +1,5 @@
 [
+  ./aider
   ./broot
   ./fish
   ./git

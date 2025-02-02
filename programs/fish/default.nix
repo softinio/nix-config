@@ -47,6 +47,8 @@
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
       set -xg TOOLCHAINS swift
+
+      set -xg OPENAI_API_KEY (cat ~/.openai)
     '';
 
     interactiveShellInit = ''

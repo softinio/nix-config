@@ -29,7 +29,6 @@
       VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
-      aider-chat
       any-nix-shell
       aspell
       basedpyright
@@ -100,6 +99,7 @@
       typescript
       typescript-language-server
       wget
+      uv
       vscode-langservers-extracted
       xz
       yaml-language-server
