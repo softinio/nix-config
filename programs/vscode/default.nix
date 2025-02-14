@@ -6,7 +6,6 @@ let
     baccata.scaladex-search
     charliermarsh.ruff
     davidanson.vscode-markdownlint
-    enkia.tokyo-night
     github.copilot
     github.copilot-chat
     github.github-vscode-theme
@@ -20,16 +19,15 @@ let
     ms-python.debugpy
     ms-python.python
     ms-python.vscode-pylance
+    ms-toolsai.datawrangler
     ms-toolsai.jupyter
     ms-toolsai.jupyter-keymap
     ms-toolsai.jupyter-renderers
     ms-toolsai.vscode-jupyter-cell-tags
     ms-toolsai.vscode-jupyter-slideshow
     ms-vscode.makefile-tools
-    ms-toolsai.jupyter
     redhat.java
     redhat.vscode-yaml
-    rust-lang.rust-analyzer
     scalameta.metals
     skyapps.fish-vscode
     sswg.swift-lang
@@ -40,7 +38,6 @@ let
     visualjj.visualjj
     vscode-icons-team.vscode-icons
     vscjava.vscode-java-pack
-    xyz.local-history
     yzhang.markdown-all-in-one
   ];
   myUserSettings = {
@@ -74,8 +71,8 @@ let
       "editor.defaultFormatter" = "charliermarsh.ruff";
       "editor.formatOnSave" = true;
       "editor.codeActionsOnSave" = {
-        "source.fixAll" = "afterDelay";
-        "source.organizeImports" = "afterDelay";
+        "source.fixAll" = "always";
+        "source.organizeImports" = "always";
       };
     };
     "telemetry.telemetryLevel" = "off";
@@ -85,7 +82,7 @@ let
     "update.mode" = "none";
     "vsicons.dontShowNewVersionMessage" = true;
     "window.openFoldersInNewWindow" = "on";
-    "workbench.colorTheme" = "Tokyo Night";
+    "workbench.colorTheme" = "GitHub Dark Default";
     "workbench.iconTheme" = "vscode-icons";
     "workbench.sideBar.location" = "right";
   };
@@ -93,10 +90,14 @@ in
 {
   programs.vscode = {
     enable = true;
-    enableUpdateCheck = false;
-    enableExtensionUpdateCheck = false;
+    profiles = {
+      default = {
+        enableExtensionUpdateCheck = false;
+        enableUpdateCheck = false;
+        extensions = myExtensions;
+        userSettings = myUserSettings;
+      };
+    };
     mutableExtensionsDir = false;
-    extensions = myExtensions;
-    userSettings = myUserSettings;
   };
 }

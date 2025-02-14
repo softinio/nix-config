@@ -7,11 +7,17 @@
     fishPlugins.bobthefish
   ];
 
+  home.shell.enableFishIntegration = true;
+
   programs.fish = {
     enable = true;
 
     functions = {
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+      ot = ''
+        set otresult (ollama run qwen2.5-coder "Provide only the MacOS terminal command (without markdown) to: $argv")
+        commandline $otresult
+      '';
     };
 
     plugins = [
@@ -26,7 +32,7 @@
       }
     ];
 
-    loginShellInit = ''
+    shellInitLast = ''
       set -xg TERM xterm-256color
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -40,7 +46,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH /Applications/Ghostty.app/Contents/MacOS $HOME/bin $HOME/.cargo/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin $PATH
+      set -xg PATH /Applications/Ghostty.app/Contents/MacOS $HOME/bin $HOME/.cargo/bin $HOME/.npm-global/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin $PATH
 
       set -xg WORKSPACE /Users/salar/Projects
 
@@ -49,6 +55,7 @@
       set -xg TOOLCHAINS swift
 
       set -xg OPENAI_API_KEY (cat ~/.openai)
+      set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)
     '';
 
     interactiveShellInit = ''
@@ -83,6 +90,7 @@
       nixq = "nix-env -qa";
       nixstorerepair = "nix-store --repair --verify --check-contents";
       nixupgrade = "nix upgrade-nix";
+      o = "echo (ollama run qwen2.5-coder \"Provide only the MacOS terminal command (without markdown) to: $argv\")";
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
       sshhcloud1 = "ssh salar@hcloud1.softinio.net";
