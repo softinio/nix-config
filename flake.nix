@@ -43,8 +43,6 @@
             packages = with pkgs; [ fira-code ];
           };
 
-          services.nix-daemon.enable = true;
-
           nix = {
             nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
 

@@ -1,5 +1,5 @@
 [
-  ./aider
+  # ./aider
   ./broot
   ./fish
   ./git

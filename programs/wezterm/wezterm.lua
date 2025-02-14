@@ -49,7 +49,8 @@ return {
   adjust_window_size_when_changing_font_size = false,
   check_for_updates = false,
   -- color_scheme = "Gruvbox Light";
-  color_scheme = 'tokyonight',
+  -- color_scheme = 'tokyonight',
+  color_scheme = 'Tango (terminal.sexy)',
   default_gui_startup_args = { 'connect', 'unix' },
   font = wezterm.font 'SF Mono',
   font_size = 16,
@@ -166,6 +167,4 @@ return {
     split_nav('resize', 'e'),
     split_nav('resize', 'u'),
   },
-  -- temp fix
-  -- front_end = 'WebGpu',
 }
