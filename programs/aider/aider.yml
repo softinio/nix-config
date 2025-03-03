@@ -23,8 +23,8 @@
 ## Use claude-3-opus-20240229 model for the main chat
 #opus: false
 
-## Use claude-3-5-sonnet-20241022 model for the main chat
-#sonnet: false
+## Use anthropic/claude-3-7-sonnet-20250219 model for the main chat
+sonnet: true
 
 ## Use claude-3-5-haiku-20241022 model for the main chat
 #haiku: false
@@ -33,7 +33,7 @@
 #4: false
 
 ## Use gpt-4o model for the main chat
-4o: true
+# 4o: true
 
 ## Use gpt-4o-mini model for the main chat
 #mini: false
@@ -429,7 +429,7 @@ vim: true
 #fancy-input: true
 
 ## Enable/disable multi-line input mode with Meta-Enter to submit (default: False)
-multiline: true
+multiline: false
 
 ## Enable/disable detection and offering to add URLs to chat (default: True)
 #detect-urls: true

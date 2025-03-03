@@ -2,39 +2,6 @@ local wezterm = require 'wezterm'
 local mux = wezterm.mux
 local act = wezterm.action
 
-local function is_vim(pane)
-  -- this is set by the plugin, and unset on ExitPre in Neovim
-  return pane:get_user_vars().IS_NVIM == 'true'
-end
-
-local direction_keys = {
-  a = 'Left',
-  o = 'Down',
-  e = 'Up',
-  u = 'Right',
-}
-
-local function split_nav(resize_or_move, key)
-  return {
-    key = key,
-    mods = resize_or_move == 'resize' and 'META' or 'CTRL',
-    action = wezterm.action_callback(function(win, pane)
-      if is_vim(pane) then
-        -- pass the keys through to vim/nvim
-        win:perform_action({
-          SendKey = { key = key, mods = resize_or_move == 'resize' and 'META' or 'CTRL' },
-        }, pane)
-      else
-        if resize_or_move == 'resize' then
-          win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
-        else
-          win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
-        end
-      end
-    end),
-  }
-end
-
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
@@ -49,8 +16,9 @@ return {
   adjust_window_size_when_changing_font_size = false,
   check_for_updates = false,
   -- color_scheme = "Gruvbox Light";
-  color_scheme = 'tokyonight',
-  default_gui_startup_args = { 'connect', 'unix' },
+  -- color_scheme = 'tokyonight',
+  color_scheme = 'Tango (terminal.sexy)',
+  -- default_gui_startup_args = { 'connect', 'unix' },
   font = wezterm.font 'SF Mono',
   font_size = 16,
   dpi = 144,
@@ -59,6 +27,8 @@ return {
   initial_rows = 80,
   leader = { key = 'b', mods = 'SUPER', timeout_milliseconds = 1000 },
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
+  window_decorations = 'RESIZE',
+  -- window_background_image = '/Users/salar/.config/nixpkgs/programs/wezterm/bridge.jpg',
   ssh_domains = {
     {
       name = 'hcloud1',
@@ -70,6 +40,7 @@ return {
   unix_domains = {
     {
       name = 'unix',
+      proxy_command = { 'nc', '-U', '/Users/salar/.local/share/wezterm/sock' },
     },
   },
   keys = {
@@ -95,7 +66,7 @@ return {
     { key = '9', mods = 'LEADER', action = wezterm.action { ActivateTab = 8 } },
     { key = '&', mods = 'LEADER', action = wezterm.action { CloseCurrentTab = { confirm = true } } },
     { key = 'x', mods = 'LEADER', action = wezterm.action { CloseCurrentPane = { confirm = true } } },
-    { key = 'Enter', mods = 'ALT', action = act.ToggleFullScreen },
+    { key = 'Enter', mods = 'ALT', action = act.DisableDefaultAssignment },
     { key = 'c', mods = 'SUPER', action = act.CopyTo 'Clipboard' },
     { key = 'v', mods = 'SUPER', action = act.PasteFrom 'Clipboard' },
     { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
@@ -155,17 +126,5 @@ return {
       },
     },
     { key = 'Tab', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
-    -- move between split panes
-    split_nav('move', 'a'),
-    split_nav('move', 'o'),
-    split_nav('move', 'e'),
-    split_nav('move', 'u'),
-    -- resize panes
-    split_nav('resize', 'a'),
-    split_nav('resize', 'o'),
-    split_nav('resize', 'e'),
-    split_nav('resize', 'u'),
   },
-  -- temp fix
-  -- front_end = 'WebGpu',
 }
