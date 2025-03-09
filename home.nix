@@ -14,6 +14,7 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
+      "gh-copilot"
       "slack"
       "vscode"
       "vscode-extension-github-copilot"
@@ -151,6 +152,9 @@
 
   programs.gh = {
     enable = true;
+    extensions = [
+      pkgs.gh-copilot
+    ];
     settings = {
       editor = "nvim";
       git_protocol = "ssh";

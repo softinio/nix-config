@@ -1,12 +1,11 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   aiderConfig = builtins.readFile ./aider.yml;
-  aiderPkgs = import ./aider-deriv.nix { inherit lib pkgs; };
 in
 {
-  home.packages = [
-    aiderPkgs.withPlaywright
+  home.packages = with pkgs; [
+    aider-chat.withPlaywright
   ];
   home.file.".aider.conf.yml".text = aiderConfig;
 }
