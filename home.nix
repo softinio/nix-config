@@ -49,6 +49,7 @@
       gnupg
       go
       graphviz
+      jetbrains-mono
       jq-lsp
       luajit
       lua-language-server
@@ -61,6 +62,7 @@
       mypy
       neofetch
       neovim
+      nerd-fonts.fira-code
       nil
       niv
       nixd

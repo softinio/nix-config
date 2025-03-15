@@ -19,7 +19,11 @@ return {
   -- color_scheme = 'tokyonight',
   color_scheme = 'Tango (terminal.sexy)',
   -- default_gui_startup_args = { 'connect', 'unix' },
-  font = wezterm.font 'SF Mono',
+  font = wezterm.font_with_fallback {
+    'SF Mono',
+    'JetBrains Mono',
+    'Fira Code',
+  },
   font_size = 16,
   dpi = 144,
   scrollback_lines = 50000,
