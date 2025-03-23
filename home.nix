@@ -200,7 +200,7 @@
     themeFile = "Tango_Dark";
     font = {
       name = "SF Mono";
-      size = 16;
+      size = 13;
     };
     settings = {
       copy_on_select = true;
