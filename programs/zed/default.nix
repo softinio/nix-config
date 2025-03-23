@@ -20,13 +20,28 @@ in
         version = "2";
         default_model = {
           provider = "copilot_chat";
-          model = "gpt-4o";
+          model = "claude-3-7-sonnet";
         };
       };
       features = {
         copilot = true;
       };
       language_models = {
+        anthropic = {
+          available_models = [
+            {
+              provider = "anthropic";
+              name = "claude-3-7-sonnet";
+              max_tokens = 128000;
+              cache_configuration = {
+                max_cache_anchors = 10;
+                min_total_token = 10000;
+                should_speculate = false;
+              };
+            }
+          ];
+          version = "1";
+        };
         openai = {
           available_models = [
             {
@@ -36,15 +51,15 @@ in
             }
             {
               provider = "openai";
-              name = "gpt-4o-mini";
+              name = "o3-mini";
               max_tokens = 128000;
             }
           ];
-          version = "2";
+          version = "1";
         };
       };
       telemetry.metrics = false;
-      theme = "Andromeda";
+      theme = "Gruvbox Dark";
       vim_mode = true;
     };
   };
