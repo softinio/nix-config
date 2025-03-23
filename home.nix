@@ -49,6 +49,7 @@
       gnupg
       go
       graphviz
+      jetbrains-mono
       jq-lsp
       luajit
       lua-language-server
@@ -61,6 +62,7 @@
       mypy
       neofetch
       neovim
+      nerd-fonts.fira-code
       nil
       niv
       nixd
@@ -188,6 +190,26 @@
 
   programs.jq = {
     enable = true;
+  };
+
+  programs.kitty = {
+    enable = true;
+    keybindings = {
+      "kitty_mod+enter" = "new_window_with_cwd";
+    };
+    themeFile = "Tango_Dark";
+    font = {
+      name = "SF Mono";
+      size = 16;
+    };
+    settings = {
+      copy_on_select = true;
+      enabled_layouts = "*";
+      macos_quit_when_last_window_closed = true;
+      scrollback_lines = 100000;
+      kitty_mod = "cmd+option";
+    };
+    shellIntegration.enableFishIntegration = true;
   };
 
   programs.lazygit = {
