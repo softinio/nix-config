@@ -175,7 +175,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "tokyonight";
+      theme = "gruvbox_dark_hard";
       editor.file-picker.hidden = false;
     };
   };
