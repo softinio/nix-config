@@ -59,7 +59,7 @@ in
         };
       };
       telemetry.metrics = false;
-      theme = "Gruvbox Dark";
+      theme = "Gruvbox Dark Hard";
       vim_mode = true;
     };
   };
