@@ -4,6 +4,7 @@
   ./fish
   ./git
   ./jujutsu
+  ./kitty
   ./vscode
   ./zed
 ]

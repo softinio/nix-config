@@ -81,6 +81,7 @@
       giscala = "gitignore scala,vim,java,sbt > .gitignore";
       gforksync = "git fetch upstream && git merge upstream/master && git push origin master";
       grep = "grep --color=auto";
+      hg = "kitten hyperlinked-grep";
       lg = "lazygit";
       new-sbt = "sbt new scala/scala-seed.g8";
       nixc = "cd ~/.config/nixpkgs";
