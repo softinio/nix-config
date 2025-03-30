@@ -19,11 +19,14 @@ in
       size = 13;
     };
     settings = {
+      active_tab_background = "#FF0";
       copy_on_select = true;
-      enabled_layouts = "*";
+      enabled_layouts = "Tall,*";
       kitty_mod = "cmd+option";
       macos_quit_when_last_window_closed = true;
       scrollback_lines = 100000;
+      tab_bar_style = "powerline";
+      tab_powerline_style = "slanted";
     };
     shellIntegration.enableFishIntegration = true;
   };
