@@ -53,6 +53,14 @@ let
     "git.confirmSync" = true;
     "git.rebaseWhenSync" = true;
     "github.gitProtocol" = "ssh";
+    "github.copilot.chat.codesearch.enabled" = true;
+    "github.copilot.nextEditSuggestions.enabled" = true;
+    "github.copilot.chat.editor.temporalContext.enabled" = true;
+    "github.copilot.chat.generateTests.codeLens" = true;
+    "github.copilot.chat.languageContext.typescript.enabled" = true;
+    "github.copilot.chat.newWorkspaceCreation.enabled" = true;
+    "github.copilot.chat.search.semanticTextResults" = true;
+    "githubPullRequests.experimental.chat" = true;
     "githubPullRequests.notifications" = "pullRequests";
     "githubPullRequests.pullBranch" = "never";
     "markdown.extension.preview.autoShowPreviewToSide" = true;
