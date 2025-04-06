@@ -5,7 +5,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    aider-chat.withPlaywright
+    aider-chat-full
   ];
   home.file.".aider.conf.yml".text = aiderConfig;
 }

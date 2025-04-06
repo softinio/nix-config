@@ -21,7 +21,7 @@ in
     settings = {
       active_tab_background = "#FF0";
       copy_on_select = true;
-      enabled_layouts = "Tall,*";
+      enabled_layouts = "Tall,Stack,Horizontal,*";
       kitty_mod = "cmd+option";
       macos_quit_when_last_window_closed = true;
       scrollback_lines = 100000;
