@@ -5,6 +5,7 @@
   ./git
   ./jujutsu
   ./kitty
+  ./tmux
   ./wezterm
   ./vscode
   ./zed
