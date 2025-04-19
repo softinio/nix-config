@@ -70,6 +70,7 @@
       nixfmt-rfc-style
       nix-prefetch-git
       nodejs
+      noto-fonts
       ollama
       openssl
       pandoc
@@ -96,6 +97,7 @@
       tectonic
       texlab
       tig
+      tmux-sessionizer
       tokei
       tree
       tree-sitter
