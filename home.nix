@@ -50,6 +50,7 @@
       go
       graphviz
       jetbrains-mono
+      jjui
       jq-lsp
       luajit
       lua-language-server
