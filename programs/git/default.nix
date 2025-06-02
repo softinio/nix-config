@@ -64,9 +64,7 @@ let
     "*metals.sbt"
     "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
     "*hie.yaml" # ghcide files
-    "*.mill-version" # used by metals
     "*.vscode"
-    "*.python-version"
     "result"
   ];
 in

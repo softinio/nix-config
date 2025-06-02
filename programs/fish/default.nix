@@ -69,6 +69,7 @@
       bf = "broot";
       cat = "bat";
       du = "dua i";
+      linesofcode = "git ls-files | xargs wc -l";
       fzfp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       ping = "prettyping";
       ".." = "cd ..";
