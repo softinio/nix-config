@@ -50,6 +50,7 @@
       go
       graphviz
       jetbrains-mono
+      jjui
       jq-lsp
       luajit
       lua-language-server
@@ -218,6 +219,6 @@
   # Neovim Configuration
   xdg.configFile."nvim".source = builtins.fetchGit {
     url = "https://code.softinio.com/softinio/nvim-config";
-    rev = "e609be92393f89856d850e9cc3aa23c7badf0bee";
+    rev = "ba28bef49a6ec11692d5bdb4949fc484139c8fa5";
   };
 }
