@@ -32,6 +32,7 @@
     packages = with pkgs; [
       any-nix-shell
       aspell
+      ast-grep
       basedpyright
       bash-language-server
       cachix
@@ -102,6 +103,7 @@
       tokei
       tree
       tree-sitter
+      typst
       typescript
       typescript-language-server
       wget

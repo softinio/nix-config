@@ -17,8 +17,7 @@ in
         key = "~/.ssh/id_ed25519.pub";
       };
       ui = {
-        diff.format = "git";
-        diff.tool = [
+        diff-formatter = [
           "difft"
           "--color=always"
           "$left"

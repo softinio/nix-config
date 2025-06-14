@@ -52,8 +52,9 @@
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
-      set -xg TOOLCHAINS swift
+      # set -xg TOOLCHAINS swift
 
+      set -xg DEVELOPER_DIR "/Library/Developer/CommandLineTools"
       set -xg OPENAI_API_KEY (cat ~/.openai)
       set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)
     '';
