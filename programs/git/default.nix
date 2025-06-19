@@ -71,6 +71,7 @@ in
 {
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userEmail = "code@softinio.com";
     userName = "Salar Rahmanian";
     aliases = myAliases;
