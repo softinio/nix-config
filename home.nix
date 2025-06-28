@@ -224,6 +224,6 @@
     owner = "softinio";
     repo = "nvim-config";
     rev = "618913553a236132e558d9df85200ed0f357dc19";
-    sha256 = "sha256-0I4yOFbcL9peHvKm8I9LXE2R9i54NvdDO5QJ5oPXTkU=";
+    sha256 = "sha256-aYYR0KvX0vKg13Xn6l+2irJBjrIrlS5aBgkoZ5nn9yE=";
   };
 }
