@@ -24,7 +24,7 @@
     ];
 
   home = {
-    stateVersion = "24.11";
+    stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
@@ -50,6 +50,7 @@
       gnupg
       go
       graphviz
+      harlequin
       jetbrains-mono
       jjui
       jq-lsp
@@ -79,6 +80,7 @@
       patchelf
       pngpaste
       prettyping
+      pyrefly
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
@@ -96,8 +98,6 @@
       stylua
       swift-format
       tealdeer
-      tectonic
-      texlab
       tig
       tmux-sessionizer
       tokei
@@ -222,7 +222,7 @@
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "softinio";
     repo = "nvim-config";
-    rev = "ba28bef49a6ec11692d5bdb4949fc484139c8fa5";
-    sha256 = "sha256-0I4yOFbcL9peHvKm8I9LXE2R9i54NvdDO5QJ5oPXTkU=";
+    rev = "9e390d7b96198ff2525c3ba9ab5ab985e62198df";
+    sha256 = "sha256-5o42JAxYkgSkhZbDimqKkoKFFFLuA4hLKFHWtcY0hbk=";
   };
 }
