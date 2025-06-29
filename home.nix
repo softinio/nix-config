@@ -98,8 +98,6 @@
       stylua
       swift-format
       tealdeer
-      tectonic
-      texlab
       tig
       tmux-sessionizer
       tokei
