@@ -80,6 +80,7 @@
       patchelf
       pngpaste
       prettyping
+      pyrefly
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
