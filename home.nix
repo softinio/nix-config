@@ -224,7 +224,7 @@
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "softinio";
     repo = "nvim-config";
-    rev = "618913553a236132e558d9df85200ed0f357dc19";
-    sha256 = "sha256-aYYR0KvX0vKg13Xn6l+2irJBjrIrlS5aBgkoZ5nn9yE=";
+    rev = "8b34d4fa2ba87e45645e6c061a21af7bce522edd";
+    sha256 = "sha256-3kDi1Cav2gN2UIXpUcG7Fv08fDbvnL1lJJHYd6A1/k0=";
   };
 }
