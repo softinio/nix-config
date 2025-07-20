@@ -50,7 +50,6 @@
       gnupg
       go
       graphviz
-      harlequin
       jetbrains-mono
       jjui
       jq-lsp
