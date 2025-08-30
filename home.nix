@@ -62,7 +62,6 @@
       metals
       multimarkdown
       mypy
-      neofetch
       neovim
       nerd-fonts.fira-code
       nil

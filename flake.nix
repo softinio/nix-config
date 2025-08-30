@@ -78,11 +78,12 @@
     in
     {
       darwinConfigurations.salarm3max = nix-darwin.lib.darwinSystem {
-        system = "aarc64-darwin";
+        system = "aarch64-darwin";
         modules = [
           m3maxConfiguration
           home-manager.darwinModules.home-manager
           {
+            home-manager.backupFileExtension = "backup";
             home-manager.useUserPackages = true;
             home-manager.users.salar = homeManagerConfFor ./home.nix;
           }
