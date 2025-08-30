@@ -50,7 +50,6 @@
       gnupg
       go
       graphviz
-      harlequin
       jetbrains-mono
       jjui
       jq-lsp
@@ -63,7 +62,6 @@
       metals
       multimarkdown
       mypy
-      neofetch
       neovim
       nerd-fonts.fira-code
       nil
@@ -81,6 +79,7 @@
       pngpaste
       prettyping
       pyrefly
+      python3Full
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
@@ -222,7 +221,7 @@
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "softinio";
     repo = "nvim-config";
-    rev = "9e390d7b96198ff2525c3ba9ab5ab985e62198df";
-    sha256 = "sha256-5o42JAxYkgSkhZbDimqKkoKFFFLuA4hLKFHWtcY0hbk=";
+    rev = "9a41e9cc3c4f855142a130f945ec31703ac76737";
+    sha256 = "sha256-+VWOQMpUF1VdUvBhASvdgPk5h8F3GKDk525opMkwomE=";
   };
 }

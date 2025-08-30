@@ -2,6 +2,7 @@
   ./aider
   ./broot
   ./fish
+  ./ghostty
   ./git
   ./jujutsu
   ./kitty
