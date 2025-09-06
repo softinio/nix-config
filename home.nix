@@ -72,6 +72,7 @@
       nix-prefetch-git
       nodejs
       noto-fonts
+      noto-fonts-color-emoji
       ollama
       openssl
       pandoc
