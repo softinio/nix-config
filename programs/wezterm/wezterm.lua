@@ -17,7 +17,7 @@ return {
   check_for_updates = false,
   color_scheme = 'Tango (terminal.sexy)',
   default_gui_startup_args = { 'connect', 'unix' },
-  font = wezterm.font_with_fallback { 'JetBrains Mono', 'Noto Color Emoji' },
+  font = wezterm.font_with_fallback { 'JetBrains Mono', 'Noto Sans' },
   font_size = 12.0,
   dpi = 144,
   scrollback_lines = 50000,
