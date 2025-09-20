@@ -4,6 +4,7 @@ let
     "fish"
     "lua"
     "nix"
+    "pyrefly"
     "ruff"
     "scala"
     "sql"
@@ -16,23 +17,18 @@ in
     enable = true;
     extensions = myextensions;
     userSettings = {
-      assistant = {
-        version = "2";
+      agent = {
         default_model = {
           provider = "copilot_chat";
-          model = "claude-3-7-sonnet";
+          model = "claude-4-sonnet";
         };
-      };
-      features = {
-        copilot = true;
       };
       language_models = {
         anthropic = {
           available_models = [
             {
-              provider = "anthropic";
-              name = "claude-3-7-sonnet";
-              max_tokens = 128000;
+              name = "claude-sonnet-4-20250514";
+              max_tokens = 200000;
               cache_configuration = {
                 max_cache_anchors = 10;
                 min_total_token = 10000;
@@ -40,22 +36,17 @@ in
               };
             }
           ];
-          version = "1";
         };
         openai = {
           available_models = [
             {
-              provider = "openai";
-              name = "gpt-4o";
-              max_tokens = 128000;
-            }
-            {
-              provider = "openai";
-              name = "o3-mini";
-              max_tokens = 128000;
+              name = "gpt-5";
+              display_name = "gpt-5 high";
+              reasoning_effort = "high";
+              max_tokens = 272000;
+              max_completion_tokens = 20000;
             }
           ];
-          version = "1";
         };
       };
       telemetry.metrics = false;
