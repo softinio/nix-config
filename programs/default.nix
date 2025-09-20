@@ -9,5 +9,5 @@
   ./tmux
   ./wezterm
   ./vscode
-  # ./zed
+  ./zed
 ]

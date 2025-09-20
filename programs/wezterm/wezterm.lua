@@ -19,6 +19,7 @@ return {
   default_gui_startup_args = { 'connect', 'unix' },
   font = wezterm.font_with_fallback { 'JetBrains Mono', 'Noto Sans' },
   font_size = 12.0,
+  freetype_load_flags = 'NO_HINTING',
   dpi = 144,
   scrollback_lines = 50000,
   initial_cols = 400,
