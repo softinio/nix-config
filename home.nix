@@ -63,7 +63,6 @@
       marksman
       marp-cli
       maven
-      meld
       metals
       multimarkdown
       mypy

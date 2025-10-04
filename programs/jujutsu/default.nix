@@ -4,7 +4,7 @@ let
     l = [
       "log"
       "-r"
-      "(main..@):: | (main..@)-"
+      "(main@origin..@):: | (main@origin..@)-"
     ];
   };
 in
@@ -17,6 +17,7 @@ in
         key = "~/.ssh/id_ed25519.pub";
       };
       ui = {
+        default-command = "log";
         diff-formatter = [
           "difft"
           "--color=always"
@@ -25,11 +26,10 @@ in
         ];
         editor = "nvim";
         merge-editor = [
-          "meld"
+          "idea"
           "$left"
-          "$base"
           "$right"
-          "-o"
+          "$base"
           "$output"
         ];
         pager = "less -FRX";
