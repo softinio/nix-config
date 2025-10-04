@@ -17,6 +17,9 @@ let
     working-directory = "home";
     keybind = [
       "shift+enter=text:\n"
+      "super+k=toggle_split_zoom"
+      "super+b>'=new_split:right"
+      "super+b>-=new_split:down"
     ];
   };
 in
