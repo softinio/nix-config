@@ -40,8 +40,10 @@
               }
             )
             {
-              ">" = ">gv";
-              "<" = "<gv";
+              # Removed gv to allow dot-repeat
+              ">" = ">";
+              "<" = "<";
+              # TAB keeps gv for convenience
               "<TAB>" = ">gv";
               "<S-TAB>" = "<gv";
               "K" = ":m '<-2<CR>gv=gv";

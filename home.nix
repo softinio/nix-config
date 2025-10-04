@@ -220,12 +220,4 @@
       };
     };
   };
-
-  # Neovim Configuration
-  # xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
-  #   owner = "softinio";
-  #   repo = "nvim-config";
-  #   rev = "e89dc85e3a4116796d4393d37c12c31737e6f17c";
-  #   sha256 = "sha256-HCLF7vM4pUbW2OlOuat1isnuyfqfPxjJ4wWYLcNcu0M=";
-  # };
 }

@@ -23,6 +23,7 @@ in
           model = "claude-4-sonnet";
         };
       };
+      auto_save = "on_focus_change";
       language_models = {
         anthropic = {
           available_models = [

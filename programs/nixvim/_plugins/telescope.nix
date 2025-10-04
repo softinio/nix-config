@@ -19,8 +19,7 @@
         "<leader>fd" = "diagnostics";
 
         "<C-p>" = "git_files";
-        "<leader>p" = "oldfiles";
-        "<C-f>" = "live_grep";
+        "<leader>?" = "oldfiles";
       };
 
       settings.defaults = {
