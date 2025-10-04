@@ -6,6 +6,7 @@
   ./git
   ./jujutsu
   # ./kitty
+  ./nixvim
   ./tmux
   ./wezterm
   ./vscode

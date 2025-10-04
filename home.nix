@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   ...
@@ -8,11 +9,15 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = (import ./programs);
+  imports = [
+    inputs.nixvim.homeModules.nixvim
+  ]
+  ++ (import ./programs);
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
+      "copilot.vim"
       "discord"
       "gh-copilot"
       "slack"
@@ -62,7 +67,6 @@
       metals
       multimarkdown
       mypy
-      neovim
       nerd-fonts.fira-code
       nil
       niv
@@ -218,10 +222,10 @@
   };
 
   # Neovim Configuration
-  xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
-    owner = "softinio";
-    repo = "nvim-config";
-    rev = "e89dc85e3a4116796d4393d37c12c31737e6f17c";
-    sha256 = "sha256-HCLF7vM4pUbW2OlOuat1isnuyfqfPxjJ4wWYLcNcu0M=";
-  };
+  # xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
+  #   owner = "softinio";
+  #   repo = "nvim-config";
+  #   rev = "e89dc85e3a4116796d4393d37c12c31737e6f17c";
+  #   sha256 = "sha256-HCLF7vM4pUbW2OlOuat1isnuyfqfPxjJ4wWYLcNcu0M=";
+  # };
 }
