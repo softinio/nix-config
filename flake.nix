@@ -7,6 +7,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur.url = "github:nix-community/nur";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -18,6 +22,7 @@
     {
       self,
       nix-darwin,
+      nixvim,
       home-manager,
       nur,
       nixpkgs,
@@ -86,6 +91,11 @@
             home-manager.backupFileExtension = "backup";
             home-manager.useUserPackages = true;
             home-manager.users.salar = homeManagerConfFor ./home.nix;
+            home-manager.extraSpecialArgs = {
+              inputs = {
+                inherit nixvim;
+              };
+            };
           }
         ];
         specialArgs = {

@@ -5,7 +5,10 @@ let
     copy-on-select = "clipboard";
     font-family = "SF Mono";
     font-size = 16;
+    link-previews = true;
+    macos-shortcuts = "ask";
     macos-titlebar-style = "transparent";
+    maximize = true;
     mouse-hide-while-typing = true;
     split-divider-color = "orange";
     theme = "Builtin Tango Dark";
@@ -14,6 +17,9 @@ let
     working-directory = "home";
     keybind = [
       "shift+enter=text:\n"
+      "super+k=toggle_split_zoom"
+      "super+b>'=new_split:right"
+      "super+b>-=new_split:down"
     ];
   };
 in
