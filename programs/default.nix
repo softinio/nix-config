@@ -5,7 +5,7 @@
   ./ghostty
   ./git
   ./jujutsu
-  ./kitty
+  # ./kitty
   ./tmux
   ./wezterm
   ./vscode
