@@ -24,7 +24,7 @@
       tabstop = 2;
       termguicolors = true;
       undofile = true;
-      updatetime = 250;
+      updatetime = 100;
       wrap = false;
     };
 

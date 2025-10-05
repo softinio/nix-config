@@ -99,6 +99,7 @@
       };
 
       trouble.enable = true;
+      typst-preview.enable = true;
       which-key.enable = true;
     };
   };

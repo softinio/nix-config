@@ -54,7 +54,7 @@
 
       set -xg TOOLCHAINS swift
 
-      set -xg DEVELOPER_DIR "/Library/Developer/CommandLineTools"
+      # set -xg DEVELOPER_DIR "/Library/Developer/CommandLineTools"
       set -xg OPENAI_API_KEY (cat ~/.openai)
       set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)
     '';
