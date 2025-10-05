@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -6,7 +6,7 @@
     ./completion.nix
     ./keymappings.nix
     ./options.nix
-    ./_plugins
+    ./plugins
   ];
 
   programs.nixvim = {
