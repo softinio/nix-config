@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.nixvim = {
@@ -18,7 +18,7 @@
       relativenumber = true;
       scrolloff = 8;
       shiftwidth = 2;
-      signcolumn = "yes";
+      signcolumn = "auto";
       smartindent = true;
       swapfile = false;
       tabstop = 2;
