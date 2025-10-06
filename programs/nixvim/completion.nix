@@ -30,6 +30,7 @@
             enable = true;
             menu = {
               nvim_lsp = "[LSP]";
+              copilot-vim = "[copilot]";
               luasnip = "[snip]";
               buffer = "[buffer]";
               path = "[path]";
@@ -67,6 +68,7 @@
 
           sources = [
             { name = "nvim_lsp"; }
+            { name = "copilot-vim"; }
             { name = "luasnip"; }
             {
               name = "buffer";
