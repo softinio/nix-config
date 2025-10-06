@@ -30,9 +30,7 @@ in
         key = "~/.ssh/id_ed25519.pub";
       };
       templates = {
-        git_push_bookmark = ''
-          \'"softinio/push-" ++ change_id.short()\'
-        '';
+        git_push_bookmark = '''''"softinio/push-" ++ change_id.short()''''';
       };
       ui = {
         default-command = "l";
