@@ -73,7 +73,7 @@
       nix-index
       nixfmt-rfc-style
       nix-prefetch-git
-      nodejs
+      nodejs-slim
       noto-fonts
       noto-fonts-color-emoji
       ollama

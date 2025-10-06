@@ -34,6 +34,7 @@ let
     pull = {
       rebase = true;
     };
+    # Commented out as xcode had issues with it.
     # url = {
     #   "git@github.com:" = {
     #     insteadOf = "https://github.com/";
@@ -62,8 +63,8 @@ let
     "*.metals"
     "*.metals.sbt"
     "*metals.sbt"
-    "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
-    "*hie.yaml" # ghcide files
+    "*.envrc"
+    "*hie.yaml"
     "*.vscode"
     "result"
   ];

@@ -54,7 +54,6 @@
 
       set -xg TOOLCHAINS swift
 
-      set -xg DEVELOPER_DIR "/Library/Developer/CommandLineTools"
       set -xg OPENAI_API_KEY (cat ~/.openai)
       set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)
     '';
@@ -80,12 +79,9 @@
       ghauth = "gh auth login --with-token < ~/.ghauth";
       gitpurgemain = ''git branch --merged | grep -v "\*" | grep -v "main" | xargs -n 1 git branch -d'';
       gitpurgemaster = ''git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'';
-      giscala = "gitignore scala,vim,java,sbt > .gitignore";
       gforksync = "git fetch upstream && git merge upstream/master && git push origin master";
       grep = "grep --color=auto";
-      hg = "kitten hyperlinked-grep";
       lg = "lazygit";
-      new-sbt = "sbt new scala/scala-seed.g8";
       nixc = "cd ~/.config/nixpkgs";
       nixre = "nix build && sudo ./result/activate";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
@@ -93,7 +89,6 @@
       nixq = "nix-env -qa";
       nixstorerepair = "nix-store --repair --verify --check-contents";
       nixupgrade = "nix upgrade-nix";
-      o = "echo (ollama run qwen2.5-coder \"Provide only the MacOS terminal command (without markdown) to: $argv\")";
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
       sshhcloud1 = "ssh salar@hcloud1.softinio.net";

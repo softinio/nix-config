@@ -1,11 +1,12 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
-    ./options.nix
-    ./keymappings.nix
+    ./autocommands.nix
     ./completion.nix
-    ./_plugins
+    ./keymappings.nix
+    ./options.nix
+    ./plugins
   ];
 
   programs.nixvim = {
