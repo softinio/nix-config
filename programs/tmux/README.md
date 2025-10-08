@@ -23,31 +23,31 @@ All commands below require pressing the prefix first, unless otherwise noted.
 | `'` | Split pane horizontally (side by side) |
 | `-` | Split pane vertically (top/bottom) |
 
-### Navigating Panes
+### Navigating Panes (Dvorak-optimized)
 
 | Key | Action |
 |-----|--------|
-| `h` | Move to left pane |
-| `j` | Move to down pane |
-| `k` | Move to up pane |
-| `l` | Move to right pane |
-| `Ctrl-j` | Cycle to next pane |
+| `d` | Move to left pane |
+| `h` | Move to down pane |
+| `t` | Move to up pane |
+| `n` | Move to right pane |
+| `Ctrl-h` | Cycle to next pane |
 
 ### Resizing Panes
 
 | Key | Action |
 |-----|--------|
-| `H` | Resize pane left (10 units) |
-| `J` | Resize pane down (10 units) |
-| `K` | Resize pane up (10 units) |
-| `L` | Resize pane right (10 units) |
+| `Ctrl-Left` | Resize pane left (10 units) |
+| `Ctrl-Down` | Resize pane down (10 units) |
+| `Ctrl-Up` | Resize pane up (10 units) |
+| `Ctrl-Right` | Resize pane right (10 units) |
 
 ## Window Management
 
 | Key | Action |
 |-----|--------|
-| `Ctrl-h` | Previous window |
-| `Ctrl-l` | Next window |
+| `Ctrl-d` | Previous window |
+| `Ctrl-n` | Next window |
 
 ## Session Management (TMS Integration)
 

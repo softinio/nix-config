@@ -37,25 +37,25 @@ let
     unbind '"'
     bind - split-window -v
 
-    # Switch panes with hjkl
-    bind h select-pane -L
-    bind j select-pane -D
-    bind k select-pane -U
-    bind l select-pane -R
+    # Switch panes with Dvorak-friendly keys (dhtn)
+    bind d select-pane -L
+    bind h select-pane -D
+    bind t select-pane -U
+    bind n select-pane -R
 
-    # Quick window selection
-    bind -r C-h select-window -t :-
-    bind -r C-l select-window -t :+
+    # Quick window selection (Dvorak-friendly)
+    bind -r C-d select-window -t :-
+    bind -r C-n select-window -t :+
 
-    # resize panes
-    bind -r H resize-pane -L 10
-    bind -r J resize-pane -D 10
-    bind -r K resize-pane -U 10
-    bind -r L resize-pane -R 10
+    # resize panes (Ctrl + Dvorak navigation to avoid conflicts with neovim)
+    bind -r C-Left resize-pane -L 10
+    bind -r C-Down resize-pane -D 10
+    bind -r C-Up resize-pane -U 10
+    bind -r C-Right resize-pane -R 10
 
-    # Quickly switch panes
-    unbind ^J
-    bind ^J select-pane -t :.+
+    # Quickly switch panes (using Dvorak 'h' for down)
+    unbind ^H
+    bind ^H select-pane -t :.+
 
     ############################
     ## Status Bar
