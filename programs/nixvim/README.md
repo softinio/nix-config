@@ -156,6 +156,104 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 2. Adjust completion performance settings in `completion.nix`
 3. Disable unused language servers in `lsp/servers.nix`
 
+## Keyboard Shortcuts Cheatsheet
+
+### Leader Key
+**Leader:** `Space`
+
+### General Keybindings
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `Esc` | Normal | Clear search highlighting |
+| `Y` | Normal | Yank to end of line |
+| `H` | Normal | Go to beginning of line |
+| `L` | Normal | Go to end of line |
+| `Ctrl-c` | Normal | Switch to alternate buffer |
+| `Ctrl-x` | Normal | Close window |
+| `Ctrl-s` or `<leader>s` | Normal | Save file |
+
+### Window Navigation
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>h` | Normal | Move to left window |
+| `<leader>l` | Normal | Move to right window |
+| `Ctrl-Up` | Normal | Decrease window height |
+| `Ctrl-Down` | Normal | Increase window height |
+| `Ctrl-Left` | Normal | Increase window width |
+| `Ctrl-Right` | Normal | Decrease window width |
+
+### Text Manipulation
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `Alt-k` | Normal | Move line up |
+| `Alt-j` | Normal | Move line down |
+| `>` | Visual | Indent (dot-repeatable) |
+| `<` | Visual | Unindent (dot-repeatable) |
+| `Tab` | Visual | Indent and keep selection |
+| `Shift-Tab` | Visual | Unindent and keep selection |
+| `J` | Visual | Move selected lines down |
+| `K` | Visual | Move selected lines up |
+
+### File Explorer (Neo-tree)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>m` | Normal | Toggle file explorer |
+
+### Fuzzy Finder (Telescope)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ff` | Normal | Find files |
+| `<leader>fg` | Normal | Live grep (search text) |
+| `<leader>b` | Normal | List buffers |
+| `<leader>fh` | Normal | Help tags |
+| `<leader>fd` | Normal | Diagnostics |
+| `Ctrl-p` | Normal | Git files |
+| `<leader>?` | Normal | Recently opened files |
+| `Ctrl-t` | Normal | Search for TODOs |
+| `<leader>t` | Normal | TODO comments (Telescope) |
+
+### LSP (Language Server)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `gd` | Normal | Go to definition |
+| `gD` | Normal | Go to references |
+| `gt` | Normal | Go to type definition |
+| `gi` | Normal | Go to implementation |
+| `K` | Normal | Hover documentation |
+| `F2` | Normal | Rename symbol |
+| `<leader>j` | Normal | Next diagnostic |
+| `<leader>k` | Normal | Previous diagnostic |
+
+### Terminal (Floaterm)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>,` | Normal | Toggle floating terminal |
+
+### AI Assistants
+
+#### Avante
+- Enabled with Claude Sonnet 4.5 model
+- Default Avante keybindings apply (check `:help avante` for full list)
+
+#### GitHub Copilot
+- Enabled with default keybindings
+- Check `:help copilot` for keybinding details
+
+### Other Utilities
+
+| Feature | Command/Key |
+|---------|-------------|
+| Which-key | Automatically shows available keybindings when you pause |
+| Oil file manager | `:Oil` command |
+| Trouble diagnostics | `:Trouble` command |
+
 ## Resources
 
 - [Nixvim Documentation](https://nix-community.github.io/nixvim/)
