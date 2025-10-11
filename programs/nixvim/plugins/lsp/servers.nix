@@ -54,28 +54,38 @@
       # Scala
       metals = {
         enable = true;
-        config.settings = {
-          defaultBspToBuildTool = true;
-          enableBestEffort = true;
-          excludedPackages = [
-            "akka.actor.typed.javadsl"
-            "com.github.swagger.akka.javadsl"
+        config = {
+          filetypes = [
+            "scala"
+            "sbt"
+            "sc"
+            "mill"
           ];
-          initOptions = {
-            statusBarProvider = "on";
+          settings.metals = {
+            defaultBspToBuildTool = true;
+            defaultShell = "fish";
+            enableBestEffort = true;
+            enableSemanticHighlighting = false;
+            excludedPackages = [
+              "akka.actor.typed.javadsl"
+              "com.github.swagger.akka.javadsl"
+            ];
+            initOptions = {
+              statusBarProvider = "on";
+            };
+            inlayHints = {
+              typeParameters.enable = true;
+              hintsInPatternMatch.enable = true;
+            };
+            mcpClient = "claude";
+            serverVersion = "latest.snapshot";
+            showImplicitArguments = true;
+            showImplicitConversionsAndClasses = true;
+            showInferredType = true;
+            startMcpServer = true;
+            superMethodLensesEnabled = true;
+            useGlobalExecutable = true;
           };
-          inlayHints = {
-            typeParameters.enable = true;
-            hintsInPatternMatch.enable = true;
-          };
-          mcpClient = "claude";
-          serverVersion = "latest.snapshot";
-          showImplicitArguments = true;
-          showImplicitConversionsAndClasses = true;
-          showInferredType = true;
-          startMcpServer = true;
-          superMethodLensesEnabled = true;
-          useGlobalExecutable = true;
         };
       };
 
