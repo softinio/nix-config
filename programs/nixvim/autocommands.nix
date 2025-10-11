@@ -30,5 +30,12 @@
       pattern = ["swift" "json" "lua" "nix"];
       command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab";
     }
+
+    # Metals (Scala) - Refresh codelens
+    {
+      event = ["BufEnter" "CursorHold" "InsertLeave"];
+      pattern = ["*.scala" "*.sbt" "*.java"];
+      command = "lua vim.lsp.codelens.refresh()";
+    }
   ];
 }

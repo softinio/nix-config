@@ -8,7 +8,7 @@
       # Python
       basedpyright = {
         enable = true;
-        settings.settings.basedpyright = {
+        config.settings.basedpyright = {
           analysis = {
             autoImportCompletions = true;
             autoSearchPaths = true;
@@ -45,14 +45,49 @@
       # Lua
       lua_ls = {
         enable = true;
-        settings.settings.diagnostics.globals = [ "vim" ];
+        config.settings.diagnostics.globals = [ "vim" ];
       };
 
       # Documentation
       marksman.enable = true;
 
       # Scala
-      metals.enable = true;
+      metals = {
+        enable = true;
+        config = {
+          filetypes = [
+            "scala"
+            "sbt"
+            "sc"
+            "mill"
+          ];
+          settings.metals = {
+            defaultBspToBuildTool = true;
+            defaultShell = "fish";
+            enableBestEffort = true;
+            enableSemanticHighlighting = false;
+            excludedPackages = [
+              "akka.actor.typed.javadsl"
+              "com.github.swagger.akka.javadsl"
+            ];
+            initOptions = {
+              statusBarProvider = "on";
+            };
+            inlayHints = {
+              typeParameters.enable = true;
+              hintsInPatternMatch.enable = true;
+            };
+            mcpClient = "claude";
+            serverVersion = "latest.snapshot";
+            showImplicitArguments = true;
+            showImplicitConversionsAndClasses = true;
+            showInferredType = true;
+            startMcpServer = true;
+            superMethodLensesEnabled = true;
+            useGlobalExecutable = true;
+          };
+        };
+      };
 
       # Nix
       nil_ls.enable = true;
@@ -64,7 +99,7 @@
       # Swift/iOS development
       sourcekit = {
         enable = true;
-        settings = {
+        config = {
           cmd = [
             "xcrun"
             "sourcekit-lsp"

@@ -40,6 +40,7 @@
       ast-grep
       basedpyright
       bash-language-server
+      bloop
       cachix
       cmake
       coursier
@@ -73,7 +74,7 @@
       nix-index
       nixfmt-rfc-style
       nix-prefetch-git
-      nodejs-slim
+      nodejs
       noto-fonts
       noto-fonts-color-emoji
       ollama

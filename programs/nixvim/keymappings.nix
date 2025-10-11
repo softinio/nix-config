@@ -30,6 +30,11 @@
               "<C-Right>" = ":vertical resize -2<CR>";
               "<M-k>" = ":move-2<CR>";
               "<M-j>" = ":move+<CR>";
+              # Metals (Scala) keybindings
+              "<leader>ws" = "<cmd>lua require('metals').hover_worksheet()<CR>";
+              "<leader>sm" = "<cmd>lua require('telescope').extensions.metals.commands()<CR>";
+              "<leader>tt" = "<cmd>lua require('metals.tvp').toggle_tree_view()<CR>";
+              "<leader>tr" = "<cmd>lua require('metals.tvp').reveal_in_tree()<CR>";
             };
         visual =
           lib.mapAttrsToList
