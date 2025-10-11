@@ -230,6 +230,15 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 | `<leader>j` | Normal | Next diagnostic |
 | `<leader>k` | Normal | Previous diagnostic |
 
+### Metals (Scala Development)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ws` | Normal | Hover Metals Worksheet |
+| `<leader>sm` | Normal | Telescope Metals Commands |
+| `<leader>tt` | Normal | Toggle tree view |
+| `<leader>tr` | Normal | Reveal in tree |
+
 ### Terminal (Floaterm)
 
 | Key | Mode | Action |

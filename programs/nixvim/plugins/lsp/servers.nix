@@ -52,7 +52,33 @@
       marksman.enable = true;
 
       # Scala
-      metals.enable = true;
+      metals = {
+        enable = true;
+        settings.settings = {
+          bloopSbtAlreadyInstalled = true;
+          defaultBspToBuildTool = true;
+          enableBestEffort = true;
+          excludedPackages = [
+            "akka.actor.typed.javadsl"
+            "com.github.swagger.akka.javadsl"
+          ];
+          initOptions = {
+            statusBarProvider = "on";
+          };
+          inlayHints = {
+            typeParameters.enable = true;
+            hintsInPatternMatch.enable = true;
+          };
+          mcpClient = "claude";
+          serverVersion = "latest.snapshot";
+          showImplicitArguments = true;
+          showImplicitConversionsAndClasses = true;
+          showInferredType = true;
+          startMcpServer = true;
+          superMethodLensesEnabled = true;
+          useGlobalExecutable = true;
+        };
+      };
 
       # Nix
       nil_ls.enable = true;
