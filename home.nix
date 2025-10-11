@@ -40,6 +40,7 @@
       ast-grep
       basedpyright
       bash-language-server
+      bloop
       cachix
       cmake
       coursier

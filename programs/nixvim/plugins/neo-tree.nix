@@ -14,11 +14,13 @@
     plugins.neo-tree = {
       enable = true;
 
-      closeIfLastWindow = true;
-      window = {
-        width = 30;
-        autoExpandWidth = true;
-        position = "right";
+      settings = {
+        close_if_last_window = true;
+        window = {
+          width = 30;
+          autoExpandWidth = true;
+          position = "right";
+        };
       };
     };
   };

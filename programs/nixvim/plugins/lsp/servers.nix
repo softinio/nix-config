@@ -8,7 +8,7 @@
       # Python
       basedpyright = {
         enable = true;
-        settings.settings.basedpyright = {
+        config.settings.basedpyright = {
           analysis = {
             autoImportCompletions = true;
             autoSearchPaths = true;
@@ -45,7 +45,7 @@
       # Lua
       lua_ls = {
         enable = true;
-        settings.settings.diagnostics.globals = [ "vim" ];
+        config.settings.diagnostics.globals = [ "vim" ];
       };
 
       # Documentation
@@ -54,8 +54,7 @@
       # Scala
       metals = {
         enable = true;
-        settings.settings = {
-          bloopSbtAlreadyInstalled = true;
+        config.settings = {
           defaultBspToBuildTool = true;
           enableBestEffort = true;
           excludedPackages = [
@@ -90,7 +89,7 @@
       # Swift/iOS development
       sourcekit = {
         enable = true;
-        settings = {
+        config = {
           cmd = [
             "xcrun"
             "sourcekit-lsp"
