@@ -1,6 +1,5 @@
 [
   ./aider
-  ./broot
   ./fish
   ./ghostty
   ./git
