@@ -2,7 +2,8 @@
 
 let
   myExtensions = with pkgs.vscode-extensions; [
-    asvetliakov.vscode-neovim
+    anthropic.claude-code
+    anweber.vscode-httpyac
     baccata.scaladex-search
     charliermarsh.ruff
     davidanson.vscode-markdownlint
@@ -11,7 +12,6 @@ let
     github.github-vscode-theme
     github.vscode-github-actions
     github.vscode-pull-request-github
-    humao.rest-client
     jnoortheen.nix-ide
     marp-team.marp-vscode
     mechatroner.rainbow-csv
@@ -37,6 +37,7 @@ let
     visualstudioexptteam.vscodeintellicode
     visualjj.visualjj
     vscode-icons-team.vscode-icons
+    vscodevim.vim
     vscjava.vscode-java-pack
     yzhang.markdown-all-in-one
   ];
@@ -45,9 +46,6 @@ let
     "editor.fontLigatures" = true;
     "editor.fontSize" = 13;
     "editor.copyWithSyntaxHighlighting" = true;
-    "extensions.experimental.affinity" = {
-      "asvetliakov.vscode-neovim" = 1;
-    };
     "extensions.ignoreRecommendations" = true;
     "files.autoSave" = "afterDelay";
     "git.confirmSync" = true;

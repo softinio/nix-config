@@ -22,6 +22,7 @@
       "gh-copilot"
       "slack"
       "vscode"
+      "vscode-extension-anthropic-claude-code"
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
       "vscode-extension-MS-python-vscode-pylance"
@@ -75,8 +76,6 @@
       nixfmt-rfc-style
       nix-prefetch-git
       nodejs
-      noto-fonts
-      noto-fonts-color-emoji
       ollama
       openssl
       pandoc
