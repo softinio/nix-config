@@ -44,6 +44,7 @@
         vim
         xml
         yaml
+        zig
       ];
 
       nixvimInjections = true;

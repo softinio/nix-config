@@ -40,5 +40,8 @@
 
     # Collection of small useful plugins
     snacks.enable = true;
+
+    # Zig language
+    zig.enable = true;
   };
 }

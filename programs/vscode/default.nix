@@ -40,6 +40,7 @@ let
     vscodevim.vim
     vscjava.vscode-java-pack
     yzhang.markdown-all-in-one
+    ziglang.vscode-zig
   ];
   myUserSettings = {
     "editor.fontFamily" = "SF Mono";

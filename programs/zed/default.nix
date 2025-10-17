@@ -10,6 +10,7 @@ let
     "sql"
     "swift"
     "toml"
+    "zig"
   ];
 in
 {

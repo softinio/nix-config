@@ -114,6 +114,8 @@
       xz
       yaml-language-server
       yq
+      zig
+      zls
     ];
   };
 
