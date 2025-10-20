@@ -65,7 +65,7 @@
             defaultBspToBuildTool = true;
             defaultShell = "fish";
             enableBestEffort = true;
-            enableSemanticHighlighting = false;
+            enableSemanticHighlighting = true;
             excludedPackages = [
               "akka.actor.typed.javadsl"
               "com.github.swagger.akka.javadsl"

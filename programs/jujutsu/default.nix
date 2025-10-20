@@ -33,7 +33,7 @@ in
         git_push_bookmark = "\"softinio/push-\" ++ change_id.short()";
       };
       ui = {
-        default-command = "l";
+        default-command = "st";
         diff-formatter = [
           "difft"
           "--color=always"
