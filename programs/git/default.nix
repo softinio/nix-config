@@ -15,7 +15,6 @@ let
   };
   myIgnores = [
     ".DS_Store"
-    ".aider*"
     "*.bloop"
     ".direnv/"
     ".idea/"
