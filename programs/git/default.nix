@@ -1,7 +1,34 @@
 { ... }:
 
 let
+  myAliases = {
+    ci = "commit";
+    cim = "commit -m";
+    cia = "commit -am";
+    co = "checkout";
+    cob = "checkout -b";
+    di = "diff";
+    gpo = "push origin";
+    main = "checkout main";
+    master = "checkout master";
+    st = "status";
+  };
+  myIgnores = [
+    ".DS_Store"
+    "*.bloop"
+    ".direnv/"
+    ".idea/"
+    ".mypy_cache"
+    "*.metals"
+    "*.metals.sbt"
+    "*metals.sbt"
+    "*.envrc"
+    "*hie.yaml"
+    "*.vscode"
+    "result"
+  ];
   gitConfig = {
+    alias = myAliases;
     core = {
       editor = "nvim";
     };
@@ -40,43 +67,17 @@ let
     #     insteadOf = "https://github.com/";
     #   };
     # };
+    user = {
+      email = "code@softinio.com";
+      name = "Salar Rahmanian";
+    };
   };
-  myAliases = {
-    ci = "commit";
-    cim = "commit -m";
-    cia = "commit -am";
-    co = "checkout";
-    cob = "checkout -b";
-    di = "diff";
-    gpo = "push origin";
-    main = "checkout main";
-    master = "checkout master";
-    st = "status";
-  };
-  myIgnores = [
-    ".DS_Store"
-    ".aider*"
-    "*.bloop"
-    ".direnv/"
-    ".idea/"
-    ".mypy_cache"
-    "*.metals"
-    "*.metals.sbt"
-    "*metals.sbt"
-    "*.envrc"
-    "*hie.yaml"
-    "*.vscode"
-    "result"
-  ];
 in
 {
   programs.git = {
     enable = true;
+    settings = gitConfig;
     lfs.enable = true;
-    userEmail = "code@softinio.com";
-    userName = "Salar Rahmanian";
-    aliases = myAliases;
     ignores = myIgnores;
-    extraConfig = gitConfig;
   };
 }

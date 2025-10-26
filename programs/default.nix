@@ -1,5 +1,4 @@
 [
-  ./aider
   ./fish
   ./ghostty
   ./git

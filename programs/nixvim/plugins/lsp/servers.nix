@@ -36,8 +36,8 @@
       # Web development
       html.enable = true;
       jsonls.enable = true;
-      yamlls.enable = true;
       ts_ls.enable = true;
+      yamlls.enable = true;
 
       # Query languages
       jqls.enable = true;
@@ -65,7 +65,7 @@
             defaultBspToBuildTool = true;
             defaultShell = "fish";
             enableBestEffort = true;
-            enableSemanticHighlighting = false;
+            enableSemanticHighlighting = true;
             excludedPackages = [
               "akka.actor.typed.javadsl"
               "com.github.swagger.akka.javadsl"
@@ -109,6 +109,9 @@
 
       # Typst
       tinymist.enable = true;
+
+      # Zig Lang
+      zls.enable = true;
     };
   };
 }
