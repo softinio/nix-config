@@ -2,6 +2,13 @@
 
 {
   programs.nixvim.autoCmd = [
+    # Highlight on yank
+    {
+      event = "TextYankPost";
+      pattern = "*";
+      command = "lua vim.highlight.on_yank()";
+    }
+
     # Vertically center document when entering insert mode
     {
       event = "InsertEnter";

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   MyAliases = {
     l = [
@@ -20,6 +20,12 @@ in
 {
   programs.jujutsu = {
     enable = true;
+    # Temp add package to overcome updstream problem
+    package = pkgs.jujutsu.override {
+      rustPlatform = pkgs.rustPlatform // {
+        buildRustPackage = pkgs.rustPlatform.buildRustPackage.override { cargoNextestHook = null; };
+      };
+    };
     settings = {
       aliases = MyAliases;
       gerrit.enabled = false;
