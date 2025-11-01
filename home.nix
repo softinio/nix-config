@@ -80,6 +80,7 @@
       openssl
       pandoc
       patchelf
+      pijul
       pngpaste
       prettyping
       pyrefly
@@ -221,4 +222,12 @@
       };
     };
   };
+
+  # pijul config
+  xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
+    [author]
+    name = "softinio"
+    full_name = "Salar Rahmanian"
+    email = "code@softinio.com"
+  '';
 }
