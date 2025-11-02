@@ -43,6 +43,7 @@
       bash-language-server
       bloop
       cachix
+      colordiff
       cmake
       coursier
       curlFull
@@ -136,6 +137,7 @@
       "^.direnv$"
       "^.envrc$"
       "^.vscode$"
+      "^.gitignore$"
     ];
   };
 
@@ -220,8 +222,23 @@
         success_symbol = " [λ](bold green)";
         error_symbol = " [λ](bold red)";
       };
+
+      # Custom darcs repository status
+      custom.darcs = {
+        description = "Display darcs repository status";
+        command = "darcs whatsnew --summary 2>/dev/null | wc -l | tr -d ' '";
+        when = "test -d _darcs";
+        symbol = "⚖️  ";
+        style = "bold purple";
+        format = "[$symbol($output )]($style)";
+      };
     };
   };
+
+  # darcs defaults
+  home.file.".darcs/defaults".text = ''
+    diff diff-command colordiff -rN -u %1 %2
+  '';
 
   # pijul config
   xdg.configFile."pijul/config.toml".text = lib.mkAfter ''

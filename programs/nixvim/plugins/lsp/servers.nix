@@ -7,7 +7,7 @@
     servers = {
       # Python
       basedpyright = {
-        enable = true;
+        enable = false;
         config.settings.basedpyright = {
           analysis = {
             autoImportCompletions = true;
@@ -92,6 +92,9 @@
       # Nix
       nil_ls.enable = true;
       nixd.enable = true;
+
+      # Python Pyrefly
+      pyrefly.enable = true;
 
       # Rust
       rust_analyzer.enable = true;

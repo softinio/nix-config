@@ -25,6 +25,7 @@ let
     "*.envrc"
     "*hie.yaml"
     "*.vscode"
+    "_darcs/"
     "result"
   ];
   gitConfig = {
