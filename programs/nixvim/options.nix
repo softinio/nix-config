@@ -10,6 +10,7 @@
     opts = {
       backup = false;
       breakindent = true;
+      cursorline = true;
       expandtab = true;
       hlsearch = true;
       incsearch = true;
