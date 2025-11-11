@@ -52,7 +52,10 @@
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
+      set -xg DEVELOPER_DIR /Applications/Xcode.app/Contents/Developer
       set -xg TOOLCHAINS swift
+
+      set -xg USE_BUILTIN_RIPGREP 0
 
       set -xg OPENAI_API_KEY (cat ~/.openai)
       set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)

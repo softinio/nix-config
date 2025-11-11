@@ -6,6 +6,7 @@
       enable = true;
       settings = {
         formatters_by_ft = {
+          json = [ "prettier" ];
           lua = [ "stylua" ];
           nix = [ "nixfmt" ];
           python = ''

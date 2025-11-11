@@ -55,12 +55,14 @@
       fd
       ffmpeg
       font-awesome
+      gg-jj
       gnupg
       go
       graphviz
       jetbrains-mono
       jjui
       jq-lsp
+      lazyjj
       luajit
       lua-language-server
       marksman
@@ -83,14 +85,13 @@
       patchelf
       pijul
       pngpaste
+      prettier
       prettyping
       pyrefly
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
       readline
-      ripgrep
-      ripgrep-all
       rustup
       sbt
       scala-cli
@@ -211,6 +212,19 @@
   programs.nix-index = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.ripgrep = {
+    enable = true;
+    arguments = [
+      "--glob=!.git/*"
+      "--glob=!.jj/*"
+      "--glob=!node_modules/"
+    ];
+  };
+
+  programs.ripgrep-all = {
+    enable = true;
   };
 
   programs.starship = {
