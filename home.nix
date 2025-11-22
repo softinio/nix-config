@@ -79,7 +79,6 @@
       nixfmt-rfc-style
       nix-prefetch-git
       nodejs
-      ollama
       openssl
       pandoc
       patchelf

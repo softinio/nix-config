@@ -19,7 +19,6 @@ let
     ms-python.debugpy
     ms-python.python
     ms-python.vscode-pylance
-    ms-toolsai.datawrangler
     ms-toolsai.jupyter
     ms-toolsai.jupyter-keymap
     ms-toolsai.jupyter-renderers
