@@ -51,7 +51,7 @@ let
     merge.tool = "intellij";
     mergetool = {
       intellij = {
-        cmd = "'/Applications/IntelliJ IDEA.app/Contents/macOS/idea' merge \“$LOCAL\” \“$REMOTE\” \“$BASE\” \“$MERGED\”";
+        cmd = "'/Applications/IntelliJ IDEA.app/Contents/macOS/idea' merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"";
         trustExitCode = true;
       };
       keepBackup = false;
