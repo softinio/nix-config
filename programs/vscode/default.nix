@@ -2,7 +2,7 @@
 
 let
   myExtensions = with pkgs.vscode-extensions; [
-    anthropic.claude-code
+    # anthropic.claude-code
     anweber.vscode-httpyac
     baccata.scaladex-search
     charliermarsh.ruff
