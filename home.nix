@@ -11,6 +11,7 @@
 
   imports = [
     inputs.nixvim.homeModules.nixvim
+    ./nix-apps-activation.nix
   ]
   ++ (import ./programs);
 
