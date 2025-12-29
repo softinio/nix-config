@@ -53,7 +53,7 @@
         highlight.enable = true;
         indent.enable = true;
       };
-      folding = false;
+      folding.enable = false;
     };
 
     treesitter-refactor = {

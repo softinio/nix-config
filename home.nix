@@ -34,7 +34,6 @@
     stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";
-      VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
       any-nix-shell
