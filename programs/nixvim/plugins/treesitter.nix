@@ -26,7 +26,6 @@
         javascript
         json
         json5
-        jsonc
         lua
         make
         markdown
@@ -53,17 +52,7 @@
         highlight.enable = true;
         indent.enable = true;
       };
-      folding = false;
-    };
-
-    treesitter-refactor = {
-      enable = true;
-      settings = {
-        highlight_definitions = {
-          enable = true;
-          clear_on_cursor_move = false;
-        };
-      };
+      folding.enable = false;
     };
 
     hmts.enable = true;

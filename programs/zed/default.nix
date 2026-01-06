@@ -21,15 +21,16 @@ in
       agent = {
         default_model = {
           provider = "copilot_chat";
-          model = "claude-4-sonnet";
+          model = "claude-sonnet-4-5-20250929";
         };
       };
       auto_save = "on_focus_change";
+      auto_update = false;
       language_models = {
         anthropic = {
           available_models = [
             {
-              name = "claude-sonnet-4-20250514";
+              name = "claude-sonnet-4-5-20250929";
               max_tokens = 200000;
               cache_configuration = {
                 max_cache_anchors = 10;
@@ -42,8 +43,8 @@ in
         openai = {
           available_models = [
             {
-              name = "gpt-5";
-              display_name = "gpt-5 high";
+              name = "gpt-5.1-codex";
+              display_name = "gpt-5.1-codex";
               reasoning_effort = "high";
               max_tokens = 272000;
               max_completion_tokens = 20000;
@@ -51,8 +52,13 @@ in
           ];
         };
       };
+      load_direnv = "shell_hook";
       telemetry.metrics = false;
-      theme = "Gruvbox Dark Hard";
+      terminal = {
+        copy_on_select = true;
+        dock = "bottom";
+      };
+      theme = "Ayu Dark";
       vim_mode = true;
     };
   };

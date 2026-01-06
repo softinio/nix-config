@@ -11,6 +11,7 @@
 
   imports = [
     inputs.nixvim.homeModules.nixvim
+    ./nix-apps-activation.nix
   ]
   ++ (import ./programs);
 
@@ -33,7 +34,6 @@
     stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";
-      VISUAL = "$EDITOR";
     };
     packages = with pkgs; [
       any-nix-shell
@@ -43,6 +43,7 @@
       bash-language-server
       bloop
       cachix
+      colordiff
       cmake
       coursier
       curlFull
@@ -54,12 +55,14 @@
       fd
       ffmpeg
       font-awesome
+      gg-jj
       gnupg
       go
       graphviz
       jetbrains-mono
       jjui
       jq-lsp
+      lazyjj
       luajit
       lua-language-server
       marksman
@@ -76,19 +79,18 @@
       nixfmt-rfc-style
       nix-prefetch-git
       nodejs
-      ollama
       openssl
       pandoc
       patchelf
+      pijul
       pngpaste
+      prettier
       prettyping
       pyrefly
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
       readline
-      ripgrep
-      ripgrep-all
       rustup
       sbt
       scala-cli
@@ -135,6 +137,7 @@
       "^.direnv$"
       "^.envrc$"
       "^.vscode$"
+      "^.gitignore$"
     ];
   };
 
@@ -210,6 +213,19 @@
     enableFishIntegration = true;
   };
 
+  programs.ripgrep = {
+    enable = true;
+    arguments = [
+      "--glob=!.git/*"
+      "--glob=!.jj/*"
+      "--glob=!node_modules/"
+    ];
+  };
+
+  programs.ripgrep-all = {
+    enable = true;
+  };
+
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
@@ -219,6 +235,29 @@
         success_symbol = " [λ](bold green)";
         error_symbol = " [λ](bold red)";
       };
+
+      # Custom darcs repository status
+      custom.darcs = {
+        description = "Display darcs repository status";
+        command = "darcs whatsnew --summary 2>/dev/null | wc -l | tr -d ' '";
+        when = "test -d _darcs";
+        symbol = "⚖️  ";
+        style = "bold purple";
+        format = "[$symbol($output )]($style)";
+      };
     };
   };
+
+  # darcs defaults
+  home.file.".darcs/defaults".text = ''
+    diff diff-command colordiff -rN -u %1 %2
+  '';
+
+  # pijul config
+  xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
+    [author]
+    name = "softinio"
+    full_name = "Salar Rahmanian"
+    email = "code@softinio.com"
+  '';
 }

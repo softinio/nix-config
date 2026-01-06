@@ -16,7 +16,9 @@
 
       settings = {
         close_if_last_window = true;
-        filesystem.filtered_items.visible = true;
+        filesystem.filtered_items = {
+          visible = true;
+        };
         window = {
           width = 30;
           autoExpandWidth = true;

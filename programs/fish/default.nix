@@ -46,13 +46,16 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $HOME/.cargo/bin $HOME/.npm-global/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin "/Applications/IntelliJ IDEA.app/Contents/MacOS" $PATH
+      set -xg PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/.npm-global/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin "/Applications/IntelliJ IDEA.app/Contents/MacOS" $PATH
 
       set -xg WORKSPACE /Users/salar/Projects
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
+      set -xg DEVELOPER_DIR /Applications/Xcode.app/Contents/Developer
       set -xg TOOLCHAINS swift
+
+      set -xg USE_BUILTIN_RIPGREP 0
 
       set -xg OPENAI_API_KEY (cat ~/.openai)
       set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)

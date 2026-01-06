@@ -2,7 +2,7 @@
 
 let
   myExtensions = with pkgs.vscode-extensions; [
-    anthropic.claude-code
+    # anthropic.claude-code
     anweber.vscode-httpyac
     baccata.scaladex-search
     charliermarsh.ruff
@@ -19,7 +19,6 @@ let
     ms-python.debugpy
     ms-python.python
     ms-python.vscode-pylance
-    ms-toolsai.datawrangler
     ms-toolsai.jupyter
     ms-toolsai.jupyter-keymap
     ms-toolsai.jupyter-renderers
