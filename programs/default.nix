@@ -6,5 +6,4 @@
   ./nixvim
   ./tmux
   ./vscode
-  ./zed
 ]
