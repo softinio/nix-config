@@ -8,8 +8,16 @@ end)
 
 wezterm.on('gui-startup', function(cmd)
   local tab, pane, window = mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
   pane:split { size = 0.2 }
+end)
+
+wezterm.on('gui-attached', function(domain)
+  local workspace = mux.get_active_workspace()
+  for _, window in ipairs(mux.all_windows()) do
+    if window:get_workspace() == workspace then
+      window:gui_window():maximize()
+    end
+  end
 end)
 
 return {
@@ -17,16 +25,18 @@ return {
   check_for_updates = false,
   color_scheme = 'Tango (terminal.sexy)',
   default_gui_startup_args = { 'connect', 'unix' },
-  font = wezterm.font_with_fallback { 'JetBrains Mono', 'Noto Sans' },
-  font_size = 12.0,
-  freetype_load_flags = 'NO_HINTING',
-  dpi = 144,
-  scrollback_lines = 50000,
-  initial_cols = 400,
-  initial_rows = 80,
-  leader = { key = 'b', mods = 'SUPER', timeout_milliseconds = 1000 },
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
+  dpi = 144,
+  font = wezterm.font_with_fallback { 'SF Mono', 'JetBrains Mono' },
+  font_size = 16.0,
+  freetype_load_flags = 'NO_HINTING',
+  leader = { key = 'b', mods = 'SUPER', timeout_milliseconds = 1000 },
+  scrollback_lines = 50000,
+  warn_about_missing_glyphs = false,
   window_decorations = 'RESIZE',
+  colors = {
+    split = 'orange',
+  },
   ssh_domains = {
     {
       name = 'hcloud1',
