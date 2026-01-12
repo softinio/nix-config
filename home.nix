@@ -76,7 +76,7 @@
       niv
       nixd
       nix-index
-      nixfmt-rfc-style
+      nixfmt
       nix-prefetch-git
       nodejs
       openssl
