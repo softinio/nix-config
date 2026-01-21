@@ -2,6 +2,8 @@ local wezterm = require 'wezterm'
 local mux = wezterm.mux
 local act = wezterm.action
 
+local theme = 'Tango (terminal.sexy)'
+
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
@@ -20,20 +22,22 @@ wezterm.on('gui-attached', function(domain)
   end
 end)
 
-return {
+local config = {
   adjust_window_size_when_changing_font_size = false,
-  check_for_updates = false,
-  color_scheme = 'Tango (terminal.sexy)',
+  check_for_updates = true,
+  color_scheme = theme,
   default_gui_startup_args = { 'connect', 'unix' },
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
   dpi = 144,
   font = wezterm.font_with_fallback { 'SF Mono', 'JetBrains Mono' },
   font_size = 16.0,
   freetype_load_flags = 'NO_HINTING',
+  front_end = 'OpenGL',
   leader = { key = 'b', mods = 'SUPER', timeout_milliseconds = 1000 },
+  native_macos_fullscreen_mode = true,
   scrollback_lines = 50000,
   warn_about_missing_glyphs = false,
-  window_decorations = 'RESIZE',
+  window_decorations = 'MACOS_FORCE_DISABLE_SHADOW | TITLE | RESIZE',
   colors = {
     split = 'orange',
   },
@@ -48,7 +52,7 @@ return {
   unix_domains = {
     {
       name = 'unix',
-      proxy_command = { 'nc', '-U', '/Users/salar/.local/share/wezterm/sock' },
+      socket_path = '/Users/salar/.local/share/wezterm/sock',
     },
   },
   keys = {
@@ -136,3 +140,5 @@ return {
     { key = 'Tab', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
   },
 }
+
+return config

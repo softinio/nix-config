@@ -19,6 +19,7 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
+      "copilot-language-server"
       "discord"
       "gh-copilot"
       "slack"
@@ -45,6 +46,7 @@
       cachix
       colordiff
       cmake
+      copilot-language-server
       coursier
       curlFull
       deno
@@ -56,9 +58,11 @@
       ffmpeg
       font-awesome
       gg-jj
+      ghostscript
       gnupg
       go
       graphviz
+      imagemagick
       jetbrains-mono
       jjui
       jq-lsp
@@ -68,6 +72,7 @@
       marksman
       marp-cli
       maven
+      mermaid-cli
       metals
       multimarkdown
       mypy
@@ -102,6 +107,7 @@
       stylua
       swift-format
       tealdeer
+      tectonic-unwrapped
       tig
       tmux-sessionizer
       tokei
