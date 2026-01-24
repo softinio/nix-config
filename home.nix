@@ -21,7 +21,7 @@
       "copilot.vim"
       "copilot-language-server"
       "discord"
-      "gh-copilot"
+      "github-copilot-cli"
       "slack"
       "vscode"
       "vscode-extension-anthropic-claude-code"
@@ -172,9 +172,6 @@
 
   programs.gh = {
     enable = true;
-    extensions = [
-      pkgs.gh-copilot
-    ];
     settings = {
       editor = "nvim";
       git_protocol = "ssh";
