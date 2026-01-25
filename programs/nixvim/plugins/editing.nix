@@ -23,21 +23,6 @@
       };
     };
 
-    # Trim trailing whitespace
-    trim = {
-      enable = true;
-      settings = {
-        highlight = true;
-        ft_blocklist = [
-          "checkhealth"
-          "floaterm"
-          "lspinfo"
-          "neo-tree"
-          "TelescopePrompt"
-        ];
-      };
-    };
-
     # Collection of small useful plugins
     snacks = {
       enable = true;
@@ -50,6 +35,7 @@
         };
         notifier = {
           enabled = true;
+          timeout = 5000;
         };
         quickfile = {
           enabled = true;

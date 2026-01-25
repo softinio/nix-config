@@ -45,7 +45,6 @@
       cachix
       colordiff
       cmake
-      copilot-language-server
       coursier
       curlFull
       deno

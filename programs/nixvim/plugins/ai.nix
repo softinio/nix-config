@@ -1,36 +1,31 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   programs.nixvim = {
     plugins = {
-      # GitHub Copilot
-      copilot-vim = {
+      # GitHub Copilot (using copilot-lua to avoid npm runtime installs)
+      copilot-lua = {
         enable = true;
+        settings = {
+          suggestion = {
+            enabled = true;
+            auto_trigger = true;
+            keymap = {
+              accept = "<C-J>";
+              accept_word = "<C-Right>";
+              accept_line = "<C-Down>";
+              next = "<M-]>";
+              prev = "<M-[>";
+              dismiss = "<C-]>";
+            };
+          };
+          panel.enabled = false;
+          copilot_node_command = "${pkgs.nodejs}/bin/node";
+        };
       };
 
       # Avante AI assistant (imported from separate file)
       # avante config is in avante.nix
     };
-
-    globals = {
-      copilot_node_command = lib.mkForce "${pkgs.nodejs}/bin/node";
-      copilot_no_tab_map = true;
-      copilot_assume_mapped = true;
-    };
-
-    # Copilot keymapping - use Ctrl+J to accept suggestion
-    keymaps = [
-      {
-        mode = "i";
-        key = "<C-J>";
-        action = "copilot#Accept(\"\\<CR>\")";
-        options = {
-          silent = true;
-          script = true;
-          expr = true;
-          replace_keycodes = false;
-        };
-      }
-    ];
   };
 }

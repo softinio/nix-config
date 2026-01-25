@@ -1,6 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  # Add nvim-metals plugin for DAP support and additional Metals features
+  programs.nixvim.extraPlugins = [
+    pkgs.vimPlugins.nvim-metals
+  ];
+
   programs.nixvim.plugins = {
     # DAP (Debug Adapter Protocol) support
     dap = {
@@ -146,7 +151,10 @@
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "scala", "sbt", "sc" },
       callback = function()
-        require("metals").setup_dap()
+        local ok, metals = pcall(require, "metals")
+        if ok and metals.setup_dap then
+          metals.setup_dap()
+        end
       end,
     })
   '';

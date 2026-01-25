@@ -15,13 +15,13 @@ The repository follows a modular architecture:
 - **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nur) and outputs. Defines the main darwin configuration `salarm3max` for aarch64-darwin.
 - **`home.nix`**: Main home-manager configuration importing all program modules and defining system-wide packages.
 - **`programs/default.nix`**: List of program module imports (each program has its own subdirectory with `default.nix`).
-- **`programs/*/default.nix`**: Individual program configurations (fish, git, jujutsu, ghostty, wezterm, zed, etc.).
+- **`programs/*/default.nix`**: Individual program configurations (fish, git, jujutsu, ghostty, nixvim, zed, etc.).
 
 ### Key Design Patterns
 
 1. **Modular Program Configuration**: Each program (fish, git, ghostty, etc.) has its own directory under `programs/` with a `default.nix` file.
 2. **Allowlist for Unfree Packages**: Unfree packages are explicitly allowlisted in `home.nix` using `allowUnfreePredicate`.
-3. **External Config Fetching**: Neovim config is fetched from external GitHub repo (`softinio/nvim-config`) rather than managed in this repo.
+3. **Nixvim Configuration**: Neovim is configured via nixvim in `programs/nixvim/` with modular plugin configurations.
 4. **Integration Through Imports**: `programs/default.nix` is a simple list that gets imported into `home.nix`, making it easy to enable/disable programs.
 
 ## Common Commands

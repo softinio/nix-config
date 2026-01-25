@@ -72,20 +72,5 @@
       command = "set filetype=scala";
     }
 
-    # Metals-specific settings on attach
-    {
-      event = "FileType";
-      pattern = [
-        "scala"
-        "sbt"
-        "sc"
-      ];
-      callback.__raw = ''
-        function()
-          -- Enable semantic tokens for better syntax highlighting
-          vim.lsp.semantic_tokens.start()
-        end
-      '';
-    }
   ];
 }
