@@ -86,7 +86,7 @@
       grep = "grep --color=auto";
       lg = "lazygit";
       nixc = "cd ~/.config/nixpkgs";
-      nixre = "nix build && sudo ./result/activate";
+      nixre = "sudo darwin-rebuild switch --flake ~/.config/nixpkgs#salarm3max";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc = "nix-collect-garbage -d";
       nixq = "nix-env -qa";

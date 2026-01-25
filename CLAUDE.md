@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a nix-darwin and home-manager configuration for managing a macOS system (Apple Silicon M3 Max) declaratively. The configuration uses Nix flakes and manages both system-level packages (via nix-darwin) and user-level packages and dotfiles (via home-manager).
+This is a nix-darwin and home-manager configuration for managing macOS systems declaratively. The configuration uses Nix flakes and manages both system-level packages (via nix-darwin) and user-level packages and dotfiles (via home-manager).
+
+Supports both Apple Silicon (`aarch64-darwin`) and Intel (`x86_64-darwin`) Macs.
 
 ## Architecture
 
@@ -12,10 +14,24 @@ This is a nix-darwin and home-manager configuration for managing a macOS system 
 
 The repository follows a modular architecture:
 
-- **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nur) and outputs. Defines the main darwin configuration `salarm3max` for aarch64-darwin.
+- **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nur) and outputs. Uses `mkDarwinConfig` helper function to generate machine configurations.
 - **`home.nix`**: Main home-manager configuration importing all program modules and defining system-wide packages.
 - **`programs/default.nix`**: List of program module imports (each program has its own subdirectory with `default.nix`).
 - **`programs/*/default.nix`**: Individual program configurations (fish, git, jujutsu, ghostty, nixvim, zed, etc.).
+
+### Machine Configuration
+
+The `mkDarwinConfig` function in `flake.nix` generates darwin configurations with these parameters:
+
+| Parameter | Required | Default | Description |
+|-----------|----------|---------|-------------|
+| `system` | Yes | - | `"aarch64-darwin"` (Apple Silicon) or `"x86_64-darwin"` (Intel) |
+| `hostname` | Yes | - | Machine hostname (sets `networking.hostName` and `networking.computerName`) |
+| `username` | No | `"salar"` | Unix username for home-manager configuration |
+
+Current configurations in `darwinConfigurations`:
+- `salarm3max` - Apple Silicon (M3 Max)
+- `salarintel` - Intel Mac (template)
 
 ### Key Design Patterns
 
@@ -23,6 +39,7 @@ The repository follows a modular architecture:
 2. **Allowlist for Unfree Packages**: Unfree packages are explicitly allowlisted in `home.nix` using `allowUnfreePredicate`.
 3. **Nixvim Configuration**: Neovim is configured via nixvim in `programs/nixvim/` with modular plugin configurations.
 4. **Integration Through Imports**: `programs/default.nix` is a simple list that gets imported into `home.nix`, making it easy to enable/disable programs.
+5. **Multi-Architecture Support**: The `mkDarwinConfig` function abstracts system-specific details, allowing the same config to work on Intel and Apple Silicon.
 
 ## Common Commands
 
@@ -80,10 +97,32 @@ To add a new program configuration:
 3. Add `./newprogram` to the list in `programs/default.nix`
 4. Run `nixre` to apply changes
 
+## Adding a New Machine Configuration
+
+To add support for a new machine:
+
+1. Edit `flake.nix` and add a new entry to `darwinConfigurations`:
+   ```nix
+   darwinConfigurations = {
+     # ... existing configs ...
+
+     new-machine = mkDarwinConfig {
+       system = "aarch64-darwin";  # or "x86_64-darwin" for Intel
+       hostname = "new-machine";
+       # username = "differentuser";  # optional, defaults to "salar"
+     };
+   };
+   ```
+
+2. Build and activate:
+   ```fish
+   darwin-rebuild switch --flake ~/.config/nixpkgs#new-machine
+   ```
+
 ## Important Notes
 
-- **Platform**: This configuration is specifically for `aarch64-darwin` (Apple Silicon Macs).
-- **User**: Configuration is for user `salar` with home directory `/Users/salar`.
+- **Platform**: Supports both `aarch64-darwin` (Apple Silicon) and `x86_64-darwin` (Intel Macs).
+- **User**: Default configuration is for user `salar` with home directory `/Users/salar`. Override with `username` parameter in `mkDarwinConfig`.
 - **Shell**: Fish is the default shell with extensive customizations.
 - **Nix Features**: Experimental features `nix-command` and `flakes` are enabled.
 - **Version Control**: Uses jujutsu (jj) as the primary VCS alongside git.
