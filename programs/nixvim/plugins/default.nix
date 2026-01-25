@@ -12,6 +12,9 @@
     # LSP configuration
     ./lsp
 
+    # Language-specific configurations
+    ./scala.nix
+
     # Individual plugin configurations
     ./avante.nix
     ./conform.nix

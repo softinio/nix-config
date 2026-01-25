@@ -24,7 +24,6 @@
       "github-copilot-cli"
       "slack"
       "vscode"
-      "vscode-extension-anthropic-claude-code"
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
       "vscode-extension-MS-python-vscode-pylance"
@@ -105,7 +104,6 @@
       slumber
       sqlite
       stylua
-      swift-format
       tealdeer
       tectonic-unwrapped
       tig

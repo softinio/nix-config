@@ -26,6 +26,7 @@
         javascript
         json
         json5
+        latex
         lua
         make
         markdown
@@ -40,6 +41,7 @@
         terraform
         toml
         typescript
+        typst
         vim
         xml
         yaml
@@ -48,9 +50,9 @@
 
       nixvimInjections = true;
 
-      settings = {
-        highlight.enable = true;
-        indent.enable = true;
+      highlight.enable = true;
+      indent = {
+        enable = false;
       };
       folding.enable = false;
     };

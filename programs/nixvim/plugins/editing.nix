@@ -39,7 +39,26 @@
     };
 
     # Collection of small useful plugins
-    snacks.enable = true;
+    snacks = {
+      enable = true;
+      settings = {
+        bigfile = {
+          enabled = true;
+        };
+        image = {
+          enabled = true;
+        };
+        notifier = {
+          enabled = true;
+        };
+        quickfile = {
+          enabled = true;
+        };
+        statuscolumn = {
+          enabled = true;
+        };
+      };
+    };
 
     # Zig language
     zig.enable = true;

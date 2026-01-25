@@ -14,7 +14,7 @@
     # TODO comment highlighting
     todo-comments = {
       enable = true;
-      keymaps.todoTelescope.key = "<leader>t";
+      keymaps.todoTelescope.key = "<leader>td";
     };
 
     # Diagnostics list

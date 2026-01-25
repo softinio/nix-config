@@ -62,28 +62,57 @@
             "mill"
           ];
           settings.metals = {
+            # Build tool settings
             defaultBspToBuildTool = true;
+            bloopVersion = "latest.release";
+
+            # Shell and execution
             defaultShell = "fish";
+
+            # Features
             enableBestEffort = true;
             enableSemanticHighlighting = true;
+            testUserInterface = "Test Explorer";
+
+            # Excluded packages (Java APIs we don't want)
             excludedPackages = [
               "akka.actor.typed.javadsl"
               "com.github.swagger.akka.javadsl"
             ];
+
+            # Status bar integration
             initOptions = {
               statusBarProvider = "on";
+              compilerOptions = {
+                snippetAutoIndent = false;
+              };
             };
+
+            # Inlay hints for better code understanding
             inlayHints = {
               typeParameters.enable = true;
               hintsInPatternMatch.enable = true;
+              inferredTypes.enable = true;
+              implicitArguments.enable = true;
+              implicitConversions.enable = true;
             };
+
+            # Claude integration
             mcpClient = "claude";
+            startMcpServer = true;
+
+            # Server version
             serverVersion = "latest.snapshot";
+
+            # Display options
             showImplicitArguments = true;
             showImplicitConversionsAndClasses = true;
             showInferredType = true;
-            startMcpServer = true;
+
+            # Code lens features
             superMethodLensesEnabled = true;
+
+            # Use globally installed metals
             useGlobalExecutable = true;
           };
         };
