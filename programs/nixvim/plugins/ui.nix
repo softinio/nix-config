@@ -8,6 +8,11 @@
       settings = {
         style = "night";
         on_colors.__raw = "function(colors) colors.bg = \"#000000\" end";
+        on_highlights.__raw = ''
+          function(hl, colors)
+            hl.WinSeparator = { fg = "#33ff33", bold = true }
+          end
+        '';
       };
     };
 
