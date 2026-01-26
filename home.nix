@@ -98,6 +98,7 @@
       rustup
       sbt
       scala-cli
+      scalafmt
       shellcheck
       slack
       slides

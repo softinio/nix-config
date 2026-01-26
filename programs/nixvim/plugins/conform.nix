@@ -32,7 +32,22 @@
             if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
               return
             end
+            -- Skip scala files, they use format_after_save due to slow JVM startup
+            if vim.bo[bufnr].filetype == "scala" then
+              return
+            end
             return { timeout_ms = 500, lsp_fallback = true }
+          end
+        '';
+        format_after_save.__raw = ''
+          function(bufnr)
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+              return
+            end
+            -- Only use format_after_save for scala (scalafmt is slow)
+            if vim.bo[bufnr].filetype == "scala" then
+              return { lsp_fallback = true }
+            end
           end
         '';
       };
