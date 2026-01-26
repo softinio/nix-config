@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  user,
   ...
 }:
 
@@ -134,7 +135,7 @@
 
   programs.darcs = {
     enable = true;
-    author = [ "Salar Rahmanian <code@softinio.com>" ];
+    author = [ "${user.fullName} <${user.email}>" ];
     boring = [
       "^.idea$"
       "^.direnv$"
@@ -256,8 +257,8 @@
   # pijul config
   xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
     [author]
-    name = "softinio"
-    full_name = "Salar Rahmanian"
-    email = "code@softinio.com"
+    name = "${user.username}"
+    full_name = "${user.fullName}"
+    email = "${user.email}"
   '';
 }

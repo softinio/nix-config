@@ -30,12 +30,16 @@
     }:
     let
       # Helper to make a darwin configuration for a given system
+      # Supports multiple users per machine
       mkDarwinConfig =
         {
           system,
           hostname,
-          username ? "salar",
+          users, # List of user profiles imported from ./users/*.nix
         }:
+        let
+          usernames = map (u: u.username) users;
+        in
         nix-darwin.lib.darwinSystem {
           inherit system;
           modules = [
@@ -58,10 +62,7 @@
                     extra-platforms = nixpkgs.lib.optionals (system == "aarch64-darwin") [
                       "x86_64-darwin"
                     ];
-                    trusted-users = [
-                      "root"
-                      username
-                    ];
+                    trusted-users = [ "root" ] ++ usernames;
                   };
                   distributedBuilds = false;
                 };
@@ -73,19 +74,32 @@
 
                 nixpkgs.hostPlatform = system;
 
-                users.users.${username}.home = "/Users/${username}";
+                users.users = builtins.listToAttrs (
+                  map (user: {
+                    name = user.username;
+                    value = {
+                      home = "/Users/${user.username}";
+                    };
+                  }) users
+                );
               }
             )
             home-manager.darwinModules.home-manager
             {
               home-manager.backupFileExtension = "backup";
               home-manager.useUserPackages = true;
-              home-manager.users.${username} =
-                { ... }:
-                {
-                  nixpkgs.overlays = [ nur.overlays.default ];
-                  imports = [ ./home.nix ];
-                };
+              home-manager.users = builtins.listToAttrs (
+                map (user: {
+                  name = user.username;
+                  value =
+                    { ... }:
+                    {
+                      nixpkgs.overlays = [ nur.overlays.default ];
+                      imports = [ ./home.nix ];
+                      _module.args.user = user;
+                    };
+                }) users
+              );
               home-manager.extraSpecialArgs = {
                 inputs = {
                   inherit nixvim;
@@ -94,7 +108,7 @@
             }
           ];
           specialArgs = {
-            inherit nixpkgs system;
+            inherit nixpkgs system users;
           };
         };
     in
@@ -104,12 +118,14 @@
         salarm3max = mkDarwinConfig {
           system = "aarch64-darwin";
           hostname = "salarm3max";
+          users = [ (import ./users/salar.nix) ];
         };
 
         # Intel Mac (example - update hostname as needed)
         salarintel = mkDarwinConfig {
           system = "x86_64-darwin";
           hostname = "salarintel";
+          users = [ (import ./users/salar.nix) ];
         };
       };
 
