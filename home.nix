@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  user,
   ...
 }:
 
@@ -19,11 +20,11 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
+      "copilot-language-server"
       "discord"
-      "gh-copilot"
+      "github-copilot-cli"
       "slack"
       "vscode"
-      "vscode-extension-anthropic-claude-code"
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
       "vscode-extension-MS-python-vscode-pylance"
@@ -56,9 +57,11 @@
       ffmpeg
       font-awesome
       gg-jj
+      ghostscript
       gnupg
       go
       graphviz
+      imagemagick
       jetbrains-mono
       jjui
       jq-lsp
@@ -68,6 +71,7 @@
       marksman
       marp-cli
       maven
+      mermaid-cli
       metals
       multimarkdown
       mypy
@@ -94,14 +98,15 @@
       rustup
       sbt
       scala-cli
+      scalafmt
       shellcheck
       slack
       slides
       slumber
       sqlite
       stylua
-      swift-format
       tealdeer
+      tectonic-unwrapped
       tig
       tmux-sessionizer
       tokei
@@ -131,7 +136,7 @@
 
   programs.darcs = {
     enable = true;
-    author = [ "Salar Rahmanian <code@softinio.com>" ];
+    author = [ "${user.fullName} <${user.email}>" ];
     boring = [
       "^.idea$"
       "^.direnv$"
@@ -166,9 +171,6 @@
 
   programs.gh = {
     enable = true;
-    extensions = [
-      pkgs.gh-copilot
-    ];
     settings = {
       editor = "nvim";
       git_protocol = "ssh";
@@ -256,8 +258,8 @@
   # pijul config
   xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
     [author]
-    name = "softinio"
-    full_name = "Salar Rahmanian"
-    email = "code@softinio.com"
+    name = "${user.username}"
+    full_name = "${user.fullName}"
+    email = "${user.email}"
   '';
 }

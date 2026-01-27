@@ -29,82 +29,106 @@
       ...
     }:
     let
-      homeManagerConfFor =
-        config:
-        { ... }:
+      # Helper to make a darwin configuration for a given system
+      # Supports multiple users per machine
+      mkDarwinConfig =
         {
-          nixpkgs.overlays = [ nur.overlays.default ];
-          imports = [
-            config
+          system,
+          hostname,
+          users, # List of user profiles imported from ./users/*.nix
+        }:
+        let
+          usernames = map (u: u.username) users;
+        in
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            (
+              { pkgs, ... }:
+              {
+                networking.hostName = hostname;
+                networking.computerName = hostname;
+
+                environment.systemPackages = with pkgs; [ home-manager ];
+
+                fonts.packages = with pkgs; [ fira-code ];
+
+                nix = {
+                  nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
+                  package = pkgs.nixVersions.stable;
+                  settings = {
+                    experimental-features = "nix-command flakes";
+                    # Only Apple Silicon can run x86_64 binaries via Rosetta
+                    extra-platforms = nixpkgs.lib.optionals (system == "aarch64-darwin") [
+                      "x86_64-darwin"
+                    ];
+                    trusted-users = [ "root" ] ++ usernames;
+                  };
+                  distributedBuilds = false;
+                };
+
+                programs.fish.enable = true;
+
+                system.configurationRevision = self.rev or self.dirtyRev or null;
+                system.stateVersion = 4;
+
+                nixpkgs.hostPlatform = system;
+
+                users.users = builtins.listToAttrs (
+                  map (user: {
+                    name = user.username;
+                    value = {
+                      home = "/Users/${user.username}";
+                    };
+                  }) users
+                );
+              }
+            )
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.backupFileExtension = "backup";
+              home-manager.useUserPackages = true;
+              home-manager.users = builtins.listToAttrs (
+                map (user: {
+                  name = user.username;
+                  value =
+                    { ... }:
+                    {
+                      nixpkgs.overlays = [ nur.overlays.default ];
+                      imports = [ ./home.nix ];
+                      _module.args.user = user;
+                    };
+                }) users
+              );
+              home-manager.extraSpecialArgs = {
+                inputs = {
+                  inherit nixvim;
+                };
+              };
+            }
           ];
-        };
-
-      m3maxConfiguration =
-        { pkgs, ... }:
-        {
-          environment.systemPackages = with pkgs; [ home-manager ];
-
-          fonts = {
-            packages = with pkgs; [ fira-code ];
-          };
-
-          nix = {
-            nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
-
-            package = pkgs.nixVersions.stable;
-            settings = {
-              experimental-features = "nix-command flakes";
-              extra-platforms = [
-                "x86_64-darwin"
-                "aarch64-darwin"
-              ];
-              trusted-users = [
-                "root"
-                "salar"
-              ];
-            };
-            distributedBuilds = false;
-          };
-
-          programs.fish.enable = true;
-
-          system.configurationRevision = self.rev or self.dirtyRev or null;
-
-          system.stateVersion = 4;
-
-          nixpkgs.hostPlatform = "aarch64-darwin";
-
-          users = {
-            users.salar = {
-              home = /Users/salar;
-            };
+          specialArgs = {
+            inherit nixpkgs system users;
           };
         };
     in
     {
-      darwinConfigurations.salarm3max = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          m3maxConfiguration
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.backupFileExtension = "backup";
-            home-manager.useUserPackages = true;
-            home-manager.users.salar = homeManagerConfFor ./home.nix;
-            home-manager.extraSpecialArgs = {
-              inputs = {
-                inherit nixvim;
-              };
-            };
-          }
-        ];
-        specialArgs = {
-          inherit nixpkgs;
+      darwinConfigurations = {
+        # Apple Silicon Mac (M3 Max)
+        salarm3max = mkDarwinConfig {
+          system = "aarch64-darwin";
+          hostname = "salarm3max";
+          users = [ (import ./users/salar.nix) ];
+        };
+
+        # Intel Mac (example - update hostname as needed)
+        salarintel = mkDarwinConfig {
+          system = "x86_64-darwin";
+          hostname = "salarintel";
+          users = [ (import ./users/salar.nix) ];
         };
       };
 
       darwinPackages = self.darwinConfigurations.salarm3max.pkgs;
-
-      defaultPackage.aarch64-darwin = self.darwinConfigurations.salarm3max.system;
     };
 }

@@ -28,6 +28,7 @@ nixvim/
     ├── floaterm.nix      # Floating terminal
     ├── lualine.nix       # Status line
     ├── neo-tree.nix      # File explorer
+    ├── scala.nix         # Scala/Metals debugging (DAP)
     ├── telescope.nix     # Fuzzy finder
     └── treesitter.nix    # Syntax highlighting
 ```
@@ -61,7 +62,7 @@ nixvim/
 
 #### UI Enhancements (`ui.nix`)
 - **Colorscheme**: Tokyo Night theme with custom background
-- **Icons**: File type icons via web-devicons
+- **Icons**: File type icons via web-devicons and mini.icons
 - **Visual aids**: Indent guides, color highlighting, markdown preview
 
 #### Git Integration (`git.nix`)
@@ -71,13 +72,30 @@ nixvim/
 - **Auto-pairs**: Automatic bracket/quote closing
 - **Flash**: Enhanced jump/search
 - **Trim**: Whitespace management
-- **Image support**: Clipboard image pasting
+- **Image support**: Clipboard image pasting and inline viewing
+- **Snacks**: Collection of useful features
+  - **Bigfile**: Optimizes performance for large files
+  - **Image**: View images inline in Neovim
+  - **Notifier**: Fancy notification system
+  - **Quickfile**: Faster file opening
+  - **Statuscolumn**: Enhanced gutter with git signs and diagnostics
 
 #### Utilities (`utility.nix`)
 - **Oil**: File manager
 - **Todo-comments**: Highlight TODO/FIXME comments
 - **Trouble**: Diagnostics list
 - **Which-key**: Show available keybindings
+
+#### Syntax & Language Support (`treesitter.nix`)
+- **Treesitter**: Advanced syntax highlighting and code understanding
+- **Supported languages**: Scala, Python, Rust, Go, Swift, Zig, TypeScript, JavaScript, Nix, LaTeX, Typst, and 30+ more
+- **Features**: Better indentation, code folding, syntax-aware navigation
+
+#### Scala Development (`scala.nix`)
+- **Metals LSP**: Full Scala language server integration
+- **DAP Debugging**: Debug Scala applications with breakpoints, step through, and variable inspection
+- **Enhanced features**: Inlay hints, code lens, semantic highlighting
+- **Build tool support**: sbt, Mill, Maven, Gradle
 
 #### AI Assistants (`ai.nix`)
 - **Copilot**: GitHub Copilot integration
@@ -171,7 +189,7 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 | `L` | Normal | Go to end of line |
 | `Ctrl-c` | Normal | Switch to alternate buffer |
 | `Ctrl-x` | Normal | Close window |
-| `Ctrl-s` or `<leader>s` | Normal | Save file |
+| `Ctrl-s` or `<leader>w` | Normal | Save file |
 
 ### Window Navigation
 
@@ -215,7 +233,7 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 | `Ctrl-p` | Normal | Git files |
 | `<leader>?` | Normal | Recently opened files |
 | `Ctrl-t` | Normal | Search for TODOs |
-| `<leader>t` | Normal | TODO comments (Telescope) |
+| `<leader>td` | Normal | TODO comments (Telescope) |
 
 ### LSP (Language Server)
 
@@ -234,10 +252,30 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<leader>ws` | Normal | Hover Metals Worksheet |
-| `<leader>sm` | Normal | Telescope Metals Commands |
-| `<leader>tt` | Normal | Toggle tree view |
-| `<leader>tr` | Normal | Reveal in tree |
+| `<leader>mc` | Normal | Telescope Metals Commands |
+| `<leader>mw` | Normal | Hover Metals Worksheet |
+| `<leader>mt` | Normal | Toggle tree view |
+| `<leader>mr` | Normal | Reveal in tree |
+| `<leader>mi` | Normal | Organize imports |
+| `<leader>mb` | Normal | Build import |
+| `<leader>ms` | Normal | Super method hierarchy |
+| `<leader>mn` | Normal | New Scala file |
+| `<leader>mR` | Normal | Build restart |
+| `<leader>mC` | Normal | Build connect |
+| `<leader>md` | Normal | Open all diagnostics |
+
+### Scala Debugging (DAP)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>db` | Normal | Toggle breakpoint |
+| `<leader>dc` | Normal | Continue debugging |
+| `<leader>ds` | Normal | Step over |
+| `<leader>di` | Normal | Step into |
+| `<leader>do` | Normal | Step out |
+| `<leader>dt` | Normal | Terminate debugging |
+| `<leader>du` | Normal | Toggle DAP UI |
+| `<leader>dh` | Normal | Hover variable value |
 
 ### Terminal (Floaterm)
 

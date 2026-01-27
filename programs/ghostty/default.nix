@@ -6,6 +6,7 @@ let
     font-family = "SF Mono";
     font-size = 16;
     link-previews = true;
+    macos-icon = "retro";
     macos-shortcuts = "ask";
     macos-titlebar-style = "transparent";
     maximize = true;

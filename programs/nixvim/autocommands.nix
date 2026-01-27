@@ -34,15 +34,43 @@
     # Set indentation for specific filetypes
     {
       event = "FileType";
-      pattern = ["swift" "json" "lua" "nix"];
+      pattern = [
+        "swift"
+        "json"
+        "lua"
+        "nix"
+      ];
       command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab";
     }
 
     # Metals (Scala) - Refresh codelens
     {
-      event = ["BufEnter" "CursorHold" "InsertLeave"];
-      pattern = ["*.scala" "*.sbt" "*.java"];
+      event = [
+        "BufEnter"
+        "CursorHold"
+        "InsertLeave"
+      ];
+      pattern = [
+        "*.scala"
+        "*.sbt"
+        "*.java"
+        "*.sc"
+      ];
       command = "lua vim.lsp.codelens.refresh()";
     }
+
+    # Scala/sbt file type detection
+    {
+      event = [
+        "BufRead"
+        "BufNewFile"
+      ];
+      pattern = [
+        "*.sbt"
+        "*.sc"
+      ];
+      command = "set filetype=scala";
+    }
+
   ];
 }

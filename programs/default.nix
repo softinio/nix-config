@@ -5,6 +5,5 @@
   ./jujutsu
   ./nixvim
   ./tmux
-  ./wezterm
   ./vscode
 ]

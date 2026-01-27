@@ -1,4 +1,4 @@
-{ ... }:
+{ user, ... }:
 
 let
   myAliases = {
@@ -69,8 +69,8 @@ let
     #   };
     # };
     user = {
-      email = "code@softinio.com";
-      name = "Salar Rahmanian";
+      email = user.email;
+      name = user.fullName;
     };
   };
 in

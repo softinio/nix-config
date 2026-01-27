@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 let
   MyAliases = {
     l = [
@@ -20,12 +20,6 @@ in
 {
   programs.jujutsu = {
     enable = true;
-    # Temp add package to overcome updstream problem
-    package = pkgs.jujutsu.override {
-      rustPlatform = pkgs.rustPlatform // {
-        buildRustPackage = pkgs.rustPlatform.buildRustPackage.override { cargoNextestHook = null; };
-      };
-    };
     settings = {
       aliases = MyAliases;
       gerrit.enabled = false;
@@ -33,10 +27,10 @@ in
         subprocess = true;
       };
       signing = {
-        key = "~/.ssh/id_ed25519.pub";
+        key = user.gitSigningKey;
       };
       templates = {
-        git_push_bookmark = "\"softinio-push-\" ++ change_id.short()";
+        git_push_bookmark = "\"${user.jujutsuBranchPrefix}-push-\" ++ change_id.short()";
       };
       ui = {
         default-command = "st";
@@ -57,8 +51,8 @@ in
         pager = "less -FRX";
       };
       user = {
-        name = "Salar Rahmanian";
-        email = "code@softinio.com";
+        name = user.fullName;
+        email = user.email;
       };
     };
   };

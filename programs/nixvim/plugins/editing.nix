@@ -23,23 +23,28 @@
       };
     };
 
-    # Trim trailing whitespace
-    trim = {
+    # Collection of small useful plugins
+    snacks = {
       enable = true;
       settings = {
-        highlight = true;
-        ft_blocklist = [
-          "checkhealth"
-          "floaterm"
-          "lspinfo"
-          "neo-tree"
-          "TelescopePrompt"
-        ];
+        bigfile = {
+          enabled = true;
+        };
+        image = {
+          enabled = true;
+        };
+        notifier = {
+          enabled = true;
+          timeout = 5000;
+        };
+        quickfile = {
+          enabled = true;
+        };
+        statuscolumn = {
+          enabled = true;
+        };
       };
     };
-
-    # Collection of small useful plugins
-    snacks.enable = true;
 
     # Zig language
     zig.enable = true;
