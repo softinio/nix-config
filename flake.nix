@@ -86,7 +86,7 @@
                   '';
 
                 system.configurationRevision = self.rev or self.dirtyRev or null;
-                system.stateVersion = 4;
+                system.stateVersion = 5;
 
                 nixpkgs.hostPlatform = system;
 
@@ -131,10 +131,10 @@
     {
       darwinConfigurations = {
         # Apple Silicon Mac (M3 Max)
-        salarm3max = mkDarwinConfig {
+        annex = mkDarwinConfig {
           system = "aarch64-darwin";
-          hostname = "salarm3max";
-          users = [ (import ./users/salar.nix) ];
+          hostname = "salar-annex-macbook";
+          users = [ (import ./users/annex.nix) ];
         };
 
         # Intel Mac (example - update hostname as needed)
@@ -145,6 +145,6 @@
         };
       };
 
-      darwinPackages = self.darwinConfigurations.salarm3max.pkgs;
+      darwinPackages = self.darwinConfigurations.annex.pkgs;
     };
 }
