@@ -46,7 +46,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/.npm-global/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin "/Applications/IntelliJ IDEA.app/Contents/MacOS" $PATH
+      set -xg PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/.npm-global/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin "/Applications/IntelliJ IDEA.app/Contents/MacOS" "/Applications/Monodraw.app/Contents/Resources" $PATH
 
       set -xg WORKSPACE /Users/salar/Projects
 
@@ -87,6 +87,7 @@
       lg = "lazygit";
       nixc = "cd ~/.config/nixpkgs";
       nixre = "sudo darwin-rebuild switch --flake ~/.config/nixpkgs#salarm3max";
+      nixrea = "sudo darwin-rebuild switch --flake ~/.config/nixpkgs#annex";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc = "nix-collect-garbage -d";
       nixq = "nix-env -qa";
