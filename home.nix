@@ -32,7 +32,7 @@
     ];
 
   home = {
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     sessionVariables = {
       EDITOR = "nvim";
     };
@@ -40,6 +40,8 @@
       any-nix-shell
       aspell
       ast-grep
+      awscli2
+      awsebcli
       basedpyright
       bash-language-server
       bloop
@@ -92,6 +94,7 @@
       prettier
       prettyping
       pyrefly
+      python3
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
