@@ -33,13 +33,15 @@
     ];
 
   home = {
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     sessionVariables = {
       EDITOR = "nvim";
     };
     packages = with pkgs; [
       any-nix-shell
       aspell
+      awscli2
+      awsebcli
       bash-language-server
       bloop
       cachix
@@ -93,6 +95,7 @@
       prettier
       prettyping
       pyrefly
+      python3
       python3Packages.huggingface-hub
       python3Packages.jupyterlab
       rclone
