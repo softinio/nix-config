@@ -18,6 +18,7 @@ let
     "*.bloop"
     ".direnv/"
     ".idea/"
+    ".mcp.json"
     ".mypy_cache"
     "*.metals"
     "*.metals.sbt"
@@ -27,6 +28,17 @@ let
     "*.vscode"
     "_darcs/"
     "result"
+    # Node.js / JavaScript
+    "node_modules/"
+    "npm-debug.log*"
+    "yarn-debug.log*"
+    "yarn-error.log*"
+    ".pnpm-debug.log*"
+    "dist/"
+    "build/"
+    "coverage/"
+    ".env.local"
+    ".env.*.local"
   ];
   gitConfig = {
     alias = myAliases;
