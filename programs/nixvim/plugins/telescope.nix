@@ -6,12 +6,26 @@
       enable = true;
 
       extensions = {
+        file-browser = {
+          enable = true;
+          settings = {
+            auto_depth = true;
+            hijack_netrw = true;
+            mappings = {
+              i = {
+                "<A-S-CR>".__raw = "require('telescope').extensions.file_browser.actions.create_from_prompt";
+              };
+            };
+            prompt_path = true;
+          };
+        };
         fzf-native.enable = true;
         ui-select.enable = true;
         undo.enable = true;
       };
 
       keymaps = {
+        "<leader>fb" = "file_browser";
         "<leader>ff" = "find_files";
         "<leader>fg" = "live_grep";
         "<leader>b" = "buffers";

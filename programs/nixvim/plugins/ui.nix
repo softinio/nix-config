@@ -19,10 +19,6 @@
     plugins = {
       # Icons for file types
       web-devicons.enable = true;
-      mini = {
-        enable = true;
-        modules.icons = { };
-      };
 
       # Color highlighter (shows colors in code)
       colorizer = {
