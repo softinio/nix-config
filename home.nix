@@ -64,9 +64,9 @@
       go
       graphviz
       httpyac
+      ijhttp
       imagemagick
       jetbrains-mono
-      ijhttp
       jjui
       jq-lsp
       lazyjj
