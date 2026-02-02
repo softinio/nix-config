@@ -23,6 +23,7 @@
       "copilot-language-server"
       "discord"
       "github-copilot-cli"
+      "ijhttp"
       "slack"
       "vscode"
       "vscode-extension-github-copilot"
@@ -62,6 +63,7 @@
       gnupg
       go
       graphviz
+      ijhttp
       imagemagick
       jetbrains-mono
       jjui
