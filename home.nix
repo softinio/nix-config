@@ -58,6 +58,7 @@
       font-awesome
       gg-jj
       ghostscript
+      github-copilot-cli
       gnupg
       go
       graphviz

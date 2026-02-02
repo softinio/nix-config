@@ -13,6 +13,7 @@
 
     plugins.neo-tree = {
       enable = true;
+      lazy = true;
 
       settings = {
         close_if_last_window = true;
@@ -21,7 +22,7 @@
         };
         window = {
           width = 30;
-          autoExpandWidth = true;
+          auto_expand_width = true;
           position = "right";
         };
       };
