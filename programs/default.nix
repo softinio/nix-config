@@ -1,4 +1,5 @@
 [
+  ./claude
   ./fish
   ./ghostty
   ./git
