@@ -3,8 +3,9 @@ let
   my_settings = {
     auto-update = "off";
     copy-on-select = "clipboard";
-    font-family = "SF Mono";
+    font-family = "JetBrainsMono Nerd Font Mono";
     font-size = 16;
+    font-thicken = true;
     link-previews = true;
     macos-icon = "retro";
     macos-shortcuts = "ask";
