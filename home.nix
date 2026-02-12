@@ -101,9 +101,6 @@
       rclone
       readline
       rustup
-      sbt
-      scala-cli
-      scalafmt
       shellcheck
       slack
       slides
@@ -225,10 +222,6 @@
   };
 
   programs.htop = {
-    enable = true;
-  };
-
-  programs.java = {
     enable = true;
   };
 
