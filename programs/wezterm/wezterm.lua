@@ -41,14 +41,6 @@ local config = {
   colors = {
     split = 'orange',
   },
-  ssh_domains = {
-    {
-      name = 'hcloud1',
-      remote_address = 'hcloud1.softinio.net',
-      username = 'salar',
-      remote_wezterm_path = '/run/current-system/sw/bin/wezterm',
-    },
-  },
   unix_domains = {
     {
       name = 'unix',
@@ -95,10 +87,9 @@ local config = {
         local home = wezterm.home_dir
         local workspaces = {
           { id = home, label = 'Home' },
-          { id = home .. '/Projects', label = 'My Projects' },
-          { id = home .. '/OpenSource', label = 'Open Source Projects' },
+          { id = home .. '/Projects', label = 'Main Projects' },
+          { id = home .. '/Projects_2', label = 'Secondary Projects' },
           { id = home .. '/.config/nixpkgs', label = 'Nix Config' },
-          { id = home .. '/Projects/scalanews', label = 'Scala News' },
         }
 
         window:perform_action(
