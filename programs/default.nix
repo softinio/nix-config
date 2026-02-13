@@ -7,6 +7,7 @@
   ./jujutsu
   ./nixvim
   ./tmux
+  ./wezterm
   ./vscode
   ./zed
 ]
