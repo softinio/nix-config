@@ -88,6 +88,8 @@ local config = {
         local home = wezterm.home_dir
         local workspaces = {
           { id = home, label = 'Home' },
+          { id = home .. '/Projects/annexrisk', label = 'Main annexrisk repo' },
+          { id = home .. '/Projects_2/annexrisk', label = 'Secondary annexrisk repo' },
           { id = home .. '/Projects', label = 'Main Projects' },
           { id = home .. '/Projects_2', label = 'Secondary Projects' },
           { id = home .. '/.config/nixpkgs', label = 'Nix Config' },
