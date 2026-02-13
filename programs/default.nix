@@ -1,4 +1,5 @@
 [
+  ./alacritty
   ./claude
   ./fish
   ./ghostty
