@@ -85,8 +85,13 @@ local config = {
       action = wezterm.action_callback(function(window, pane)
         -- Here you can dynamically construct a longer list if needed
 
-        local home = wezterm.home_dir -- do not remove as its used by block inserted by nix
-        -- WEZTERM_WORKSPACES
+        local home = wezterm.home_dir
+        local workspaces = {
+          { id = home, label = 'Home' },
+          { id = home .. '/Projects', label = 'Main Projects' },
+          { id = home .. '/Projects_2', label = 'Secondary Projects' },
+          { id = home .. '/.config/nixpkgs', label = 'Nix Config' },
+        }
 
         window:perform_action(
           act.InputSelector {
