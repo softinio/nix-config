@@ -1,11 +1,14 @@
 [
+  ./alacritty
   ./claude
   ./fish
   ./ghostty
   ./git
   ./jujutsu
+  ./kitty
   ./nixvim
   ./tmux
+  ./wezterm
   ./vscode
   ./zed
 ]
