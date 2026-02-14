@@ -29,7 +29,7 @@ local config = {
   default_gui_startup_args = { 'connect', 'unix' },
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
   dpi = 144,
-  font = wezterm.font_with_fallback { 'SF Mono', 'JetBrains Mono' },
+  font = wezterm.font_with_fallback { family = 'JetBrains Mono', weight = 'Medium' },
   font_size = 16.0,
   freetype_load_flags = 'NO_HINTING',
   front_end = 'OpenGL',
@@ -37,7 +37,7 @@ local config = {
   native_macos_fullscreen_mode = true,
   scrollback_lines = 50000,
   warn_about_missing_glyphs = false,
-  window_decorations = 'MACOS_FORCE_DISABLE_SHADOW | TITLE | RESIZE',
+  window_decorations = 'RESIZE',
   colors = {
     split = 'orange',
   },
