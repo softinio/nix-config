@@ -77,7 +77,7 @@ let
     set -g status-right " #(tms sessions)"
     bind -r '(' switch-client -p\; refresh-client -S
     bind -r ')' switch-client -n\; refresh-client -S
-    bind C-o display-popup -E "tms"
+    bind o display-popup -E "tms"
 
     set -g default-command /etc/profiles/per-user/salar/bin/fish
   '';

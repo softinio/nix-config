@@ -3,11 +3,11 @@
 {
   imports = [
     # Core plugin categories
-    ./ui.nix
-    ./git.nix
-    ./editing.nix
-    ./utility.nix
     ./ai.nix
+    ./editing.nix
+    ./ui.nix
+    ./utility.nix
+    ./vcs.nix
 
     # LSP configuration
     ./lsp

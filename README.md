@@ -29,6 +29,22 @@ Example user profile (`users/myusername.nix`):
   email = "me@example.com";
   gitSigningKey = "~/.ssh/id_ed25519.pub";  # or null if not using signing
   jujutsuBranchPrefix = "myprefix";
+
+  # Optional: wezterm SSH domains (omit if not needed)
+  weztermSshDomains = [
+    {
+      name = "myserver";
+      remoteAddress = "myserver.example.com";
+      username = "myusername";
+      remoteWeztermPath = "/run/current-system/sw/bin/wezterm";
+    }
+  ];
+
+  # Optional: wezterm workspace switcher entries (omit if not needed)
+  weztermWorkspaces = [
+    { id = "";          label = "Home"; }
+    { id = "/Projects"; label = "My Projects"; }
+  ];
 }
 ```
 

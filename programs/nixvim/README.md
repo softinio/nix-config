@@ -14,7 +14,7 @@ nixvim/
 └── plugins/              # Plugin configurations
     ├── default.nix       # Plugin imports
     ├── ui.nix            # UI enhancements (colorscheme, icons, etc.)
-    ├── git.nix           # Git integration
+    ├── vcs.nix           # VCS integration
     ├── editing.nix       # Editing enhancements
     ├── utility.nix       # Utility plugins
     ├── ai.nix            # AI assistants (Copilot, Avante)
@@ -65,8 +65,8 @@ nixvim/
 - **Icons**: File type icons via web-devicons and mini.icons
 - **Visual aids**: Indent guides, color highlighting, markdown preview
 
-#### Git Integration (`git.nix`)
-- **Gitsigns**: Shows git changes in the gutter
+#### VCS Integration (`vcs.nix`)
+- **vim-signify**: Shows VCS changes in the gutter (supports git, darcs, and more)
 
 #### Editing (`editing.nix`)
 - **Auto-pairs**: Automatic bracket/quote closing
@@ -81,7 +81,6 @@ nixvim/
   - **Statuscolumn**: Enhanced gutter with git signs and diagnostics
 
 #### Utilities (`utility.nix`)
-- **Oil**: File manager
 - **Todo-comments**: Highlight TODO/FIXME comments
 - **Trouble**: Diagnostics list
 - **Which-key**: Show available keybindings
@@ -298,7 +297,6 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 | Feature | Command/Key |
 |---------|-------------|
 | Which-key | Automatically shows available keybindings when you pause |
-| Oil file manager | `:Oil` command |
 | Trouble diagnostics | `:Trouble` command |
 
 ## Resources

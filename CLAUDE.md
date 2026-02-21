@@ -33,6 +33,22 @@ User profile structure:
   email = "me@example.com";          # Used in git, jujutsu, darcs, pijul
   gitSigningKey = "~/.ssh/id_ed25519.pub";  # SSH key for signing (or null)
   jujutsuBranchPrefix = "myprefix";  # Prefix for jujutsu push bookmarks
+
+  # Optional: wezterm SSH domains (omit if not needed)
+  weztermSshDomains = [
+    {
+      name = "myserver";
+      remoteAddress = "myserver.example.com";
+      username = "myusername";
+      remoteWeztermPath = "/run/current-system/sw/bin/wezterm";
+    }
+  ];
+
+  # Optional: wezterm workspace switcher entries (omit if not needed)
+  weztermWorkspaces = [
+    { id = "";          label = "Home"; }
+    { id = "/Projects"; label = "My Projects"; }
+  ];
 }
 ```
 
@@ -129,6 +145,7 @@ To add a new user:
      email = "newuser@example.com";
      gitSigningKey = "~/.ssh/id_ed25519.pub";  # or null
      jujutsuBranchPrefix = "newuser";
+     # weztermSshDomains and weztermWorkspaces are optional
    }
    ```
 
