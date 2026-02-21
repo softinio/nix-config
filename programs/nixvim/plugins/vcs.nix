@@ -5,20 +5,6 @@
     extraPlugins = with pkgs.vimPlugins; [
       vim-signify
     ];
-    plugins = {
-      # Git signs in the gutter
-      gitsigns = {
-        enable = false;
-        settings.signs = {
-          add.text = "+";
-          change.text = "~";
-          delete.text = "_";
-          topdelete.text = "‾";
-          changedelete.text = "~";
-        };
-      };
-    };
-
     # vim-signify color customization
     highlight = {
       SignifySignAdd = {

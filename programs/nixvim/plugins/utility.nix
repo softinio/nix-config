@@ -2,15 +2,6 @@
 
 {
   programs.nixvim.plugins = {
-    # Lazy loading support
-    lz-n.enable = true;
-
-    # File manager
-    oil = {
-      enable = true;
-      lazyLoad.settings.cmd = "Oil";
-    };
-
     # TODO comment highlighting
     todo-comments = {
       enable = true;
