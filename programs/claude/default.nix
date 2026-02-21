@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   # Define the settings as a Nix attribute set
@@ -13,14 +18,18 @@ let
         "Bash(cat:*)"
         "Bash(curl:*)"
         "Bash(find:*)"
+        "Bash(gh pr view:*)"
+        "Bash(gh api:*)"
+        "Bash(gh pr diff:*)"
         "Bash(grep:*)"
         "Bash(mill:*)"
+        "Bash(python3:*)"
         "Bash(sbt:*)"
         "Bash(uv:*)"
         "Bash(xargs cat:*)"
       ];
-      deny = [];
-      ask = [];
+      deny = [ ];
+      ask = [ ];
     };
 
     model = "sonnet";
@@ -37,12 +46,15 @@ let
   };
 
   # Generate formatted JSON using jq
-  formattedSettings = pkgs.runCommand "claude-settings.json" {
-    buildInputs = [ pkgs.jq ];
-    json = builtins.toJSON settings;
-  } ''
-    echo "$json" | jq '.' > $out
-  '';
+  formattedSettings =
+    pkgs.runCommand "claude-settings.json"
+      {
+        buildInputs = [ pkgs.jq ];
+        json = builtins.toJSON settings;
+      }
+      ''
+        echo "$json" | jq '.' > $out
+      '';
 in
 {
   # Manage Claude Code settings file

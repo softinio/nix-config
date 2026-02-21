@@ -21,7 +21,7 @@ in
       agent = {
         default_model = {
           provider = "copilot_chat";
-          model = "claude-sonnet-4-5-20250929";
+          model = "claude-sonnet-4-6";
         };
       };
       autosave = "on_focus_change";
@@ -33,7 +33,7 @@ in
         anthropic = {
           available_models = [
             {
-              name = "claude-sonnet-4-5-20250929";
+              name = "claude-sonnet-4-6";
               max_tokens = 200000;
               cache_configuration = {
                 max_cache_anchors = 10;
