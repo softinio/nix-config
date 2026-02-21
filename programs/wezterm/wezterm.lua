@@ -41,14 +41,7 @@ local config = {
   colors = {
     split = 'orange',
   },
-  ssh_domains = {
-    {
-      name = 'hcloud1',
-      remote_address = 'hcloud1.softinio.net',
-      username = 'salar',
-      remote_wezterm_path = '/run/current-system/sw/bin/wezterm',
-    },
-  },
+  -- WEZTERM_SSH_DOMAINS
   unix_domains = {
     {
       name = 'unix',
@@ -92,14 +85,8 @@ local config = {
       action = wezterm.action_callback(function(window, pane)
         -- Here you can dynamically construct a longer list if needed
 
-        local home = wezterm.home_dir
-        local workspaces = {
-          { id = home, label = 'Home' },
-          { id = home .. '/Projects', label = 'My Projects' },
-          { id = home .. '/OpenSource', label = 'Open Source Projects' },
-          { id = home .. '/.config/nixpkgs', label = 'Nix Config' },
-          { id = home .. '/Projects/scalanews', label = 'Scala News' },
-        }
+        local home = wezterm.home_dir -- do not remove as its used by block inserted by nix
+        -- WEZTERM_WORKSPACES
 
         window:perform_action(
           act.InputSelector {
