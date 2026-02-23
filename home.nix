@@ -49,7 +49,6 @@
       cmake
       coursier
       curlFull
-      deno
       devenv
       difftastic
       discord
