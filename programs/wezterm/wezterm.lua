@@ -30,7 +30,7 @@ local config = {
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
   dpi = 144,
   font = wezterm.font_with_fallback { family = 'JetBrains Mono', weight = 'Medium' },
-  font_size = 16.0,
+  font_size = 12.0,
   freetype_load_flags = 'NO_HINTING',
   front_end = 'OpenGL',
   leader = { key = 'b', mods = 'SUPER', timeout_milliseconds = 1000 },
