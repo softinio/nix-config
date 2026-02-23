@@ -28,6 +28,7 @@ let
         "Bash(xargs cat:*)"
         "WebFetch(domain:github.com)"
         "WebFetch(domain:raw.githubusercontent.com)"
+        "WebFetch(domain:twitter.github.io)"
       ];
       deny = [ ];
       ask = [ ];
