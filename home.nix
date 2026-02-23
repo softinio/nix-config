@@ -51,7 +51,6 @@
       cmake
       coursier
       curlFull
-      deno
       devenv
       difftastic
       discord
@@ -73,7 +72,6 @@
       lazyjj
       luajit
       lua-language-server
-      marksman
       marp-cli
       maven
       mermaid-cli

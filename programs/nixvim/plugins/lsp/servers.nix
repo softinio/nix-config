@@ -48,9 +48,6 @@
         config.settings.diagnostics.globals = [ "vim" ];
       };
 
-      # Documentation
-      marksman.enable = true;
-
       # Scala
       metals = {
         enable = true;
