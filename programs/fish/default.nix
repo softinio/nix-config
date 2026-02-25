@@ -14,10 +14,6 @@
 
     functions = {
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
-      ot = ''
-        set otresult (ollama run qwen2.5-coder "Provide only the MacOS terminal command (without markdown) to: $argv")
-        commandline $otresult
-      '';
     };
 
     plugins = [
@@ -86,7 +82,6 @@
       grep = "grep --color=auto";
       lg = "lazygit";
       nixc = "cd ~/.config/nixpkgs";
-      nixre = "sudo darwin-rebuild switch --flake ~/.config/nixpkgs#salarm3max";
       nixrea = "sudo darwin-rebuild switch --flake ~/.config/nixpkgs#annex";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc = "nix-collect-garbage -d";
@@ -95,8 +90,6 @@
       nixupgrade = "nix upgrade-nix";
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
-      sshhcloud1 = "ssh salar@hcloud1.softinio.net";
-      sshhcloud1r = "ssh root@hcloud1.softinio.net";
     };
   };
 }
