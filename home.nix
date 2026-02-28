@@ -69,7 +69,6 @@
       lazyjj
       luajit
       lua-language-server
-      marksman
       marp-cli
       maven
       mermaid-cli
