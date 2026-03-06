@@ -2,6 +2,7 @@
 let
   myextensions = [
     "fish"
+    "http"
     "lua"
     "nix"
     "pyrefly"
