@@ -64,6 +64,7 @@
       gnupg
       go
       graphviz
+      httpyac
       ijhttp
       imagemagick
       jetbrains-mono

@@ -15,6 +15,7 @@ let
 
     permissions = {
       allow = [
+        "mcp__claude_ai_Linear__get_issue"
         "Bash(cat:*)"
         "Bash(curl:*)"
         "Bash(find:*)"
@@ -27,6 +28,9 @@ let
         "Bash(sbt:*)"
         "Bash(uv:*)"
         "Bash(xargs cat:*)"
+        "WebFetch(domain:docs.dagster.io)"
+        "WebFetch(domain:github.com)"
+        "WebFetch(domain:raw.githubusercontent.com)"
         "WebFetch(domain:twitter.github.io)"
       ];
       deny = [ ];
