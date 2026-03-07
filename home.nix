@@ -40,6 +40,7 @@
     packages = with pkgs; [
       any-nix-shell
       aspell
+      atlas
       awscli2
       awsebcli
       bash-language-server
