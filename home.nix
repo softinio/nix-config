@@ -41,6 +41,7 @@
       any-nix-shell
       aspell
       ast-grep
+      atlas
       awscli2
       awsebcli
       basedpyright
