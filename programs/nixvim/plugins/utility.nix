@@ -2,6 +2,9 @@
 
 {
   programs.nixvim.plugins = {
+    # Rest Client
+    kulala.enable = true;
+
     # TODO comment highlighting
     todo-comments = {
       enable = true;

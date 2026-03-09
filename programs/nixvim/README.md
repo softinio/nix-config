@@ -84,6 +84,7 @@ nixvim/
 - **Todo-comments**: Highlight TODO/FIXME comments
 - **Trouble**: Diagnostics list
 - **Which-key**: Show available keybindings
+- **Kulala**: HTTP REST client for `.http`/`.rest` files
 
 #### Syntax & Language Support (`treesitter.nix`)
 - **Treesitter**: Advanced syntax highlighting and code understanding
@@ -291,6 +292,17 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 #### GitHub Copilot
 - Enabled with default keybindings
 - Check `:help copilot` for keybinding details
+
+### REST Client (Kulala)
+
+Active only in `.http` / `.rest` files.
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>Rs` | Normal | Send request |
+| `<leader>Ra` | Normal | Send all requests |
+| `<leader>Rr` | Normal | Replay last request |
+| `<leader>Rf` | Normal | Find/search requests |
 
 ### Other Utilities
 
