@@ -72,5 +72,20 @@
       command = "set filetype=scala";
     }
 
+    # Kulala REST client keymaps (only active in .http files)
+    {
+      event = "FileType";
+      pattern = "http";
+      callback.__raw = ''
+        function()
+          local opts = { buffer = true }
+          vim.keymap.set("n", "<leader>Rs", function() require("kulala").run() end, vim.tbl_extend("force", opts, { desc = "Kulala: Send request" }))
+          vim.keymap.set("n", "<leader>Ra", function() require("kulala").run_all() end, vim.tbl_extend("force", opts, { desc = "Kulala: Send all requests" }))
+          vim.keymap.set("n", "<leader>Rr", function() require("kulala").replay() end, vim.tbl_extend("force", opts, { desc = "Kulala: Replay last request" }))
+          vim.keymap.set("n", "<leader>Rf", function() require("kulala").search() end, vim.tbl_extend("force", opts, { desc = "Kulala: Find request" }))
+        end
+      '';
+    }
+
   ];
 }
