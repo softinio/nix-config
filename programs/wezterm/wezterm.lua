@@ -28,11 +28,11 @@ local config = {
   color_scheme = theme,
   default_gui_startup_args = { 'connect', 'unix' },
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
-  dpi = 144,
+  -- dpi = 144,
   font = wezterm.font_with_fallback { family = 'JetBrains Mono', weight = 'Medium' },
   font_size = 16.0,
   freetype_load_flags = 'NO_HINTING',
-  front_end = 'OpenGL',
+  front_end = 'WebGpu',
   leader = { key = 'b', mods = 'SUPER', timeout_milliseconds = 1000 },
   native_macos_fullscreen_mode = true,
   scrollback_lines = 50000,
@@ -45,7 +45,6 @@ local config = {
   unix_domains = {
     {
       name = 'unix',
-      proxy_command = { 'nc', '-U', '/Users/salar/.local/share/wezterm/sock' },
     },
   },
   keys = {
