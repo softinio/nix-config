@@ -5,31 +5,6 @@
     inlayHints.enable = true;
 
     servers = {
-      # Python
-      basedpyright = {
-        enable = false;
-        config.settings.basedpyright = {
-          analysis = {
-            autoImportCompletions = true;
-            autoSearchPaths = true;
-            inlayHints = {
-              callArgumentNames = true;
-            };
-            diagnosticMode = "openFilesOnly";
-            reportMissingImports = true;
-            reportMissingParameterType = true;
-            reportUnnecessaryComparison = true;
-            reportUnnecessaryContains = true;
-            reportUnusedClass = true;
-            reportUnusedFunction = true;
-            reportUnsedImports = true;
-            reportUnsusedVariables = true;
-            typeCheckingMode = "recommended";
-            useLibraryCodeForTypes = true;
-          };
-        };
-      };
-
       # Shell scripting
       bashls.enable = true;
 
@@ -119,8 +94,9 @@
       nil_ls.enable = true;
       nixd.enable = true;
 
-      # Python Pyrefly
+      # Python
       pyrefly.enable = true;
+      ruff.enable = true;
 
       # Rust
       rust_analyzer.enable = true;

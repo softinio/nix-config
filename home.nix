@@ -39,8 +39,6 @@
     packages = with pkgs; [
       any-nix-shell
       aspell
-      ast-grep
-      basedpyright
       bash-language-server
       bloop
       cachix
@@ -95,6 +93,7 @@
       python3Packages.jupyterlab
       rclone
       readline
+      ruff
       rustup
       sbt
       scala-cli
