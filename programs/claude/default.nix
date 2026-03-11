@@ -13,6 +13,8 @@ let
 
     permissions = {
       allow = [
+        "mcp__claude_ai_Atlassian__search"
+        "mcp__claude_ai_Atlassian__getConfluencePage"
         "mcp__claude_ai_Linear__get_issue"
         "Bash(cat:*)"
         "Bash(curl:*)"
@@ -31,6 +33,7 @@ let
         "WebFetch(domain:github.com)"
         "WebFetch(domain:raw.githubusercontent.com)"
         "WebFetch(domain:twitter.github.io)"
+        "WebFetch(domain:developer.zendesk.com)"
       ];
       deny = [ ];
       ask = [ ];
