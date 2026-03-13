@@ -1,0 +1,7 @@
+new_tab Projects-3
+layout splits
+cd $HOME/Projects_3
+launch --var window=main
+launch --location=vsplit --bias=20
+launch --location=hsplit
+focus_matching_window var:window=main
