@@ -1,0 +1,32 @@
+new_tab Home
+layout splits
+cd $HOME
+launch --var window=main
+launch --location=vsplit --bias=20
+launch --location=hsplit
+focus_matching_window var:window=main
+
+new_tab annexrisk
+layout splits
+cd $HOME/Projects/annexrisk
+launch --var window=main
+launch --location=vsplit --bias=20
+launch --location=hsplit
+focus_matching_window var:window=main
+
+new_tab annexrisk-2
+layout splits
+cd $HOME/Projects_2/annexrisk
+launch --var window=main
+launch --location=vsplit --bias=20
+launch --location=hsplit
+focus_matching_window var:window=main
+
+new_tab MyAI
+layout splits
+cd $HOME/Projects/MyAI
+launch --var window=main
+launch --location=vsplit --bias=20
+launch --location=hsplit
+focus_matching_window var:window=main
+

@@ -1,0 +1,7 @@
+new_tab Home
+layout splits
+cd $HOME
+launch --var window=main
+launch --location=vsplit --bias=20
+launch --location=hsplit
+focus_matching_window var:window=main

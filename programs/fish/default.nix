@@ -90,6 +90,17 @@
       nixupgrade = "nix upgrade-nix";
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
+      # kitty sessions
+      ks          = "kitty --session ~/.config/kitty/sessions/workspaces.session";
+      ks-home     = "kitty --session ~/.config/kitty/sessions/home.session";
+      ks-ar       = "kitty --session ~/.config/kitty/sessions/annexrisk.session";
+      ks-ar2      = "kitty --session ~/.config/kitty/sessions/annexrisk2.session";
+      ks-ai       = "kitty --session ~/.config/kitty/sessions/myai.session";
+      ks-proj     = "kitty --session ~/.config/kitty/sessions/projects.session";
+      ks-proj2    = "kitty --session ~/.config/kitty/sessions/projects2.session";
+      ks-proj3    = "kitty --session ~/.config/kitty/sessions/projects3.session";
+      ks-learn    = "kitty --session ~/.config/kitty/sessions/learn.session";
+      ks-nix      = "kitty --session ~/.config/kitty/sessions/nixconfig.session";
     };
   };
 }
