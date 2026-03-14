@@ -37,17 +37,16 @@ All commands below require pressing the prefix first, unless otherwise noted.
 
 | Key | Action |
 |-----|--------|
-| `Ctrl-Left` | Resize pane left (10 units) |
-| `Ctrl-Down` | Resize pane down (10 units) |
-| `Ctrl-Up` | Resize pane up (10 units) |
-| `Ctrl-Right` | Resize pane right (10 units) |
+| `Ctrl-d` | Resize pane left |
+| `Ctrl-h` | Resize pane down |
+| `Ctrl-t` | Resize pane up |
+| `Ctrl-n` | Resize pane right |
 
 ## Window Management
 
 | Key | Action |
 |-----|--------|
-| `Ctrl-d` | Previous window |
-| `Ctrl-n` | Next window |
+| `1`-`9` | Switch to window by number |
 
 ## Session Management (TMS Integration)
 
