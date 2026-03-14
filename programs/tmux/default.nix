@@ -1,6 +1,19 @@
-{ pkgs, ... }:
+{ pkgs, lib, user, ... }:
 
 let
+  tmsConfig =
+    let
+      workspaces = user.weztermWorkspaces or [ ];
+      nonEmpty = builtins.filter (w: w.id != "") workspaces;
+      depthOf = w:
+        let segments = builtins.filter (s: s != "") (lib.splitString "/" w.id);
+        in if builtins.length segments == 1 then 1 else 0;
+      paths = map (w: "\"~${w.id}\"") nonEmpty;
+      depths = map (w: toString (depthOf w)) nonEmpty;
+    in
+    "search_paths = [${lib.concatStringsSep ", " paths}]\n"
+    + "max_depths = [${lib.concatStringsSep ", " depths}]\n";
+
   tmuxConfig = ''
     # disable mouse
     set -g mouse off
@@ -31,11 +44,11 @@ let
     # paste
     bind p paste-buffer
 
-    # panes: window splitting
+    # panes: window splitting (use current pane directory)
     unbind %
-    bind "'" split-window -h
+    bind "'" split-window -h -c "#{pane_current_path}"
     unbind '"'
-    bind - split-window -v
+    bind - split-window -v -c "#{pane_current_path}"
 
     # Switch panes with Dvorak-friendly keys (dhtn)
     bind d select-pane -L
@@ -43,15 +56,22 @@ let
     bind t select-pane -U
     bind n select-pane -R
 
-    # Quick window selection (Dvorak-friendly)
-    bind -r C-d select-window -t :-
-    bind -r C-n select-window -t :+
+    # Switch windows by number (matching wezterm Leader 1-9)
+    bind 1 select-window -t :1
+    bind 2 select-window -t :2
+    bind 3 select-window -t :3
+    bind 4 select-window -t :4
+    bind 5 select-window -t :5
+    bind 6 select-window -t :6
+    bind 7 select-window -t :7
+    bind 8 select-window -t :8
+    bind 9 select-window -t :9
 
-    # resize panes (Ctrl + Dvorak navigation to avoid conflicts with neovim)
-    bind -r C-Left resize-pane -L 10
-    bind -r C-Down resize-pane -D 10
-    bind -r C-Up resize-pane -U 10
-    bind -r C-Right resize-pane -R 10
+    # resize panes (Leader + Ctrl + Dvorak navigation)
+    bind -r C-d resize-pane -L 10
+    bind -r C-h resize-pane -D 10
+    bind -r C-t resize-pane -U 10
+    bind -r C-n resize-pane -R 10
 
     # Quickly switch panes (using Dvorak 'h' for down)
     unbind ^H
@@ -125,4 +145,6 @@ in
       }
     ];
   };
+
+  home.file."Library/Application Support/tms/config.toml".text = tmsConfig;
 }

@@ -69,6 +69,22 @@
 
                 programs.fish.enable = true;
 
+                system.activationScripts.linkGhosttyIntegrationForCmux.text =
+                  let
+                    firstUser = builtins.head users;
+                  in
+                  ''
+                    GHOSTTY_BIN=$(readlink -f /etc/profiles/per-user/${firstUser.username}/bin/ghostty 2>/dev/null || true)
+                    if [ -n "$GHOSTTY_BIN" ]; then
+                      GHOSTTY_STORE_DIR=$(dirname $(dirname "$GHOSTTY_BIN"))
+                      GHOSTTY_INTEGRATION="$GHOSTTY_STORE_DIR/Applications/Ghostty.app/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+                      if [ -f "$GHOSTTY_INTEGRATION" ]; then
+                        mkdir -p "/Applications/cmux.app/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d"
+                        ln -sfn "$GHOSTTY_INTEGRATION" "/Applications/cmux.app/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+                      fi
+                    fi
+                  '';
+
                 system.configurationRevision = self.rev or self.dirtyRev or null;
                 system.stateVersion = 4;
 
