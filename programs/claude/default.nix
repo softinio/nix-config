@@ -27,6 +27,8 @@ let
         "Bash(sbt:*)"
         "Bash(uv:*)"
         "Bash(xargs cat:*)"
+        "WebFetch(domain:github.com)"
+        "WebFetch(domain:raw.githubusercontent.com)"
       ];
       deny = [ ];
       ask = [ ];
