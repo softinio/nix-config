@@ -12,6 +12,7 @@
       breakindent = true;
       cursorline = true;
       expandtab = true;
+      guifont = "SF Mono:h14";
       hlsearch = true;
       incsearch = true;
       mouse = "a";
