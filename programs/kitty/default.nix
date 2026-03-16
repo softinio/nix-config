@@ -18,6 +18,7 @@ in
 {
   programs.kitty = {
     enable = true;
+    enableGitIntegration = true;
     keybindings = {
       "kitty_mod+enter" = "new_window_with_cwd";
       "f1" = "create_marker";
@@ -28,7 +29,7 @@ in
     themeFile = "Tango_Dark";
     font = {
       name = "SF Mono";
-      size = 13;
+      size = 12;
     };
     settings = {
       active_tab_background = "#FF0";
@@ -45,8 +46,13 @@ in
 
   home.file = {
     ".config/kitty/open-actions.conf".text = actionsConfig;
-  } // builtins.listToAttrs (map (name: {
-    name = ".config/kitty/sessions/${name}.session";
-    value = { source = ./sessions/${name}.session; };
-  }) sessionFiles);
+  }
+  // builtins.listToAttrs (
+    map (name: {
+      name = ".config/kitty/sessions/${name}.session";
+      value = {
+        source = ./sessions/${name}.session;
+      };
+    }) sessionFiles
+  );
 }
