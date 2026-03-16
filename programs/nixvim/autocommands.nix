@@ -31,6 +31,13 @@
       command = "setlocal spell spelllang=en";
     }
 
+    # Enable word wrap for markdown
+    {
+      event = "FileType";
+      pattern = "markdown";
+      command = "setlocal wrap linebreak";
+    }
+
     # Set indentation for specific filetypes
     {
       event = "FileType";
