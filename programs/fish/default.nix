@@ -81,7 +81,7 @@
       grep = "grep --color=auto";
       lg = "lazygit";
       nixc = "cd ~/.config/nixpkgs";
-      nixrea = "sudo darwin-rebuild switch --flake ~/.config/nixpkgs#annex";
+      nixrea = "sudo -v && sudo darwin-rebuild switch --flake ~/.config/nixpkgs#annex";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc = "nix-collect-garbage -d";
       nixq = "nix-env -qa";
