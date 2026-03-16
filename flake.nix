@@ -75,10 +75,12 @@
                     firstUser = builtins.head users;
                   in
                   ''
-                    GHOSTTY_BIN=$(readlink -f /etc/profiles/per-user/${firstUser.username}/bin/ghostty 2>/dev/null || true)
-                    if [ -n "$GHOSTTY_BIN" ]; then
-                      GHOSTTY_STORE_DIR=$(dirname $(dirname "$GHOSTTY_BIN"))
-                      GHOSTTY_INTEGRATION="$GHOSTTY_STORE_DIR/Applications/Ghostty.app/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+                    GHOSTTY_APP=$(readlink -f /etc/profiles/per-user/${firstUser.username}/Applications/Ghostty.app 2>/dev/null || true)
+                    if [ -z "$GHOSTTY_APP" ]; then
+                      GHOSTTY_APP=$(readlink -f /run/current-system/sw/Applications/Ghostty.app 2>/dev/null || true)
+                    fi
+                    if [ -n "$GHOSTTY_APP" ]; then
+                      GHOSTTY_INTEGRATION="$GHOSTTY_APP/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
                       if [ -f "$GHOSTTY_INTEGRATION" ]; then
                         mkdir -p "/Applications/cmux.app/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d"
                         ln -sfn "$GHOSTTY_INTEGRATION" "/Applications/cmux.app/Contents/Resources/ghostty/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
