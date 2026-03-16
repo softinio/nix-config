@@ -50,6 +50,7 @@
                 networking.computerName = hostname;
 
                 environment.systemPackages = with pkgs; [ home-manager ];
+                environment.enableAllTerminfo = true;
 
                 fonts.packages = with pkgs; [ fira-code ];
 
