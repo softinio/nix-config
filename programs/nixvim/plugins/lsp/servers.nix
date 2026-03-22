@@ -95,6 +95,25 @@
       nixd.enable = true;
 
       # Python
+      # pylsp handles hover, completion, etc. Its formatting/linting plugins
+      # (black, isort, flake8) are disabled at runtime when ruff is detected
+      # in the project (see autocommands.nix LspAttach handler).
+      pylsp = {
+        enable = true;
+        config.settings.pylsp.plugins = {
+          # Formatting / sorting / linting — enabled by default, suppressed
+          # at runtime when the project has ruff configured
+          black.enabled = true;
+          isort.enabled = true;
+          flake8.enabled = true;
+
+          # Disable the default pylsp plugins that overlap with the above
+          pyflakes.enabled = false;
+          pycodestyle.enabled = false;
+          autopep8.enabled = false;
+          mccabe.enabled = false;
+        };
+      };
       pyrefly.enable = true;
       ruff.enable = true;
 

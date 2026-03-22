@@ -72,6 +72,59 @@
       command = "set filetype=scala";
     }
 
+    # Python: disable pylsp formatting/linting plugins when the project uses ruff
+    {
+      event = "LspAttach";
+      callback.__raw = ''
+        function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if not client then return end
+
+          local function has_ruff()
+            if #vim.fs.find({ "ruff.toml", ".ruff.toml" }, {
+              upward = true,
+              path = vim.fn.expand("%:p:h"),
+            }) > 0 then
+              return true
+            end
+            local pyproject = vim.fs.find("pyproject.toml", {
+              upward = true,
+              path = vim.fn.expand("%:p:h"),
+            })
+            if #pyproject > 0 then
+              for _, line in ipairs(vim.fn.readfile(pyproject[1])) do
+                if line:match("%[tool%.ruff%]") then return true end
+              end
+            end
+            return false
+          end
+
+          -- Stop ruff LSP when the project does not use ruff
+          if client.name == "ruff" and not has_ruff() then
+            client.stop()
+            return
+          end
+
+          -- Disable pylsp formatting/linting plugins when ruff is present
+          if client.name == "pylsp" and has_ruff() then
+            client.config.settings = vim.tbl_deep_extend("force",
+              client.config.settings or {}, {
+                pylsp = {
+                  plugins = {
+                    black  = { enabled = false },
+                    isort  = { enabled = false },
+                    flake8 = { enabled = false },
+                  },
+                },
+              }
+            )
+            client.notify("workspace/didChangeConfiguration",
+              { settings = client.config.settings })
+          end
+        end
+      '';
+    }
+
     # Kulala REST client keymaps (only active in .http files)
     {
       event = "FileType";
