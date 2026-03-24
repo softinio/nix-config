@@ -53,6 +53,8 @@
 
       set -xg USE_BUILTIN_RIPGREP 0
 
+      set -xg SBT_NATIVE_CLIENT true
+
       set -xg OPENAI_API_KEY (cat ~/.openai)
       set -xg ANTHROPIC_API_KEY (cat ~/.anthropic)
     '';
