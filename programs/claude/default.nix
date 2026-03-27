@@ -16,6 +16,8 @@ let
         "mcp__claude_ai_Atlassian__search"
         "mcp__claude_ai_Atlassian__getConfluencePage"
         "mcp__claude_ai_Linear__get_issue"
+        "Bash(bloop compile:*)"
+        "Bash(bloop test:*)"
         "Bash(cat:*)"
         "Bash(curl:*)"
         "Bash(find:*)"
@@ -34,6 +36,7 @@ let
         "WebFetch(domain:raw.githubusercontent.com)"
         "WebFetch(domain:twitter.github.io)"
         "WebFetch(domain:developer.zendesk.com)"
+        "WebFetch(domain:www.useanvil.com)"
       ];
       deny = [ ];
       ask = [ ];
