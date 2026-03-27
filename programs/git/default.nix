@@ -39,6 +39,7 @@ let
     "coverage/"
     ".env.local"
     ".env.*.local"
+    ".claude/worktrees/"
   ];
   gitConfig = {
     alias = myAliases;
