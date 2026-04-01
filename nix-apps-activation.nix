@@ -53,6 +53,9 @@
             done
           fi
           done
+
+      # Remove Home Manager Apps symlinks to avoid duplicates in Spotlight/Launchpad
+      rm -rf "$HOME/Applications/Home Manager Apps"
     '';
   };
 }
