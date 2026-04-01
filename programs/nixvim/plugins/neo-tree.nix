@@ -6,7 +6,16 @@
       {
         mode = "n";
         key = "<leader>m";
-        action = ":Neotree action=focus reveal toggle<CR>";
+        action.__raw = ''
+          function()
+            local has_file = vim.fn.expand('%:p') ~= ""
+            require("neo-tree.command").execute({
+              action = "focus",
+              reveal = has_file,
+              toggle = true,
+            })
+          end
+        '';
         options.silent = true;
       }
     ];
