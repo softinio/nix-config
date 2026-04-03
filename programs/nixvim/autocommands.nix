@@ -113,7 +113,7 @@
                 },
               }
             )
-            client.notify("workspace/didChangeConfiguration",
+            client:notify("workspace/didChangeConfiguration",
               { settings = client.config.settings })
           end
         end
