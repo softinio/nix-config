@@ -18,9 +18,6 @@
     typst-preview.enable = true;
 
     # Key binding help
-    which-key = {
-      enable = true;
-      settings.icons.mappings = false;
-    };
+    which-key.enable = true;
   };
 }

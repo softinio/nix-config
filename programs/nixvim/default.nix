@@ -18,5 +18,7 @@
 
     viAlias = true;
     vimAlias = true;
+
+    extraPython3Packages = ps: [ ps.pynvim ];
   };
 }
