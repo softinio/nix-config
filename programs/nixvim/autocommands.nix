@@ -62,9 +62,22 @@
         "*.sbt"
         "*.java"
         "*.sc"
-        "*.mills"
+        "*.mill"
       ];
       command = "lua vim.lsp.codelens.refresh()";
+    }
+
+    # Scala/sbt file type detection
+    {
+      event = [
+        "BufRead"
+        "BufNewFile"
+      ];
+      pattern = [
+        "*.sbt"
+        "*.sc"
+      ];
+      command = "set filetype=scala";
     }
 
     # Python: disable pylsp formatting/linting plugins when the project uses ruff
