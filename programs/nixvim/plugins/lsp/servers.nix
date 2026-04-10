@@ -30,6 +30,20 @@
       metals = {
         enable = true;
         config = {
+          # Workaround for Neovim 0.12 vim/glob.lua rejecting file:/// URI globs
+          # sent by metals for workspace file watching (upstream Neovim bug)
+          capabilities.__raw = ''
+            vim.tbl_deep_extend("force",
+              vim.lsp.protocol.make_client_capabilities(),
+              {
+                workspace = {
+                  didChangeWatchedFiles = {
+                    dynamicRegistration = false,
+                  },
+                },
+              }
+            )
+          '';
           filetypes = [
             "scala"
             "sbt"
