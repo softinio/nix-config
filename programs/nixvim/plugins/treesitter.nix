@@ -57,6 +57,5 @@
       folding.enable = false;
     };
 
-    hmts.enable = true;
   };
 }
