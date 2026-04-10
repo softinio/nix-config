@@ -61,6 +61,7 @@
       gnupg
       go
       graphviz
+      grpcurl
       httpyac
       imagemagick
       jetbrains-mono
