@@ -12,7 +12,10 @@
       html.enable = true;
       jsonls.enable = true;
       ts_ls.enable = true;
-      yamlls.enable = true;
+      yamlls = {
+        enable = true;
+        config.filetypes = [ "yaml" "yaml.ansible" ];
+      };
 
       # Query languages
       jqls.enable = true;
@@ -30,8 +33,6 @@
           filetypes = [
             "scala"
             "sbt"
-            "sc"
-            "mill"
           ];
           settings.metals = {
             # Build tool settings

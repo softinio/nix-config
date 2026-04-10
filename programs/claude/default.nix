@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -23,6 +21,7 @@ let
         "Bash(gh pr diff:*)"
         "Bash(grep:*)"
         "Bash(mill:*)"
+        "Bash(poetry:*)"
         "Bash(python3:*)"
         "Bash(sbt:*)"
         "Bash(uv:*)"
