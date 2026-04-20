@@ -64,7 +64,7 @@
         "*.sc"
         "*.mill"
       ];
-      command = "lua vim.lsp.codelens.refresh()";
+      command = "lua vim.lsp.codelens.enable(true)";
     }
 
     # Scala/sbt file type detection
