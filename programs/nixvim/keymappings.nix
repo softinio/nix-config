@@ -31,7 +31,7 @@
               "<M-k>" = ":move-2<CR>";
               "<M-j>" = ":move+<CR>";
               # Metals (Scala) keybindings
-              "<leader>mc" = "<cmd>lua require('telescope').extensions.metals.commands()<CR>";
+              "<leader>mc" = "<cmd>lua require('metals').commands()<CR>";
               "<leader>mw" = "<cmd>lua require('metals').hover_worksheet()<CR>";
               "<leader>mt" = "<cmd>lua require('metals.tvp').toggle_tree_view()<CR>";
               "<leader>mr" = "<cmd>lua require('metals.tvp').reveal_in_tree()<CR>";

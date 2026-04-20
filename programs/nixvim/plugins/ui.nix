@@ -26,9 +26,6 @@
         settings.user_default_options.names = false;
       };
 
-      # Indentation guides
-      indent-blankline.enable = true;
-
       # Markdown preview with live rendering
       markview.enable = true;
 

@@ -55,21 +55,9 @@
         "*.sbt"
         "*.java"
         "*.sc"
+        "*.mills"
       ];
       command = "lua vim.lsp.codelens.refresh()";
-    }
-
-    # Scala/sbt file type detection
-    {
-      event = [
-        "BufRead"
-        "BufNewFile"
-      ];
-      pattern = [
-        "*.sbt"
-        "*.sc"
-      ];
-      command = "set filetype=scala";
     }
 
     # Python: disable pylsp formatting/linting plugins when the project uses ruff
@@ -121,6 +109,20 @@
             client.notify("workspace/didChangeConfiguration",
               { settings = client.config.settings })
           end
+        end
+      '';
+    }
+
+    # Disable completion in snacks picker input
+    {
+      event = "FileType";
+      pattern = "snacks_picker_input";
+      callback.__raw = ''
+        function()
+          vim.b.completion = false
+          vim.bo.autocomplete = false
+          vim.bo.completefunc = ""
+          vim.bo.omnifunc = ""
         end
       '';
     }

@@ -6,10 +6,7 @@
     kulala.enable = true;
 
     # TODO comment highlighting
-    todo-comments = {
-      enable = true;
-      keymaps.todoTelescope.key = "<leader>td";
-    };
+    todo-comments.enable = true;
 
     # Diagnostics list
     trouble.enable = true;
@@ -18,9 +15,6 @@
     typst-preview.enable = true;
 
     # Key binding help
-    which-key = {
-      enable = true;
-      settings.icons.mappings = false;
-    };
+    which-key.enable = true;
   };
 }

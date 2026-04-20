@@ -34,6 +34,7 @@
         nix
         proto
         python
+        regex
         rust
         scala
         sql
