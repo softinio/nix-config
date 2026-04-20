@@ -17,6 +17,7 @@
 
       settings = {
         close_if_last_window = true;
+        hide_root_node = true;
         filesystem.filtered_items = {
           visible = true;
         };
@@ -24,6 +25,12 @@
           width = 30;
           auto_expand_width = true;
           position = "right";
+        };
+        default_component_configs = {
+          file_size.enabled = false;
+          last_modified.enabled = false;
+          created.enabled = false;
+          symlink_target.enabled = false;
         };
       };
     };
