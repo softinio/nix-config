@@ -10,7 +10,7 @@ nixvim/
 ├── options.nix           # Core Neovim options (line numbers, tabs, etc.)
 ├── keymappings.nix       # Global key mappings
 ├── autocommands.nix      # Auto commands for various events
-├── completion.nix        # Completion configuration (nvim-cmp)
+├── completion.nix        # Completion configuration (native LSP)
 └── plugins/              # Plugin configurations
     ├── default.nix       # Plugin imports
     ├── ui.nix            # UI enhancements (colorscheme, icons, etc.)
@@ -18,6 +18,7 @@ nixvim/
     ├── editing.nix       # Editing enhancements
     ├── utility.nix       # Utility plugins
     ├── ai.nix            # AI assistants (Copilot, Avante)
+    ├── snacks.nix        # Snacks: picker, explorer, lazygit, and more
     ├── lsp/              # Language Server Protocol
     │   ├── default.nix   # LSP imports
     │   ├── servers.nix   # Language server configurations
@@ -27,9 +28,7 @@ nixvim/
     ├── conform.nix       # Code formatting
     ├── floaterm.nix      # Floating terminal
     ├── lualine.nix       # Status line
-    ├── neo-tree.nix      # File explorer
     ├── scala.nix         # Scala/Metals debugging (DAP)
-    ├── telescope.nix     # Fuzzy finder
     └── treesitter.nix    # Syntax highlighting
 ```
 
@@ -53,32 +52,40 @@ nixvim/
 - UI behavior modifications
 
 ### Completion (`completion.nix`)
-- nvim-cmp configuration
-- Snippet support
-- LSP integration
-- Multiple completion sources
+- Native LSP completion (Neovim 0.12+)
+- `completeopt`: menu, menuone, noselect, popup
 
 ### Plugins
 
 #### UI Enhancements (`ui.nix`)
-- **Colorscheme**: Tokyo Night theme with custom background
-- **Icons**: File type icons via web-devicons and mini.icons
-- **Visual aids**: Indent guides, color highlighting, markdown preview
+- **Colorscheme**: Tokyo Night theme with custom black background and green window separators
+- **Icons**: File type icons via web-devicons
+- **Color highlighting**: Inline color preview in code
+- **Markdown preview**: Live rendering with markview
 
 #### VCS Integration (`vcs.nix`)
 - **vim-signify**: Shows VCS changes in the gutter (supports git, darcs, and more)
 
 #### Editing (`editing.nix`)
 - **Auto-pairs**: Automatic bracket/quote closing
-- **Flash**: Enhanced jump/search
-- **Trim**: Whitespace management
-- **Image support**: Clipboard image pasting and inline viewing
-- **Snacks**: Collection of useful features
-  - **Bigfile**: Optimizes performance for large files
-  - **Image**: View images inline in Neovim
-  - **Notifier**: Fancy notification system
-  - **Quickfile**: Faster file opening
-  - **Statuscolumn**: Enhanced gutter with git signs and diagnostics
+- **Flash**: Enhanced jump/search navigation
+- **Image support**: Clipboard image pasting and inline viewing (img-clip)
+- **Zig**: Zig language support
+
+#### Snacks (`snacks.nix`)
+All-in-one plugin replacing telescope and neo-tree, plus extras:
+- **Explorer**: File tree sidebar (replaces neo-tree), opens on the right
+- **Picker**: Fuzzy finder for files, grep, buffers, diagnostics, help, git files, recent files
+- **Lazygit**: LazyGit floating window integration
+- **Gitbrowse**: Open current file/selection in GitHub/GitLab
+- **Indent**: Indent guides with scope highlighting (replaces indent-blankline)
+- **Scroll**: Smooth scrolling animations
+- **Words**: Auto-highlight LSP symbol references under cursor
+- **Bigfile**: Performance optimisation for large files
+- **Image**: View images inline in Neovim
+- **Notifier**: Fancy notification system
+- **Quickfile**: Faster file opening
+- **Statuscolumn**: Enhanced gutter with git signs and diagnostics
 
 #### Utilities (`utility.nix`)
 - **Todo-comments**: Highlight TODO/FIXME comments
@@ -89,7 +96,6 @@ nixvim/
 #### Syntax & Language Support (`treesitter.nix`)
 - **Treesitter**: Advanced syntax highlighting and code understanding
 - **Supported languages**: Scala, Python, Rust, Go, Swift, Zig, TypeScript, JavaScript, Nix, LaTeX, Typst, and 30+ more
-- **Features**: Better indentation, code folding, syntax-aware navigation
 
 #### Scala Development (`scala.nix`)
 - **Metals LSP**: Full Scala language server integration
@@ -99,7 +105,7 @@ nixvim/
 
 #### AI Assistants (`ai.nix`)
 - **Copilot**: GitHub Copilot integration
-- **Avante**: Advanced AI assistant
+- **Avante**: Advanced AI assistant (Claude Sonnet)
 
 #### LSP (`lsp/`)
 - **Language Servers**: Support for 15+ languages
@@ -153,27 +159,6 @@ After making changes, rebuild your nix configuration:
 nixre  # Alias for darwin-rebuild switch --flake ~/.config/nixpkgs#salarm3max
 ```
 
-## Performance Tuning
-
-Key performance settings:
-- `updatetime`: Controls LSP/diagnostic update speed (currently 100ms)
-- `performance.debounce`: Completion debounce time (60ms)
-- `performance.throttle`: Completion throttle time (30ms)
-
-Adjust these in `options.nix` and `completion.nix` respectively.
-
-## Troubleshooting
-
-### LSP Not Working
-1. Check if language server is installed: `:LspInfo`
-2. Verify keymaps are loaded: `:map gd`
-3. Check for errors: `:messages`
-
-### Slow Performance
-1. Increase `updatetime` in `options.nix`
-2. Adjust completion performance settings in `completion.nix`
-3. Disable unused language servers in `lsp/servers.nix`
-
 ## Keyboard Shortcuts Cheatsheet
 
 ### Leader Key
@@ -215,25 +200,55 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 | `J` | Visual | Move selected lines down |
 | `K` | Visual | Move selected lines up |
 
-### File Explorer (Neo-tree)
+### File Explorer (Snacks Explorer)
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<leader>m` | Normal | Toggle file explorer |
+| `<leader>m` | Normal | Toggle file explorer (right side) |
 
-### Fuzzy Finder (Telescope)
+### Picker (Snacks Picker)
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<leader>ff` | Normal | Find files |
+| `<leader>ff` | Normal | Find files (full path search) |
 | `<leader>fg` | Normal | Live grep (search text) |
-| `<leader>b` | Normal | List buffers |
+| `<leader>fw` | Normal | Grep word under cursor |
+| `<leader>fb` | Normal | List open buffers |
 | `<leader>fh` | Normal | Help tags |
 | `<leader>fd` | Normal | Diagnostics |
+| `<leader>fs` | Normal | LSP symbols (current file) |
+| `<leader>fS` | Normal | LSP symbols (workspace) |
+| `<leader>fk` | Normal | Browse keymaps |
+| `<leader>fc` | Normal | Browse commands |
+| `<leader>fm` | Normal | Browse marks |
+| `<leader>fj` | Normal | Browse jumplist |
 | `Ctrl-p` | Normal | Git files |
 | `<leader>?` | Normal | Recently opened files |
 | `Ctrl-t` | Normal | Search for TODOs |
-| `<leader>td` | Normal | TODO comments (Telescope) |
+
+### Git
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>gl` | Normal | Git log |
+| `<leader>gb` | Normal | Git branches |
+| `<leader>gs` | Normal | Git status |
+| `<leader>lg` | Normal | Open LazyGit |
+| `<leader>lf` | Normal | LazyGit file log |
+| `<leader>gB` | Normal | Open file in browser (GitHub/GitLab) |
+
+### LSP References (Words)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `]]` | Normal | Jump to next LSP reference |
+| `[[` | Normal | Jump to previous LSP reference |
+
+### Notifications
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>nh` | Normal | Show notification history |
 
 ### LSP (Language Server)
 
@@ -252,8 +267,8 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<leader>mc` | Normal | Telescope Metals Commands |
-| `<leader>mw` | Normal | Hover Metals Worksheet |
+| `<leader>mc` | Normal | Metals commands |
+| `<leader>mw` | Normal | Hover Metals worksheet |
 | `<leader>mt` | Normal | Toggle tree view |
 | `<leader>mr` | Normal | Reveal in tree |
 | `<leader>mi` | Normal | Organize imports |
@@ -286,7 +301,7 @@ Adjust these in `options.nix` and `completion.nix` respectively.
 ### AI Assistants
 
 #### Avante
-- Enabled with Claude Sonnet 4.5 model
+- Enabled with Claude Sonnet model
 - Default Avante keybindings apply (check `:help avante` for full list)
 
 #### GitHub Copilot
@@ -316,3 +331,4 @@ Active only in `.http` / `.rest` files.
 - [Nixvim Documentation](https://nix-community.github.io/nixvim/)
 - [Neovim Documentation](https://neovim.io/doc/)
 - [LSP Specification](https://microsoft.github.io/language-server-protocol/)
+- [Snacks.nvim](https://github.com/folke/snacks.nvim)

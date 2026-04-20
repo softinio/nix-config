@@ -23,29 +23,6 @@
       };
     };
 
-    # Collection of small useful plugins
-    snacks = {
-      enable = true;
-      settings = {
-        bigfile = {
-          enabled = true;
-        };
-        image = {
-          enabled = true;
-        };
-        notifier = {
-          enabled = true;
-          timeout = 5000;
-        };
-        quickfile = {
-          enabled = true;
-        };
-        statuscolumn = {
-          enabled = true;
-        };
-      };
-    };
-
     # Zig language
     zig.enable = true;
   };

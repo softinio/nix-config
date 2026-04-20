@@ -20,8 +20,7 @@
     ./conform.nix
     ./floaterm.nix
     ./lualine.nix
-    ./neo-tree.nix
-    ./telescope.nix
+    ./snacks.nix
     ./treesitter.nix
   ];
 }
