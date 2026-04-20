@@ -1,6 +1,12 @@
 { ... }:
 
 {
+  programs.nixvim.filetype.extension = {
+    sbt = "scala";
+    sc = "scala";
+    mill = "scala";
+  };
+
   programs.nixvim = {
 
     clipboard = {
