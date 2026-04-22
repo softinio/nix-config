@@ -2,7 +2,6 @@
   inputs,
   lib,
   pkgs,
-  user,
   ...
 }:
 
@@ -21,10 +20,8 @@
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
       "copilot-language-server"
-      "discord"
       "github-copilot-cli"
       "ijhttp"
-      "slack"
       "vscode"
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
@@ -51,12 +48,10 @@
       curlFull
       devenv
       difftastic
-      discord
       dua
       fd
       ffmpeg
       font-awesome
-      gg-jj
       ghostscript
       github-copilot-cli
       gnupg
@@ -67,17 +62,12 @@
       ijhttp
       imagemagick
       jetbrains-mono
-      jjui
       jq-lsp
-      lazyjj
       luajit
       lua-language-server
-      marp-cli
-      maven
       mermaid-cli
       metals
       multimarkdown
-      mypy
       nerd-fonts.fira-code
       nil
       niv
@@ -89,31 +79,22 @@
       openssl
       pandoc
       patchelf
-      pijul
       pngpaste
       prettier
       prettyping
       pyrefly
       python3
-      python3Packages.huggingface-hub
-      python3Packages.jupyterlab
-      rclone
       readline
       rustup
       shellcheck
-      slack
-      slides
       slumber
       sqlite
       stylua
       tealdeer
-      tectonic-unwrapped
-      tig
       tmux-sessionizer
       tokei
       tree
       tree-sitter
-      typst
       typescript
       typescript-language-server
       wget
@@ -132,18 +113,6 @@
 
   programs.btop = {
     enable = true;
-  };
-
-  programs.darcs = {
-    enable = true;
-    author = [ "${user.fullName} <${user.email}>" ];
-    boring = [
-      "^.idea$"
-      "^.direnv$"
-      "^.envrc$"
-      "^.vscode$"
-      "^.gitignore$"
-    ];
   };
 
   programs.direnv = {
@@ -259,29 +228,6 @@
         success_symbol = " [λ](bold green)";
         error_symbol = " [λ](bold red)";
       };
-
-      # Custom darcs repository status
-      custom.darcs = {
-        description = "Display darcs repository status";
-        command = "darcs whatsnew --summary 2>/dev/null | wc -l | tr -d ' '";
-        when = "test -d _darcs";
-        symbol = "⚖️  ";
-        style = "bold purple";
-        format = "[$symbol($output )]($style)";
-      };
     };
   };
-
-  # darcs defaults
-  home.file.".darcs/defaults".text = ''
-    diff diff-command colordiff -rN -u %1 %2
-  '';
-
-  # pijul config
-  xdg.configFile."pijul/config.toml".text = lib.mkAfter ''
-    [author]
-    name = "${user.username}"
-    full_name = "${user.fullName}"
-    email = "${user.email}"
-  '';
 }
