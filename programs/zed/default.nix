@@ -1,43 +1,83 @@
 { ... }:
-let
-  myextensions = [
-    "fish"
-    "lua"
-    "nix"
-    "pyrefly"
-    "python"
-    "ruff"
-    "scala"
-    "sql"
-    "swift"
-    "toml"
-    "zig"
-  ];
-in
 {
   programs.zed-editor = {
     enable = true;
-    extensions = myextensions;
     userSettings = {
-      agent = {
-        default_model = {
-          provider = "copilot_chat";
-          model = "claude-sonnet-4-6";
+      agent_servers = {
+        "github-copilot-cli" = {
+          type = "registry";
+        };
+        "claude-acp" = {
+          type = "registry";
         };
       };
-      autosave = "on_focus_change";
+      edit_predictions = {
+        provider = "copilot";
+      };
+      agent = {
+        default_model = {
+          model = "claude-sonnet-4-6";
+          provider = "copilot_chat";
+        };
+      };
+      auto_install_extensions = {
+        fish = true;
+        lua = true;
+        nix = true;
+        pyrefly = true;
+        ruff = true;
+        scala = true;
+        sql = true;
+        swift = true;
+        toml = true;
+        zig = true;
+        http = true;
+        python = true;
+        markdown = true;
+        opentofu = true;
+        typescript = true;
+      };
       auto_update = false;
-      features = {
-        edit_prediction_provider = "copilot";
+      autosave = "on_focus_change";
+      language_models = {
+        anthropic = {
+          available_models = [
+            {
+              cache_configuration = {
+                max_cache_anchors = 10;
+                min_total_token = 10000;
+                should_speculate = false;
+              };
+              max_tokens = 200000;
+              name = "claude-sonnet-4-6";
+            }
+          ];
+        };
+        openai = {
+          available_models = [
+            {
+              display_name = "gpt-5.2-codex";
+              max_completion_tokens = 20000;
+              max_tokens = 272000;
+              name = "gpt-5.2-codex";
+              reasoning_effort = "high";
+            }
+          ];
+        };
       };
       load_direnv = "shell_hook";
-      telemetry.metrics = false;
+      telemetry = {
+        diagnostics = false;
+        metrics = false;
+      };
       terminal = {
         copy_on_select = true;
         dock = "bottom";
       };
       theme = "Ayu Dark";
       vim_mode = true;
+      auto_signature_help = true;
+      show_signature_help_after_edits = true;
     };
   };
 }
