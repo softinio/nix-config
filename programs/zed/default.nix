@@ -74,7 +74,7 @@
         copy_on_select = true;
         dock = "bottom";
       };
-      theme = "Ayu Dark";
+      theme = "Gruvbox Light";
       vim_mode = true;
       auto_signature_help = true;
       show_signature_help_after_edits = true;
