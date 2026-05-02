@@ -1,34 +1,58 @@
 { ... }:
-let
-  myextensions = [
-    "fish"
-    "lua"
-    "nix"
-    "pyrefly"
-    "ruff"
-    "scala"
-    "sql"
-    "swift"
-    "toml"
-    "zig"
-  ];
-in
 {
   programs.zed-editor = {
     enable = true;
-    extensions = myextensions;
     userSettings = {
+      project_panel = {
+        dock = "left";
+      };
+      outline_panel = {
+        dock = "left";
+      };
+      collaboration_panel = {
+        dock = "left";
+      };
+      git_panel = {
+        dock = "left";
+      };
       agent = {
+        dock = "right";
         default_model = {
-          provider = "copilot_chat";
           model = "claude-sonnet-4-6";
+          provider = "copilot_chat";
         };
+      };
+      agent_servers = {
+        "github-copilot-cli" = {
+          type = "registry";
+        };
+        "claude-acp" = {
+          type = "registry";
+        };
+      };
+      auto_install_extensions = {
+        fish = true;
+        http = true;
+        lua = true;
+        markdown = true;
+        nix = true;
+        opentofu = true;
+        pyrefly = true;
+        python = true;
+        ruff = true;
+        scala = true;
+        sql = true;
+        swift = true;
+        toml = true;
+        typescript = true;
+        zig = true;
+      };
+      auto_signature_help = true;
+      edit_predictions = {
+        provider = "copilot";
       };
       autosave = "on_focus_change";
       auto_update = false;
-      features = {
-        edit_prediction_provider = "copilot";
-      };
       language_models = {
         anthropic = {
           available_models = [
@@ -56,12 +80,16 @@ in
         };
       };
       load_direnv = "shell_hook";
-      telemetry.metrics = false;
+      show_signature_help_after_edits = true;
+      telemetry = {
+        diagnostics = false;
+        metrics = false;
+      };
       terminal = {
         copy_on_select = true;
         dock = "bottom";
       };
-      theme = "Ayu Dark";
+      theme = "Gruvbox Light";
       vim_mode = true;
     };
   };
