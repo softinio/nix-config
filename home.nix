@@ -67,6 +67,7 @@
       lua-language-server
       mermaid-cli
       metals
+      mitmproxy
       multimarkdown
       nerd-fonts.fira-code
       nil
