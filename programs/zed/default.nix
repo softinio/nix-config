@@ -15,6 +15,11 @@
         provider = "copilot";
       };
       agent = {
+        single_file_review = true;
+        use_modifier_to_send = true;
+        thinking_display = "always_collapsed";
+        enable_feedback = false;
+        dock = "right";
         default_model = {
           model = "claude-sonnet-4-6";
           provider = "copilot_chat";
@@ -22,6 +27,7 @@
       };
       auto_install_extensions = {
         fish = true;
+        java = true;
         lua = true;
         nix = true;
         pyrefly = true;
