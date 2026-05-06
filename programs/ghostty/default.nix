@@ -13,7 +13,8 @@ let
     maximize = true;
     mouse-hide-while-typing = true;
     split-divider-color = "orange";
-    theme = "Builtin Tango Dark";
+    theme = "Gruvbox Light";
+    # theme = "Builtin Tango Dark";
     window-inherit-working-directory = true;
     window-save-state = "always";
     working-directory = "home";
