@@ -13,7 +13,10 @@
         notifier.enabled = true;
         picker = {
           enabled = true;
-          layout = "ivy";
+          layout = {
+            cycle = true;
+            preset = "ivy";
+          };
           live = true;
           matcher = {
             frecency = false;
@@ -125,43 +128,64 @@
         mode = "n";
         key = "<leader>fw";
         action.__raw = "function() Snacks.picker.grep_word() end";
-        options = { silent = true; desc = "Grep Word Under Cursor"; };
+        options = {
+          silent = true;
+          desc = "Grep Word Under Cursor";
+        };
       }
       {
         mode = "n";
         key = "<leader>fs";
         action.__raw = "function() Snacks.picker.lsp_symbols() end";
-        options = { silent = true; desc = "LSP Symbols (file)"; };
+        options = {
+          silent = true;
+          desc = "LSP Symbols (file)";
+        };
       }
       {
         mode = "n";
         key = "<leader>fS";
         action.__raw = "function() Snacks.picker.lsp_workspace_symbols() end";
-        options = { silent = true; desc = "LSP Symbols (workspace)"; };
+        options = {
+          silent = true;
+          desc = "LSP Symbols (workspace)";
+        };
       }
       {
         mode = "n";
         key = "<leader>fk";
         action.__raw = "function() Snacks.picker.keymaps() end";
-        options = { silent = true; desc = "Keymaps"; };
+        options = {
+          silent = true;
+          desc = "Keymaps";
+        };
       }
       {
         mode = "n";
         key = "<leader>fc";
         action.__raw = "function() Snacks.picker.commands() end";
-        options = { silent = true; desc = "Commands"; };
+        options = {
+          silent = true;
+          desc = "Commands";
+        };
       }
       {
         mode = "n";
         key = "<leader>fm";
         action.__raw = "function() Snacks.picker.marks() end";
-        options = { silent = true; desc = "Marks"; };
+        options = {
+          silent = true;
+          desc = "Marks";
+        };
       }
       {
         mode = "n";
         key = "<leader>fj";
         action.__raw = "function() Snacks.picker.jumps() end";
-        options = { silent = true; desc = "Jumps"; };
+        options = {
+          silent = true;
+          desc = "Jumps";
+        };
       }
 
       # Git
@@ -169,37 +193,55 @@
         mode = "n";
         key = "<leader>gl";
         action.__raw = "function() Snacks.picker.git_log() end";
-        options = { silent = true; desc = "Git Log"; };
+        options = {
+          silent = true;
+          desc = "Git Log";
+        };
       }
       {
         mode = "n";
         key = "<leader>gb";
         action.__raw = "function() Snacks.picker.git_branches() end";
-        options = { silent = true; desc = "Git Branches"; };
+        options = {
+          silent = true;
+          desc = "Git Branches";
+        };
       }
       {
         mode = "n";
         key = "<leader>gs";
         action.__raw = "function() Snacks.picker.git_status() end";
-        options = { silent = true; desc = "Git Status"; };
+        options = {
+          silent = true;
+          desc = "Git Status";
+        };
       }
       {
         mode = "n";
         key = "<leader>lg";
         action.__raw = "function() Snacks.lazygit() end";
-        options = { silent = true; desc = "LazyGit"; };
+        options = {
+          silent = true;
+          desc = "LazyGit";
+        };
       }
       {
         mode = "n";
         key = "<leader>lf";
         action.__raw = "function() Snacks.lazygit.log_file() end";
-        options = { silent = true; desc = "LazyGit File Log"; };
+        options = {
+          silent = true;
+          desc = "LazyGit File Log";
+        };
       }
       {
         mode = "n";
         key = "<leader>gB";
         action.__raw = "function() Snacks.gitbrowse() end";
-        options = { silent = true; desc = "Git Browse"; };
+        options = {
+          silent = true;
+          desc = "Git Browse";
+        };
       }
 
       # Notifier
@@ -207,7 +249,10 @@
         mode = "n";
         key = "<leader>nh";
         action.__raw = "function() Snacks.notifier.show_history() end";
-        options = { silent = true; desc = "Notification History"; };
+        options = {
+          silent = true;
+          desc = "Notification History";
+        };
       }
 
       # Words (LSP reference navigation)
@@ -215,13 +260,19 @@
         mode = "n";
         key = "]]";
         action.__raw = "function() Snacks.words.jump(1) end";
-        options = { silent = true; desc = "Next LSP Reference"; };
+        options = {
+          silent = true;
+          desc = "Next LSP Reference";
+        };
       }
       {
         mode = "n";
         key = "[[";
         action.__raw = "function() Snacks.words.jump(-1) end";
-        options = { silent = true; desc = "Prev LSP Reference"; };
+        options = {
+          silent = true;
+          desc = "Prev LSP Reference";
+        };
       }
     ];
   };
