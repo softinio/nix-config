@@ -16,6 +16,10 @@
         dock = "left";
       };
       agent = {
+        single_file_review = true;
+        use_modifier_to_send = true;
+        thinking_display = "always_collapsed";
+        enable_feedback = false;
         dock = "right";
         default_model = {
           model = "claude-sonnet-4-6";
@@ -33,6 +37,7 @@
       auto_install_extensions = {
         fish = true;
         http = true;
+        java = true;
         lua = true;
         markdown = true;
         nix = true;
