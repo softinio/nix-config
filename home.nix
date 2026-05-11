@@ -10,6 +10,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    inputs.hunk.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
     ./nix-apps-activation.nix
   ]
@@ -192,6 +193,16 @@
 
   programs.htop = {
     enable = true;
+  };
+
+  programs.hunk = {
+    enable = true;
+    enableGitIntegration = true;
+    settings = {
+      theme = "paper"; # graphite, midnight, paper, ember
+      mode = "split";
+      line_numbers = true;
+    };
   };
 
   programs.jq = {

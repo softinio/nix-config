@@ -45,10 +45,10 @@ let
     alias = myAliases;
     core = {
       editor = "nvim";
+      pager = "hunk pager";
     };
     diff = {
       colorMoved = "default";
-      external = "difft";
       tool = "difftastic";
     };
     difftool.difftastic = {

@@ -2,6 +2,10 @@
   description = "Nix and home-manager configurations for Softinio's macbook";
 
   inputs = {
+    hunk = {
+      url = "github:modem-dev/hunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -21,6 +25,7 @@
   outputs =
     {
       self,
+      hunk,
       nix-darwin,
       nixvim,
       home-manager,
@@ -39,6 +44,8 @@
         }:
         let
           usernames = map (u: u.username) users;
+          firstUser = builtins.head users;
+          githubTokenFile = "/Users/${firstUser.username}/.config/nixpkgs/github-token";
         in
         nix-darwin.lib.darwinSystem {
           inherit system;
@@ -64,6 +71,9 @@
                       "x86_64-darwin"
                     ];
                     trusted-users = [ "root" ] ++ usernames;
+                    access-tokens = nixpkgs.lib.optional
+                      (builtins.pathExists githubTokenFile)
+                      "github.com=${builtins.readFile githubTokenFile}";
                   };
                   distributedBuilds = false;
                 };
@@ -121,6 +131,7 @@
               );
               home-manager.extraSpecialArgs = {
                 inputs = {
+                  inherit hunk;
                   inherit nixvim;
                 };
               };
