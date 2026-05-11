@@ -2,6 +2,10 @@
   description = "Nix and home-manager configurations for Softinio's macbook";
 
   inputs = {
+    hunk = {
+      url = "github:modem-dev/hunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -21,6 +25,7 @@
   outputs =
     {
       self,
+      hunk,
       nix-darwin,
       nixvim,
       home-manager,
@@ -118,6 +123,7 @@
               );
               home-manager.extraSpecialArgs = {
                 inputs = {
+                  inherit hunk;
                   inherit nixvim;
                 };
               };
