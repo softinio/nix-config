@@ -80,7 +80,7 @@
         copy_on_select = true;
         dock = "bottom";
       };
-      theme = "Gruvbox Light";
+      theme = "Ayu Dark";
       vim_mode = true;
       auto_signature_help = true;
       show_signature_help_after_edits = true;
