@@ -199,7 +199,7 @@
     enable = true;
     enableGitIntegration = true;
     settings = {
-      theme = "paper"; # graphite, midnight, paper, ember
+      theme = "graphite"; # graphite, midnight, paper, ember
       mode = "split";
       line_numbers = true;
     };
