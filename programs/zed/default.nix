@@ -85,5 +85,21 @@
       auto_signature_help = true;
       show_signature_help_after_edits = true;
     };
+    userTasks = [
+      {
+        label = "Run HTTP Request";
+        command = "httpyac";
+        args = [ "send" "--line" "$ZED_ROW" "$ZED_FILE" ];
+        tags = [ "http-request" ];
+        reveal = "always";
+      }
+      {
+        label = "Run All HTTP Requests";
+        command = "httpyac";
+        args = [ "send" "$ZED_FILE" ];
+        tags = [ "http-request" ];
+        reveal = "always";
+      }
+    ];
   };
 }
