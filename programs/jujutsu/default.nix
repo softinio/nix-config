@@ -44,6 +44,7 @@ in
           "$output"
         ];
         pager = "hunk pager";
+        paginate = "never";
       };
       user = {
         name = user.fullName;

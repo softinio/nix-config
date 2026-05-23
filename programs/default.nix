@@ -5,10 +5,10 @@
   ./ghostty
   ./git
   ./jujutsu
-  ./kitty
+  # ./kitty
   ./nixvim
   ./tmux
   ./wezterm
-  ./vscode
+  # ./vscode
   ./zed
 ]
