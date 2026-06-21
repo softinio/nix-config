@@ -34,7 +34,12 @@ in
       };
       ui = {
         default-command = "st";
-        diff-formatter = ":git";
+        diff-formatter = [
+          "difft"
+          "--color=always"
+          "$left"
+          "$right"
+        ];
         editor = "nvim";
         merge-editor = [
           "idea"
@@ -43,7 +48,7 @@ in
           "$base"
           "$output"
         ];
-        pager = "hunk pager";
+        pager = "less -FRX";
         paginate = "never";
       };
       user = {
