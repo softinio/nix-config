@@ -1,5 +1,12 @@
 { pkgs, user, ... }:
 let
+  signingConfig =
+    if user.gitSigningKey != null then {
+      backend = "ssh";
+      behavior = "own";
+      key = user.gitSigningKey;
+    } else { };
+
   MyAliases = {
     l = [
       "log"
@@ -26,9 +33,7 @@ in
       git = {
         subprocess = true;
       };
-      signing = {
-        key = user.gitSigningKey;
-      };
+      signing = signingConfig;
       templates = {
         git_push_bookmark = "\"${user.jujutsuBranchPrefix}-push-\" ++ change_id.short()";
       };

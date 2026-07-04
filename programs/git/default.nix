@@ -1,4 +1,4 @@
-{ user, ... }:
+{ user, lib, ... }:
 
 let
   myAliases = {
@@ -81,5 +81,10 @@ in
     settings = gitConfig;
     lfs.enable = true;
     ignores = myIgnores;
+    signing = lib.mkIf (user.gitSigningKey != null) {
+      key = user.gitSigningKey;
+      format = "ssh";
+      signByDefault = true;
+    };
   };
 }
