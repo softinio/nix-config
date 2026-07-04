@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 
 let
   actionsConfig = builtins.readFile ./open-actions.conf;
@@ -15,7 +15,7 @@ in
     };
     themeFile = "Tango_Dark";
     font = {
-      name = "SF Mono";
+      name = theme.fontFamily;
       size = 13;
     };
     settings = {

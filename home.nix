@@ -10,6 +10,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Shared appearance settings available to every module as `theme`.
+  _module.args.theme = import ./theme.nix;
+
   imports = [
     inputs.hunk.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
