@@ -10,6 +10,6 @@
   ./nixvim
   ./tmux
   ./wezterm
-  # ./vscode
+  ./vscode
   ./zed
 ]
