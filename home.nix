@@ -39,7 +39,6 @@
       EDITOR = "nvim";
     };
     packages = with pkgs; [
-      inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
       any-nix-shell
       aspell
       bash-language-server
