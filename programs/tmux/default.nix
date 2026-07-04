@@ -115,7 +115,6 @@ in
     extraConfig = tmuxConfig;
     plugins = with pkgs.tmuxPlugins; [
       sensible
-      tokyo-night-tmux
       yank
       {
         plugin = tokyo-night-tmux;
