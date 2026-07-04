@@ -1,5 +1,12 @@
 { pkgs, user, ... }:
 let
+  signingConfig =
+    if user.gitSigningKey != null then {
+      backend = "ssh";
+      behavior = "own";
+      key = user.gitSigningKey;
+    } else { };
+
   MyAliases = {
     l = [
       "log"
@@ -26,15 +33,18 @@ in
       git = {
         subprocess = true;
       };
-      signing = {
-        key = user.gitSigningKey;
-      };
+      signing = signingConfig;
       templates = {
         git_push_bookmark = "\"${user.jujutsuBranchPrefix}-push-\" ++ change_id.short()";
       };
       ui = {
         default-command = "st";
-        diff-formatter = ":git";
+        diff-formatter = [
+          "difft"
+          "--color=always"
+          "$left"
+          "$right"
+        ];
         editor = "nvim";
         merge-editor = [
           "idea"
@@ -43,7 +53,8 @@ in
           "$base"
           "$output"
         ];
-        pager = "hunk pager";
+        pager = "less -FRX";
+        paginate = "never";
       };
       user = {
         name = user.fullName;

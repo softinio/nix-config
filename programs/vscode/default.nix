@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 
 let
   myExtensions = with pkgs.vscode-extensions; [
@@ -41,7 +41,7 @@ let
     ziglang.vscode-zig
   ];
   myUserSettings = {
-    "editor.fontFamily" = "SF Mono";
+    "editor.fontFamily" = theme.fontFamily;
     "editor.fontLigatures" = true;
     "editor.fontSize" = 13;
     "editor.copyWithSyntaxHighlighting" = true;
@@ -82,7 +82,7 @@ let
     };
     "telemetry.telemetryLevel" = "off";
     "terminal.integrated.defaultProfile.osx" = "fish";
-    "terminal.integrated.fontFamily" = "SF Mono";
+    "terminal.integrated.fontFamily" = theme.fontFamily;
     "terminal.integrated.fontSize" = 13;
     "update.mode" = "none";
     "vsicons.dontShowNewVersionMessage" = true;

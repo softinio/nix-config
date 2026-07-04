@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 {
   programs.alacritty = {
     enable = true;
@@ -18,19 +18,19 @@
       # Font configuration (matching ghostty)
       font = {
         normal = {
-          family = "SF Mono";
+          family = theme.fontFamily;
           style = "Regular";
         };
         bold = {
-          family = "SF Mono";
+          family = theme.fontFamily;
           style = "Bold";
         };
         italic = {
-          family = "SF Mono";
+          family = theme.fontFamily;
           style = "Italic";
         };
         bold_italic = {
-          family = "SF Mono";
+          family = theme.fontFamily;
           style = "Bold Italic";
         };
         size = 16;

@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 let
   my_settings = {
     auto-update = "off";
     copy-on-select = "clipboard";
-    font-family = "SF Mono";
+    font-family = theme.fontFamily;
     font-size = 16;
     link-previews = true;
     macos-icon = "retro";

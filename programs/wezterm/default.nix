@@ -1,8 +1,8 @@
-{ user, lib, ... }:
+{ user, lib, config, ... }:
 
 let
-  # Set to true to install wezterm via nix, false to only manage config
-  useNixPackage = false;
+  useNixPackage = config.local.wezterm.useNixPackage;
+  useMux = config.local.wezterm.useMux;
 
   sshDomainToLua = d:
     "    {\n"
@@ -38,13 +38,45 @@ let
       + lib.concatMapStrings workspaceToLua ws
       + "        }\n";
 
+  muxHandlers = if useMux then ''
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  pane:split { size = 0.2 }
+end)
+
+wezterm.on('gui-attached', function(domain)
+  local workspace = mux.get_active_workspace()
+  for _, window in ipairs(mux.all_windows()) do
+    if window:get_workspace() == workspace then
+      window:gui_window():maximize()
+    end
+  end
+end)
+'' else "";
+
+  muxStartupArgs = if useMux then "  default_gui_startup_args = { 'connect', 'unix' },\n" else "";
+
+  muxDomains = if useMux then ''
+  unix_domains = {
+    {
+      name = 'unix',
+    },
+  },
+'' else "";
+
   weztermConfigRaw = builtins.readFile ./wezterm.lua;
   weztermConfig = builtins.replaceStrings
     [
+      "-- WEZTERM_MUX_HANDLERS\n"
+      "  -- WEZTERM_MUX_STARTUP_ARGS\n"
+      "  -- WEZTERM_MUX_DOMAINS\n"
       "  -- WEZTERM_SSH_DOMAINS\n"
       "        -- WEZTERM_WORKSPACES\n"
     ]
     [
+      muxHandlers
+      muxStartupArgs
+      muxDomains
       sshDomainsBlock
       workspacesLua
     ]

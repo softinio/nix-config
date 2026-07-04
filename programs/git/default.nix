@@ -1,4 +1,4 @@
-{ user, ... }:
+{ user, lib, ... }:
 
 let
   myAliases = {
@@ -19,6 +19,7 @@ let
     ".direnv/"
     ".idea/"
     ".mypy_cache"
+    ".zed/"
     "*.metals"
     "*.metals.sbt"
     "*metals.sbt"
@@ -32,10 +33,10 @@ let
     alias = myAliases;
     core = {
       editor = "nvim";
-      pager = "hunk pager";
     };
     diff = {
       colorMoved = "default";
+      external = "difft";
       tool = "difftastic";
     };
     difftool.difftastic = {
@@ -80,5 +81,10 @@ in
     settings = gitConfig;
     lfs.enable = true;
     ignores = myIgnores;
+    signing = lib.mkIf (user.gitSigningKey != null) {
+      key = user.gitSigningKey;
+      format = "ssh";
+      signByDefault = true;
+    };
   };
 }

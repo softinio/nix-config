@@ -2,6 +2,10 @@
   description = "Nix and home-manager configurations for Softinio's macbook";
 
   inputs = {
+    herdr = {
+      url = "github:ogulcancelik/herdr/v0.7.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hunk = {
       url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +19,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/nur";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,11 +28,11 @@
   outputs =
     {
       self,
+      herdr,
       hunk,
       nix-darwin,
       nixvim,
       home-manager,
-      nur,
       nixpkgs,
       ...
     }:
@@ -56,8 +59,6 @@
 
                 environment.systemPackages = with pkgs; [ home-manager ];
 
-                fonts.packages = with pkgs; [ fira-code ];
-
                 nix = {
                   nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
                   package = pkgs.nixVersions.stable;
@@ -69,7 +70,6 @@
                     ];
                     trusted-users = [ "root" ] ++ usernames;
                   };
-                  distributedBuilds = false;
                 };
 
                 programs.fish.enable = true;
@@ -115,14 +115,15 @@
                   value =
                     { ... }:
                     {
-                      nixpkgs.overlays = [ nur.overlays.default ];
                       imports = [ ./home.nix ];
                       _module.args.user = user;
                     };
                 }) users
               );
               home-manager.extraSpecialArgs = {
+                inherit hostname;
                 inputs = {
+                  inherit herdr;
                   inherit hunk;
                   inherit nixvim;
                 };
