@@ -29,7 +29,7 @@ local config = {
   default_gui_startup_args = { 'connect', 'unix' },
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
   -- dpi = 144,
-  font = wezterm.font_with_fallback { family = 'JetBrains Mono', weight = 'Medium' },
+  font = wezterm.font_with_fallback { family = 'SF Mono', weight = 'Medium' },
   font_size = 16.0,
   freetype_load_flags = 'NO_HINTING',
   front_end = 'WebGpu',

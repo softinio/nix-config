@@ -66,7 +66,6 @@
       grpcurl
       httpyac
       imagemagick
-      jetbrains-mono
       ijhttp
       jjui
       jq-lsp
