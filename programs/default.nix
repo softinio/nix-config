@@ -1,13 +1,25 @@
 [
   ./alacritty
   ./claude
+  ./cli-tools
+  ./darcs
+  ./direnv
+  ./eza
+  ./fzf
+  ./gh
+  ./helix
   ./herdr
   ./fish
   ./ghostty
   ./git
+  ./hunk
   ./jujutsu
   ./kitty
+  ./nix-index
   ./nixvim
+  ./pijul
+  ./ripgrep
+  ./starship
   ./tmux
   ./wezterm
   ./vscode
