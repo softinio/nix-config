@@ -6,7 +6,7 @@
   ./ghostty
   ./git
   ./jujutsu
-  # ./kitty
+  ./kitty
   ./nixvim
   ./tmux
   ./wezterm
