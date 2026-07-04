@@ -53,16 +53,7 @@ let
     };
   };
 
-  # Generate formatted JSON using jq
-  formattedSettings =
-    pkgs.runCommand "claude-settings.json"
-      {
-        buildInputs = [ pkgs.jq ];
-        json = builtins.toJSON settings;
-      }
-      ''
-        echo "$json" | jq '.' > $out
-      '';
+  formattedSettings = (pkgs.formats.json { }).generate "claude-settings.json" settings;
 in
 {
   # Manage Claude Code settings file
