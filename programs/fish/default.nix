@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, hostname, ... }:
 
 {
   home.packages = with pkgs; [
@@ -49,9 +49,9 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/.npm-global/bin /Users/salar/.luarocks/bin:/Users/salar/bin:/Users/salar/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin "/Applications/IntelliJ IDEA.app/Contents/MacOS" /Applications/WezTerm.app/Contents/MacOS $PATH
+      set -xg PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/.npm-global/bin $HOME/.luarocks/bin $HOME/.nix-profile/bin /nix/var/nix/profiles/default/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin "/Applications/IntelliJ IDEA.app/Contents/MacOS" /Applications/WezTerm.app/Contents/MacOS $PATH
 
-      set -xg WORKSPACE /Users/salar/Projects
+      set -xg WORKSPACE $HOME/Projects
 
       set -xg FZF_DEFAULT_OPTS "--preview='bat {} --color=always'" \n
 
@@ -89,7 +89,7 @@
       grep = "grep --color=auto";
       lg = "lazygit";
       nixc = "cd ~/.config/nixpkgs";
-      nixre = "sudo -v && sudo darwin-rebuild switch --flake ~/.config/nixpkgs#salarm3max";
+      nixre = "sudo -v && sudo darwin-rebuild switch --flake ~/.config/nixpkgs#${hostname}";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
       nixgc = "nix-collect-garbage -d";
       nixq = "nix-env -qa";

@@ -99,7 +99,7 @@ let
     bind -r ')' switch-client -n\; refresh-client -S
     bind o display-popup -E "tms"
 
-    set -g default-command /etc/profiles/per-user/salar/bin/fish
+    set -g default-command ${pkgs.fish}/bin/fish
   '';
 in
 {

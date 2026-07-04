@@ -121,6 +121,7 @@
                 }) users
               );
               home-manager.extraSpecialArgs = {
+                inherit hostname;
                 inputs = {
                   inherit herdr;
                   inherit hunk;
