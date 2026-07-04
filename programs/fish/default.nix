@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    fish
     fishPlugins.foreign-env
     fishPlugins.bobthefish
   ];
