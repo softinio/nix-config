@@ -8,25 +8,13 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
 
-wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
-  pane:split { size = 0.2 }
-end)
-
-wezterm.on('gui-attached', function(domain)
-  local workspace = mux.get_active_workspace()
-  for _, window in ipairs(mux.all_windows()) do
-    if window:get_workspace() == workspace then
-      window:gui_window():maximize()
-    end
-  end
-end)
+-- WEZTERM_MUX_HANDLERS
 
 local config = {
   adjust_window_size_when_changing_font_size = false,
   check_for_updates = true,
   color_scheme = theme,
-  default_gui_startup_args = { 'connect', 'unix' },
+  -- WEZTERM_MUX_STARTUP_ARGS
   default_prog = { '/etc/profiles/per-user/salar/bin/fish' },
   -- dpi = 144,
   font = wezterm.font_with_fallback { family = 'SF Mono', weight = 'Medium' },
@@ -41,12 +29,8 @@ local config = {
   colors = {
     split = 'orange',
   },
+  -- WEZTERM_MUX_DOMAINS
   -- WEZTERM_SSH_DOMAINS
-  unix_domains = {
-    {
-      name = 'unix',
-    },
-  },
   keys = {
     { key = '-', mods = 'LEADER', action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
     { key = "'", mods = 'LEADER', action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
