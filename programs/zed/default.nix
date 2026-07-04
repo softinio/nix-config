@@ -1,8 +1,7 @@
-{ ... }:
+{ config, ... }:
 
 let
-  # Set to true to install zed via nix, false to only manage config
-  useNixPackage = false;
+  useNixPackage = config.local.zed.useNixPackage;
 
   settings = {
     project_panel = {

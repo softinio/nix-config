@@ -1,11 +1,8 @@
-{ user, lib, ... }:
+{ user, lib, config, ... }:
 
 let
-  # Set to true to install wezterm via nix, false to only manage config
-  useNixPackage = false;
-
-  # Set to true to enable the unix-domain multiplexer on startup
-  useMux = false;
+  useNixPackage = config.local.wezterm.useNixPackage;
+  useMux = config.local.wezterm.useMux;
 
   sshDomainToLua = d:
     "    {\n"
