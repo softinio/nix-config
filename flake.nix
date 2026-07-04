@@ -72,7 +72,6 @@
                     ];
                     trusted-users = [ "root" ] ++ usernames;
                   };
-                  distributedBuilds = false;
                 };
 
                 programs.fish.enable = true;
