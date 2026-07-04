@@ -77,7 +77,6 @@
       metals
       multimarkdown
       mypy
-      nerd-fonts.fira-code
       nil
       niv
       nixd

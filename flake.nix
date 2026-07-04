@@ -59,8 +59,6 @@
 
                 environment.systemPackages = with pkgs; [ home-manager ];
 
-                fonts.packages = with pkgs; [ fira-code ];
-
                 nix = {
                   nixPath = nixpkgs.lib.mkForce [ "nixpkgs=${nixpkgs}" ];
                   package = pkgs.nixVersions.stable;
