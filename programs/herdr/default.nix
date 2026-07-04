@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 {
-  home.packages = [ inputs.herdr.packages.${pkgs.system}.default ];
+  home.packages = [ inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   home.file.".config/herdr/config.toml".text = ''
     onboarding = false
 

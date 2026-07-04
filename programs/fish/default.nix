@@ -9,6 +9,10 @@
 
   home.shell.enableFishIntegration = true;
 
+  # programs.man.package is null on Darwin (stateVersion >= 26.05), so the
+  # fish module's default of generateCaches = true has no effect and just warns.
+  programs.man.generateCaches = false;
+
   programs.fish = {
     enable = true;
 
