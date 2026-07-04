@@ -1,6 +1,7 @@
 [
   ./alacritty
   ./claude
+  ./herdr
   ./fish
   ./ghostty
   ./git
