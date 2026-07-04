@@ -65,6 +65,12 @@
     '';
 
     interactiveShellInit = ''
+      # Load keychain-stored SSH keys into the agent (needed for SSH commit
+      # signing), but only when the agent has no identities yet.
+      if not ssh-add -l >/dev/null 2>&1
+        ssh-add --apple-load-keychain 2>/dev/null
+      end
+
       jj util completion fish | source
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
