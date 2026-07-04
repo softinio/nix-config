@@ -19,7 +19,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/nur";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +33,6 @@
       nix-darwin,
       nixvim,
       home-manager,
-      nur,
       nixpkgs,
       ...
     }:
@@ -120,7 +118,6 @@
                   value =
                     { ... }:
                     {
-                      nixpkgs.overlays = [ nur.overlays.default ];
                       imports = [ ./home.nix ];
                       _module.args.user = user;
                     };
