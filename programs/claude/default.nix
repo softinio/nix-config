@@ -12,8 +12,6 @@ let
     };
 
     env = {
-      # Disable fullscreen flicker on redraw (https://code.claude.com/docs/en/fullscreen)
-      CLAUDE_CODE_NO_FLICKER = "1";
       # Disable Mouse
       CLAUDE_CODE_DISABLE_MOUSE = "1";
     };
@@ -41,6 +39,8 @@ let
     };
 
     # model = "sonnet";
+
+    tui = "default";
 
     enabledMcpjsonServers = [
       "metals"
