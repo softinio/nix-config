@@ -89,6 +89,7 @@ let
     github-copilot-cli
     gnupg
     grpcurl
+    hcloud
     openssl
     patchelf
     pngpaste
