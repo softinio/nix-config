@@ -6,11 +6,21 @@
       url = "github:ogulcancelik/herdr/v0.7.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # NOTE: hunk is a flake-parts flake that enumerates x86_64-darwin in its
+    # perSystem outputs (evaluated via `self'` in its home-manager module).
+    # It must NOT follow our unstable nixpkgs (26.11+ dropped x86_64-darwin),
+    # or evaluation throws even on aarch64. Pin it to the 26.05-darwin branch,
+    # which still supports Intel.
     hunk = {
       url = "github:modem-dev/hunk";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-x86-compat";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-unstable (26.11+) dropped x86_64-darwin support. Some flake-parts
+    # inputs (e.g. hunk) enumerate x86_64-darwin in their perSystem outputs and
+    # would throw when following our unstable nixpkgs. Pin such inputs to the
+    # 26.05-darwin stable branch, which still supports Intel Macs.
+    nixpkgs-x86-compat.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -145,11 +155,15 @@
         };
 
         # Intel Mac (example - update hostname as needed)
-        salarintel = mkDarwinConfig {
-          system = "x86_64-darwin";
-          hostname = "salarintel";
-          users = [ (import ./users/salar.nix) ];
-        };
+        # NOTE: nixpkgs 26.11 (nixpkgs-unstable) dropped x86_64-darwin support.
+        # To re-enable Intel, pin a separate nixpkgs input to the
+        # nixpkgs-26.05-darwin branch (supported until end of 2026) and wire it
+        # through mkDarwinConfig for this configuration.
+        # salarintel = mkDarwinConfig {
+        #   system = "x86_64-darwin";
+        #   hostname = "salarintel";
+        #   users = [ (import ./users/salar.nix) ];
+        # };
       };
 
       darwinPackages = self.darwinConfigurations.salarm3max.pkgs;
