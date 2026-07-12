@@ -58,4 +58,7 @@ in
 {
   # Manage Claude Code settings file
   home.file.".claude/settings.json".source = formattedSettings;
+
+  # Global user instructions loaded by Claude Code every session
+  home.file.".claude/CLAUDE.md".source = ./CLAUDE.md;
 }
