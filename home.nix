@@ -15,7 +15,6 @@
     inputs.hunk.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
     ./local-options.nix
-    ./nix-apps-activation.nix
     ./packages.nix
   ]
   ++ (import ./programs);
