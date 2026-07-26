@@ -3,7 +3,7 @@
 
   inputs = {
     herdr = {
-      url = "github:ogulcancelik/herdr/v0.7.1";
+      url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # NOTE: hunk is a flake-parts flake that enumerates x86_64-darwin in its

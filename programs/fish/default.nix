@@ -101,6 +101,8 @@
       nixq = "nix-env -qa";
       nixstorerepair = "nix-store --repair --verify --check-contents";
       nixupgrade = "nix upgrade-nix";
+      psbt = "pkill -f sbt";
+      reviewr = "herdr plugin action invoke open --plugin persiyanov.reviewr";
       rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
       v = "nvim";
       sshhcloud1 = "ssh salar@hcloud1.softinio.net";
