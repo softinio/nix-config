@@ -24,7 +24,6 @@
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
       "copilot-language-server"
-      "discord"
       "github-copilot-cli"
       "ijhttp"
       "slack"

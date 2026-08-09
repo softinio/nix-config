@@ -113,7 +113,6 @@ let
   ];
 
   apps = with pkgs; [
-    discord
     slack
   ];
 in
