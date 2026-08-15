@@ -9,11 +9,11 @@ let
   #
   #   TAB 1 "{name}"                   TAB 2 "build"
   #   +----------+----------+          +----------+----------+
-  #   | Claude   | reviewr  |          | nvim     | sbt      |
+  #   | Claude   | reviewr  |          | nvim     | build    |
   #   +----------+----------+          +----------+----------+
   #
   # reviewr gets a full-height pane in the tab Claude lives in — the diff is the thing
-  # you actually read — while nvim and sbt sit one tab away.
+  # you actually read — while nvim and the build tool sit one tab away.
   workspaceLayout = pkgs.writeShellApplication {
     name = "herdr-workspace-layout";
     runtimeInputs = [
@@ -32,6 +32,10 @@ let
       The workspace and its first tab are named <name>. When omitted, the name is the
       worktree's branch with any owner prefix stripped (salar/add-caching -> add-caching),
       falling back to the worktree directory name.
+
+      The build pane picks its command from the worktree: `sbt --client` for an sbt
+      project, `mill -w __.compile` for a mill one, otherwise a plain shell. Set
+      HERDR_BUILD_CMD to override.
 
       Outside a herdr pane both subcommands are a no-op and exit 0.
       EOF
@@ -54,6 +58,30 @@ let
         for id in $ids; do
           herdr pane close "$id" >/dev/null 2>&1 || true
         done
+      }
+
+      # What the build pane runs, by build tool. Empty output means "leave a prompt":
+      # a bare shell in the worktree is more useful than a command that errors out.
+      #
+      # sbt has a persistent client worth parking in a pane; mill does not, so it gets
+      # watch-compile, which is the closest long-running equivalent (Ctrl-C drops back to
+      # the prompt with the dev shell already loaded). HERDR_BUILD_CMD overrides both.
+      detect_build_cmd() {
+        local worktree="$1" mill
+        if [ -n "''${HERDR_BUILD_CMD:-}" ]; then
+          printf '%s' "$HERDR_BUILD_CMD"
+        elif [ -x "$worktree/mill" ] || [ -x "$worktree/millw" ] \
+          || [ -f "$worktree/build.mill" ] || [ -f "$worktree/build.mill.scala" ] \
+          || [ -f "$worktree/build.sc" ] || [ -f "$worktree/.mill-version" ]; then
+          # Prefer the checked-in wrapper: it pins the mill version the project expects.
+          if [ -x "$worktree/mill" ]; then mill=./mill
+          elif [ -x "$worktree/millw" ]; then mill=./millw
+          else mill=mill
+          fi
+          printf '%s' "$mill -w __.compile"
+        elif [ -f "$worktree/build.sbt" ] || [ -f "$worktree/project/build.properties" ]; then
+          printf '%s' "sbt --client"
+        fi
       }
 
       # The workspace name is the branch, minus the owner prefix jj/git push bookmarks add:
@@ -94,7 +122,7 @@ let
           --placement split --target-pane "$HERDR_PANE_ID" --direction right \
           --cwd "$worktree" --no-focus | pane_id_from)
 
-        # --- Tab 2: nvim | sbt ----------------------------------------------------
+        # --- Tab 2: nvim | build ---------------------------------------------------
         local before after build_tab
         before=$(herdr tab list --workspace "$HERDR_WORKSPACE_ID" | jq -r '.result.tabs[].tab_id' | sort)
 
@@ -113,19 +141,25 @@ let
           return 1
         fi
 
-        local nvim_pane sbt_pane
+        local nvim_pane build_pane build_cmd
         nvim_pane=$(herdr pane list \
           | jq -r --arg t "$build_tab" '.result.panes[] | select(.tab_id == $t) | .pane_id' | head -1)
 
-        sbt_pane=$(herdr pane split "$nvim_pane" \
+        build_pane=$(herdr pane split "$nvim_pane" \
           --direction right --cwd "$worktree" --no-focus | pane_id_from)
 
-        # The panes already start in the worktree, where the claude-setup-worktree hook
-        # wrote .envrc; the cd is belt-and-suspenders so direnv loads the flake dev shell.
-        herdr pane run "$nvim_pane" "cd $worktree && nvim ." >/dev/null
-        herdr pane run "$sbt_pane" "cd $worktree && sbt --client" >/dev/null
+        build_cmd=$(detect_build_cmd "$worktree")
 
-        echo "herdr-workspace-layout: $name ready — reviewr $reviewr_pane, build tab $build_tab (nvim $nvim_pane, sbt $sbt_pane)"
+        # The panes already start in the worktree, where .envrc lives; the cd is
+        # belt-and-suspenders so direnv loads the flake dev shell.
+        herdr pane run "$nvim_pane" "cd $worktree && nvim ." >/dev/null
+        if [ -n "$build_cmd" ]; then
+          herdr pane run "$build_pane" "cd $worktree && $build_cmd" >/dev/null
+        else
+          herdr pane run "$build_pane" "cd $worktree" >/dev/null
+        fi
+
+        echo "herdr-workspace-layout: $name ready — reviewr $reviewr_pane, build tab $build_tab (nvim $nvim_pane, build $build_pane: ''${build_cmd:-shell})"
       }
 
       cmd_close() {

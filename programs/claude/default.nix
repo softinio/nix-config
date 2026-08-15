@@ -24,6 +24,8 @@ let
         "Bash(gh pr view:*)"
         "Bash(gh api:*)"
         "Bash(gh pr diff:*)"
+        "Bash(gh issue view:*)"
+        "Bash(gh issue list:*)"
         "Bash(grep:*)"
         "Bash(mill:*)"
         "Bash(poetry:*)"
@@ -61,4 +63,7 @@ in
 
   # Global user instructions loaded by Claude Code every session
   home.file.".claude/CLAUDE.md".source = ./CLAUDE.md;
+
+  # GitHub issue lifecycle skill (worktree -> plan -> implement -> PR -> teardown)
+  home.file.".claude/skills/github-issue/SKILL.md".source = ./skills/github-issue/SKILL.md;
 }

@@ -2,9 +2,20 @@
   description = "Nix and home-manager configurations for Softinio's macbook";
 
   inputs = {
+    # Promoted to a direct input purely so `nix flake update` keeps it current.
+    # herdr's own lock pins an older rust-overlay, and nix seeds transitive inputs
+    # from the dependency's lock — without this follows, every `nix flake update`
+    # snapped rust-overlay back and reintroduced its stdenv.isDarwin/isLinux
+    # deprecation warnings (fixed upstream 2026-08).
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      # Mirrors what herdr already did for it — keeps a second nixpkgs out of the lock.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     herdr = {
       url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
