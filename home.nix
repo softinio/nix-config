@@ -12,7 +12,6 @@
   _module.args.theme = import ./theme.nix;
 
   imports = [
-    inputs.hunk.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
     ./local-options.nix
     ./packages.nix

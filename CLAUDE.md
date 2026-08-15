@@ -14,7 +14,7 @@ Supports both Apple Silicon (`aarch64-darwin`) and Intel (`x86_64-darwin`) Macs,
 
 The repository follows a modular architecture:
 
-- **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nixvim, herdr, hunk) and outputs. Uses `mkDarwinConfig` helper function to generate machine configurations. Threads `hostname` to home-manager via `extraSpecialArgs`.
+- **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nixvim, herdr) and outputs. Uses `mkDarwinConfig` helper function to generate machine configurations. Threads `hostname` to home-manager via `extraSpecialArgs`.
 - **`home.nix`**: Main home-manager entry point. Imports the program modules, `packages.nix`, and `local-options.nix`; sets the unfree allowlist (`allowUnfreePredicate`), `stateVersion`, and `sessionVariables`; and exposes shared module args (`theme`). It no longer holds the package list or inline program config.
 - **`packages.nix`**: User packages (`home.packages`), grouped by domain (languages, language servers, formatters, vcs, cli tools, etc.).
 - **`theme.nix`**: Shared appearance settings (currently the monospace `fontFamily`), passed to every module as the `theme` argument.
