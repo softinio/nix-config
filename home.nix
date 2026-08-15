@@ -12,10 +12,8 @@
   _module.args.theme = import ./theme.nix;
 
   imports = [
-    inputs.hunk.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
     ./local-options.nix
-    ./nix-apps-activation.nix
     ./packages.nix
   ]
   ++ (import ./programs);
@@ -25,7 +23,6 @@
     builtins.elem (lib.getName pkg) [
       "copilot.vim"
       "copilot-language-server"
-      "discord"
       "github-copilot-cli"
       "ijhttp"
       "slack"

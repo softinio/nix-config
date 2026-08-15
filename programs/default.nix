@@ -12,7 +12,6 @@
   ./fish
   ./ghostty
   ./git
-  ./hunk
   ./jujutsu
   ./kitty
   ./nix-index
@@ -21,6 +20,7 @@
   ./ripgrep
   ./starship
   ./tmux
+  ./tuicr
   ./wezterm
   ./vscode
   ./zed

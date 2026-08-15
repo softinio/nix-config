@@ -14,11 +14,14 @@ Supports both Apple Silicon (`aarch64-darwin`) and Intel (`x86_64-darwin`) Macs,
 
 The repository follows a modular architecture:
 
-- **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nur) and outputs. Uses `mkDarwinConfig` helper function to generate machine configurations.
-- **`home.nix`**: Main home-manager configuration importing all program modules and defining system-wide packages. Receives `user` argument for user-specific settings.
+- **`flake.nix`**: Entry point defining inputs (nixpkgs, nix-darwin, home-manager, nixvim, herdr) and outputs. Uses `mkDarwinConfig` helper function to generate machine configurations. Threads `hostname` to home-manager via `extraSpecialArgs`.
+- **`home.nix`**: Main home-manager entry point. Imports the program modules, `packages.nix`, and `local-options.nix`; sets the unfree allowlist (`allowUnfreePredicate`), `stateVersion`, and `sessionVariables`; and exposes shared module args (`theme`). It no longer holds the package list or inline program config.
+- **`packages.nix`**: User packages (`home.packages`), grouped by domain (languages, language servers, formatters, vcs, cli tools, etc.).
+- **`theme.nix`**: Shared appearance settings (currently the monospace `fontFamily`), passed to every module as the `theme` argument.
+- **`local-options.nix`**: Declares repo-local module options under `config.local.*` (e.g. per-editor `useNixPackage` toggles).
 - **`users/*.nix`**: User profile files containing personal settings (gitignored to keep private).
 - **`programs/default.nix`**: List of program module imports (each program has its own subdirectory with `default.nix`).
-- **`programs/*/default.nix`**: Individual program configurations (fish, git, jujutsu, ghostty, nixvim, zed, etc.). Can access `user` argument for user-specific settings.
+- **`programs/*/default.nix`**: Individual program configurations (fish, git, jujutsu, ghostty, nixvim, zed, etc.). Can access the `user` and `theme` arguments. Trivial `enable = true` programs are grouped in `programs/cli-tools/default.nix`.
 
 ### User Profiles
 
@@ -31,7 +34,7 @@ User profile structure:
   username = "myusername";           # Unix username
   fullName = "My Full Name";         # Used in git, jujutsu, darcs, pijul
   email = "me@example.com";          # Used in git, jujutsu, darcs, pijul
-  gitSigningKey = "~/.ssh/id_ed25519.pub";  # SSH key for signing (or null)
+  gitSigningKey = "~/.ssh/id_ed25519.pub";  # SSH pubkey for git+jj commit signing (null disables signing)
   jujutsuBranchPrefix = "myprefix";  # Prefix for jujutsu push bookmarks
 
   # Optional: wezterm SSH domains (omit if not needed)
@@ -75,6 +78,8 @@ Current configurations in `darwinConfigurations`:
 5. **Integration Through Imports**: `programs/default.nix` is a simple list that gets imported into `home.nix`, making it easy to enable/disable programs.
 6. **Multi-Architecture Support**: The `mkDarwinConfig` function abstracts system-specific details, allowing the same config to work on Intel and Apple Silicon.
 7. **Multi-User Support**: A single machine configuration can support multiple users, each with their own home-manager config.
+8. **Shared Theme**: Common appearance values (e.g. `fontFamily`) live in `theme.nix` and reach every module via the `theme` argument, avoiding per-app duplication.
+9. **Repo-local Options**: `local-options.nix` declares `config.local.*` options (e.g. editor `useNixPackage` toggles) so a machine can override behavior instead of editing per-module `let` bindings.
 
 ## Common Commands
 
@@ -131,6 +136,12 @@ To add a new program configuration:
 2. Create `programs/newprogram/default.nix` with configuration
 3. Add `./newprogram` to the list in `programs/default.nix`
 4. Run `nixre` to apply changes
+
+For a program that only needs `programs.<name>.enable = true`, add it to `programs/cli-tools/default.nix` instead of creating a new directory.
+
+## Adding Packages
+
+Plain packages (no home-manager module) live in `packages.nix`, grouped by domain. Add the package to the appropriate group list (`languages`, `languageServers`, `formatters`, `vcs`, `buildTools`, `httpTools`, `docsAndMedia`, `cliTools`, `fonts`, `apps`). If a program has its own home-manager module (`programs.<name>.enable`), configure it under `programs/` rather than also listing it in `packages.nix`.
 
 ## Adding a New User Profile
 
@@ -189,7 +200,9 @@ To add support for a new machine:
 
 - **Platform**: Supports both `aarch64-darwin` (Apple Silicon) and `x86_64-darwin` (Intel Macs).
 - **Users**: User profiles are defined in `users/*.nix` (gitignored). Each machine configuration specifies which users to configure.
+- **Packages**: Plain packages are defined in `packages.nix` (grouped by domain), not `home.nix`.
 - **Shell**: Fish is the default shell with extensive customizations.
 - **Nix Features**: Experimental features `nix-command` and `flakes` are enabled.
 - **Version Control**: Uses jujutsu (jj) as the primary VCS alongside git.
+- **Commit Signing**: git and jujutsu are configured for SSH commit signing from `gitSigningKey`. The private key must be in `ssh-agent`; fish loads it from the macOS keychain on shell start when the agent is empty. Run `addsshmac` once to store the key in the keychain (needed after a fresh key or if signing prompts for a passphrase and fails).
 - **Editor**: Neovim is the default editor (`$EDITOR` and `$VISUAL` environment variables).

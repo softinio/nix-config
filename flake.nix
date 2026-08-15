@@ -2,13 +2,20 @@
   description = "Nix and home-manager configurations for Softinio's macbook";
 
   inputs = {
-    herdr = {
-      url = "github:ogulcancelik/herdr/v0.7.1";
+    # Promoted to a direct input purely so `nix flake update` keeps it current.
+    # herdr's own lock pins an older rust-overlay, and nix seeds transitive inputs
+    # from the dependency's lock — without this follows, every `nix flake update`
+    # snapped rust-overlay back and reintroduced its stdenv.isDarwin/isLinux
+    # deprecation warnings (fixed upstream 2026-08).
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      # Mirrors what herdr already did for it — keeps a second nixpkgs out of the lock.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hunk = {
-      url = "github:modem-dev/hunk";
+    herdr = {
+      url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
@@ -29,7 +36,6 @@
     {
       self,
       herdr,
-      hunk,
       nix-darwin,
       nixvim,
       home-manager,
@@ -124,7 +130,6 @@
                 inherit hostname;
                 inputs = {
                   inherit herdr;
-                  inherit hunk;
                   inherit nixvim;
                 };
               };
@@ -145,11 +150,15 @@
         };
 
         # Intel Mac (example - update hostname as needed)
-        salarintel = mkDarwinConfig {
-          system = "x86_64-darwin";
-          hostname = "salarintel";
-          users = [ (import ./users/salar.nix) ];
-        };
+        # NOTE: nixpkgs 26.11 (nixpkgs-unstable) dropped x86_64-darwin support.
+        # To re-enable Intel, pin a separate nixpkgs input to the
+        # nixpkgs-26.05-darwin branch (supported until end of 2026) and wire it
+        # through mkDarwinConfig for this configuration.
+        # salarintel = mkDarwinConfig {
+        #   system = "x86_64-darwin";
+        #   hostname = "salarintel";
+        #   users = [ (import ./users/salar.nix) ];
+        # };
       };
 
       darwinPackages = self.darwinConfigurations.salarm3max.pkgs;

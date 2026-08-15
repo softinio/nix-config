@@ -89,6 +89,7 @@ let
     github-copilot-cli
     gnupg
     grpcurl
+    hcloud
     openssl
     patchelf
     pngpaste
@@ -112,7 +113,6 @@ let
   ];
 
   apps = with pkgs; [
-    discord
     slack
   ];
 in
