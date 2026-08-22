@@ -35,6 +35,9 @@ local config = {
     { key = '-', mods = 'LEADER', action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
     { key = "'", mods = 'LEADER', action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
     { key = 'k', mods = 'SUPER', action = act.TogglePaneZoomState },
+    -- macOS keeps Cmd chords out of the pty, so herdr never sees cmd+r itself.
+    -- Relay it as F12, which herdr binds to the reviewr pane toggle.
+    { key = 'r', mods = 'SUPER', action = act.SendKey { key = 'F12' } },
     { key = 'd', mods = 'LEADER', action = wezterm.action { ActivatePaneDirection = 'Left' } },
     { key = 'h', mods = 'LEADER', action = wezterm.action { ActivatePaneDirection = 'Down' } },
     { key = 't', mods = 'LEADER', action = wezterm.action { ActivatePaneDirection = 'Up' } },
