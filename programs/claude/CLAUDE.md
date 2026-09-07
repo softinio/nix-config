@@ -10,6 +10,21 @@ Detect which to use per repository:
 
 When in doubt, check for `.jj` at the repo root before running any VCS command.
 
+## Committing
+
+- **Never commit unless I explicitly ask you to.** I review every change in
+  herdr-reviewr before it becomes a commit, so finish the work and leave it in
+  the working tree for me to look at.
+- Completing the task is not permission to commit. Neither is a green test run,
+  a clean CI check, or the change "being ready" — only me asking for a commit is.
+- The same applies to anything else that writes history or publishes work:
+  amending, rebasing, `jj commit` / `jj new` / `jj squash`, pushing, and opening
+  a PR. Staging is fine when it helps me review; committing is not.
+- When the work is done, say so, summarise what changed, and stop. Let me decide
+  what happens to it.
+- If I do ask for a commit, that covers **that** commit only. It does not carry
+  over to later changes in the same session — ask again.
+
 ## Pull Request Conventions
 
 - **Never put a Claude Code session link in a PR body, PR comment, commit message, or any other
