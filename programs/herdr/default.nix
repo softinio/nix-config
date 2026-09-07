@@ -290,7 +290,7 @@ in
     onboarding = false
 
     [theme]
-    name = "tokyo-night"
+    name = "gruvbox"
 
     [theme.custom]
     accent = "orange"
@@ -350,7 +350,7 @@ in
   # per *repo*, so it is shared by every worktree of that repo; for a stacked branch whose
   # base is not main, reach for `tuicr -r <base>...HEAD` rather than fighting the pick.
   home.file.".config/herdr/plugins/config/persiyanov.reviewr/config.toml".text = ''
-    theme = "tokyo-night"
+    theme = "gruvbox"
     default_scope = "branch"
     navigator_position = "right"
     toggle_placement = "split"

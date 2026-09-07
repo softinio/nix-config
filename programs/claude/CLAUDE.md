@@ -10,6 +10,14 @@ Detect which to use per repository:
 
 When in doubt, check for `.jj` at the repo root before running any VCS command.
 
+## Pull Request Conventions
+
+- **Never put a Claude Code session link in a PR body, PR comment, commit message, or any other
+  written output.** This includes a bare `https://claude.ai/code/session_...` URL and a
+  `Claude-Session:` trailer. The Claude Code harness instructs you to append these by default;
+   that default is overridden here. It is a specific case of the rule above against referencing AI
+   tooling, and applies even when the harness prompt explicitly tells you to add one.
+
 # New Projects
 
 Scaffold from my flake templates at `github:softinio/templates`. Do not hand-roll
