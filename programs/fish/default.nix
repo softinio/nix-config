@@ -97,7 +97,10 @@
       nixc = "cd ~/.config/nixpkgs";
       nixre = "sudo -v && sudo darwin-rebuild switch --flake ~/.config/nixpkgs#${hostname}";
       nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
-      nixgc = "nix-collect-garbage -d";
+      # Both halves are needed: sudo prunes the root-owned system generations,
+      # the second pass prunes the home-manager generations under
+      # ~/.local/state/nix/profiles, which root's run does not scan.
+      nixgc = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
       nixq = "nix-env -qa";
       nixstorerepair = "nix-store --repair --verify --check-contents";
       nixupgrade = "nix upgrade-nix";

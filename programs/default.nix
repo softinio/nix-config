@@ -1,5 +1,6 @@
 [
   ./alacritty
+  ./cache-sweep
   ./claude
   ./cli-tools
   ./darcs
@@ -22,6 +23,7 @@
   ./tmux
   ./tuicr
   ./wezterm
+  ./worktree-audit
   ./vscode
   ./zed
 ]
