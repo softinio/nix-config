@@ -77,37 +77,50 @@
     '';
 
     shellAliases = {
-      addsshmac = "ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
-      bf = "broot";
-      cat = "bat";
-      du = "dua i";
-      linesofcode = "git ls-files | xargs wc -l";
-      fzfp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
-      ping = "prettyping";
-      ".." = "cd ..";
-      pj = "python -m json.tool";
-      l = "ll";
+      # Disk reclamation
+      # The Saturday agent sequence on demand; nixgc because -g runs unprivileged.
+      diskreclaim = "wtclean; and cache-sweep --yes; and nixgc; and nix-store --optimise";
+      rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
+      # -d narrows the default cache list, which also matches tracked dist/build.
+      wtclean = "worktree-audit -k -m -y -d node_modules,target,.venv,.direnv ~/Projects ~/OpenSource ~/Learn";
+
+      # Git and review
       g = "git";
+      gforksync = "git fetch upstream && git merge upstream/master && git push origin master";
       ghauth = "gh auth login --with-token < ~/.ghauth";
       gitpurgemain = ''git branch --merged | grep -v "\*" | grep -v "main" | xargs -n 1 git branch -d'';
       gitpurgemaster = ''git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'';
-      gforksync = "git fetch upstream && git merge upstream/master && git push origin master";
-      grep = "grep --color=auto";
       lg = "lazygit";
+      linesofcode = "git ls-files | xargs wc -l";
+      reviewr = "herdr plugin action invoke open --plugin persiyanov.reviewr";
+
+      # Nix
       nixc = "cd ~/.config/nixpkgs";
-      nixre = "sudo -v && sudo darwin-rebuild switch --flake ~/.config/nixpkgs#${hostname}";
-      nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
-      # Both halves are needed: sudo prunes the root-owned system generations,
-      # the second pass prunes the home-manager generations under
-      # ~/.local/state/nix/profiles, which root's run does not scan.
+      # sudo prunes the system generations, the second pass the home-manager ones.
       nixgc = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      nixinfo = "nix-shell -p nix-info --run \"nix-info -m\"";
       nixq = "nix-env -qa";
+      nixre = "sudo -v && sudo darwin-rebuild switch --flake ~/.config/nixpkgs#${hostname}";
       nixstorerepair = "nix-store --repair --verify --check-contents";
       nixupgrade = "nix upgrade-nix";
+
+      # Scala / JVM
       psbt = "pkill -f sbt";
-      reviewr = "herdr plugin action invoke open --plugin persiyanov.reviewr";
-      rmxcodederived = "rm -fr ~/Library/Developer/Xcode/DerivedData";
+
+      # Shell and file tools
+      ".." = "cd ..";
+      bf = "broot";
+      cat = "bat";
+      du = "dua i";
+      fzfp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
+      grep = "grep --color=auto";
+      l = "ll";
+      ping = "prettyping";
+      pj = "python -m json.tool";
       v = "nvim";
+
+      # SSH and remote hosts
+      addsshmac = "ssh-add  ~/.ssh/id_ed25519 --apple-use-keychain --apple-load-keychain";
       sshhcloud1 = "ssh salar@hcloud1.softinio.net";
       sshhcloud1r = "ssh root@hcloud1.softinio.net";
     };
