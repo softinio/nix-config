@@ -19,6 +19,7 @@ let
     ".direnv/"
     ".idea/"
     ".mypy_cache"
+    ".wrangler/"
     ".zed/"
     "*.metals"
     "*.metals.sbt"

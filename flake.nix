@@ -75,6 +75,41 @@
                       "x86_64-darwin"
                     ];
                     trusted-users = [ "root" ] ++ usernames;
+                    # Collect garbage mid-build when free space drops below
+                    # 10 GiB, stopping once 50 GiB is free.
+                    min-free = 10 * 1024 * 1024 * 1024;
+                    max-free = 50 * 1024 * 1024 * 1024;
+                  };
+
+                  # Saturday disk-space sequence, an hour after the
+                  # worktree-audit agent clears .direnv roots at 07:00.
+                  # Runs as root via launchd, so it also prunes old system
+                  # generations, not just the store.
+                  gc = {
+                    automatic = true;
+                    interval = [
+                      {
+                        Weekday = 6;
+                        Hour = 8;
+                        Minute = 0;
+                      }
+                    ];
+                    options = "--delete-older-than 14d";
+                  };
+
+                  # auto-optimise-store is known to corrupt the store on darwin;
+                  # a scheduled `nix-store --optimise` is the safe alternative.
+                  # An hour after the GC so it does not dedupe paths that are
+                  # about to be deleted.
+                  optimise = {
+                    automatic = true;
+                    interval = [
+                      {
+                        Weekday = 6;
+                        Hour = 9;
+                        Minute = 0;
+                      }
+                    ];
                   };
                 };
 

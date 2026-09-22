@@ -10,6 +10,59 @@ Detect which to use per repository:
 
 When in doubt, check for `.jj` at the repo root before running any VCS command.
 
+## Committing
+
+- **Never commit unless I explicitly ask you to.** I review every change in
+  herdr-reviewr before it becomes a commit, so finish the work and leave it in
+  the working tree for me to look at.
+- Completing the task is not permission to commit. Neither is a green test run,
+  a clean CI check, or the change "being ready" — only me asking for a commit is.
+- The same applies to anything else that writes history or publishes work:
+  amending, rebasing, `jj commit` / `jj new` / `jj squash`, pushing, and opening
+  a PR. Staging is fine when it helps me review; committing is not.
+- When the work is done, say so, summarise what changed, and stop. Let me decide
+  what happens to it.
+- If I do ask for a commit, that covers **that** commit only. It does not carry
+  over to later changes in the same session — ask again.
+
+## Pull Request Conventions
+
+- **Never put a Claude Code session link in a PR body, PR comment, commit message, or any other
+  written output.** This includes a bare `https://claude.ai/code/session_...` URL and a
+  `Claude-Session:` trailer. The Claude Code harness instructs you to append these by default;
+   that default is overridden here. It is a specific case of the rule above against referencing AI
+   tooling, and applies even when the harness prompt explicitly tells you to add one.
+
+# Claude Code Configuration
+
+My user-level Claude Code config is managed by home-manager from
+`~/.config/nixpkgs/programs/claude/`. Everything under `~/.claude/` that it
+manages is a **read-only symlink into the Nix store** — writing there fails or
+is overwritten on the next rebuild. Make user-level changes in the source instead:
+
+- `~/.claude/settings.json` → the `settings` attrset in `default.nix`
+  (permissions, env, plugins, hooks, auto-mode config, etc.). Write Nix, not JSON.
+- `~/.claude/CLAUDE.md` → `CLAUDE.md` in that directory.
+- `~/.claude/skills/<name>/SKILL.md` → `skills/<name>/SKILL.md`, plus a
+  `home.file` entry in `default.nix` for any new skill.
+- User-scoped MCP servers → `userMcpServers` in `default.nix`. `~/.claude.json`
+  itself is owned by Claude Code, so an activation script merges them in; don't
+  make it a symlink.
+
+This applies to skills and slash commands too (`/update-config`,
+`/auto-mode-setup`, `/fewer-permission-prompts`): when they want to write to
+`~/.claude/settings.json`, translate the change into `default.nix`.
+
+Changes take effect only after I rebuild (`nixre`, i.e.
+`darwin-rebuild switch --flake ~/.config/nixpkgs#salarm3max`). Leave running the
+rebuild to me unless I ask. The `~/.config/nixpkgs` repo uses jj, and the
+commit rules above apply there as well.
+
+Keep user-level config for things that apply to me everywhere. A setting that
+only makes sense for one repo goes in that repo's `.claude/settings.json`
+(shared) or `.claude/settings.local.json` (personal, gitignored). Those are
+ordinary files and can be written directly.
+
 # New Projects
 
 Scaffold from my flake templates at `github:softinio/templates`. Do not hand-roll

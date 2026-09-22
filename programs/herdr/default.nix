@@ -28,6 +28,7 @@ let
       Usage:
         herdr-workspace-layout open <worktree-path> [name]
         herdr-workspace-layout close
+        herdr-workspace-layout toggle
 
       The workspace and its first tab are named <name>. When omitted, the name is the
       worktree's branch with any owner prefix stripped (salar/add-caching -> add-caching),
@@ -37,7 +38,8 @@ let
       project, `mill -w __.compile` for a mill one, otherwise a plain shell. Set
       HERDR_BUILD_CMD to override.
 
-      Outside a herdr pane both subcommands are a no-op and exit 0.
+      open and close are a no-op outside a herdr pane and exit 0; toggle works from
+      anywhere, since it reads the focused pane from the server.
       EOF
       }
 
@@ -47,14 +49,35 @@ let
         jq -r '.result.pane.pane_id // .result.plugin_pane.pane.pane_id // empty'
       }
 
-      # Close reviewr by sweeping its labelled panes rather than invoking the plugin's own
-      # close action. That action validates reviewr's whole config before it will touch a
-      # pane, so an unparseable config leaves the pane both broken and unclosable. herdr
-      # labels plugin panes, and a plain `pane close` is what the plugin does internally.
+      # A pane counts as reviewr when it runs the plugin binary in its foreground process
+      # group. The `reviewr` label alone is not enough: herdr labels the panes the plugin
+      # opens, but a pane this script opened carries no label, so both are checked.
+      pane_runs_reviewr() {
+        herdr pane process-info --pane "$1" 2>/dev/null \
+          | jq -e '[.result.process_info.foreground_processes[]?
+                      | ((.argv0 // "") | split("/") | last)]
+                   | index("herdr-reviewr")' >/dev/null 2>&1
+      }
+
+      reviewr_panes() {
+        local ws="$1" id label
+        herdr pane list --workspace "$ws" \
+          | jq -r '.result.panes[] | "\(.pane_id) \(.label // "")"' \
+          | while read -r id label; do
+              [ -n "$id" ] || continue
+              if [ "$label" = "reviewr" ] || pane_runs_reviewr "$id"; then
+                printf '%s\n' "$id"
+              fi
+            done
+      }
+
+      # Close reviewr by sweeping its panes rather than invoking the plugin's own close
+      # action. That action validates reviewr's whole config before it will touch a pane,
+      # so an unparseable config leaves the pane both broken and unclosable. A plain
+      # `pane close` is what the plugin does internally anyway.
       close_reviewr_panes() {
-        local ids id
-        ids=$(herdr pane list --workspace "$HERDR_WORKSPACE_ID" \
-          | jq -r '.result.panes[] | select(.label == "reviewr") | .pane_id')
+        local ws="''${1:-''${HERDR_WORKSPACE_ID:-}}" ids id
+        ids=$(reviewr_panes "$ws")
         for id in $ids; do
           herdr pane close "$id" >/dev/null 2>&1 || true
         done
@@ -162,6 +185,59 @@ let
         echo "herdr-workspace-layout: $name ready — reviewr $reviewr_pane, build tab $build_tab (nvim $nvim_pane, build $build_pane: ''${build_cmd:-shell})"
       }
 
+      # The worktree the layout put the tool panes in. The focused pane is usually Claude's,
+      # which lives in the *main* checkout — taking its cwd is exactly what makes the
+      # plugin's own toggle open reviewr against the wrong tree.
+      layout_worktree() {
+        local ws="$1" fallback="$2" build_tab candidate
+        build_tab=$(herdr tab list --workspace "$ws" \
+          | jq -r '.result.tabs[] | select(.label == "build") | .tab_id' | head -1)
+        if [ -n "$build_tab" ]; then
+          candidate=$(herdr pane list --workspace "$ws" \
+            | jq -r --arg t "$build_tab" \
+                'first(.result.panes[] | select(.tab_id == $t) | .foreground_cwd // .cwd // empty)')
+          if [ -n "$candidate" ] && [ -d "$candidate" ]; then
+            printf '%s\n' "$candidate"
+            return 0
+          fi
+        fi
+
+        # No build tab — closed, or this workspace never had a layout. Nothing on the
+        # server still records the worktree, and workspace and tab labels are free-form
+        # (`open` takes an explicit name), so there is nothing to reconstruct it from.
+        # The focused pane's own cwd is the only honest answer left.
+        printf '%s\n' "$fallback"
+      }
+
+      # Bound to a key in config.toml, so it reads the focused pane from the server rather
+      # than the environment: a keybinding's shell runs detached, with no pane of its own.
+      cmd_toggle() {
+        local current ws focused existing cwd
+        current=$(herdr pane current 2>/dev/null || true)
+        ws=$(printf '%s' "$current" | jq -r '.result.pane.workspace_id // empty')
+        focused=$(printf '%s' "$current" | jq -r '.result.pane.pane_id // empty')
+        if [ -z "$ws" ] || [ -z "$focused" ]; then
+          echo "herdr-workspace-layout: no focused herdr pane — nothing to toggle" >&2
+          return 1
+        fi
+
+        existing=$(reviewr_panes "$ws")
+        if [ -n "$existing" ]; then
+          close_reviewr_panes "$ws"
+          echo "herdr-workspace-layout: closed reviewr in $ws"
+          return 0
+        fi
+
+        cwd=$(layout_worktree "$ws" \
+          "$(printf '%s' "$current" | jq -r '.result.pane.foreground_cwd // .result.pane.cwd // empty')")
+
+        herdr plugin pane open \
+          --plugin persiyanov.reviewr --entrypoint pane \
+          --placement split --target-pane "$focused" --direction right \
+          --cwd "$cwd" --focus >/dev/null
+        echo "herdr-workspace-layout: opened reviewr on $cwd"
+      }
+
       cmd_close() {
         # Panes are found by label, not by ids remembered from `open`, so teardown works
         # from a fresh shell and survives however long the work took.
@@ -181,13 +257,15 @@ let
         open)
           if [ "$#" -lt 2 ]; then usage >&2; exit 2; fi
           ;;
-        close) ;;
+        close | toggle) ;;
         ""|-h|--help|help) usage; exit 0 ;;
         *) usage >&2; exit 2 ;;
       esac
 
       # Claude is not always run inside herdr. Skip silently rather than failing the caller.
-      if [ -z "''${HERDR_WORKSPACE_ID:-}" ] || [ -z "''${HERDR_PANE_ID:-}" ] || [ -z "''${HERDR_TAB_ID:-}" ]; then
+      # toggle is exempt: it is a keybinding, and its shell has no pane of its own.
+      if [ "$1" != toggle ] &&
+        { [ -z "''${HERDR_WORKSPACE_ID:-}" ] || [ -z "''${HERDR_PANE_ID:-}" ] || [ -z "''${HERDR_TAB_ID:-}" ]; }; then
         echo "herdr-workspace-layout: not running inside a herdr pane — skipping layout"
         exit 0
       fi
@@ -197,6 +275,7 @@ let
       case "$sub" in
         open) cmd_open "$@" ;;
         close) cmd_close ;;
+        toggle) cmd_toggle ;;
       esac
     '';
   };
@@ -211,7 +290,7 @@ in
     onboarding = false
 
     [theme]
-    name = "tokyo-night"
+    name = "gruvbox"
 
     [theme.custom]
     accent = "orange"
@@ -228,21 +307,33 @@ in
     delay_seconds = 1
 
     # Several workspaces run at once, so the agent sidebar needs to say which
-    # worktree a blocked agent belongs to, not just that something is blocked.
+    # worktree a blocked agent belongs to, not just that something is blocked. The
+    # workspace is the branch name and the tab says which half of the layout it is.
+    # `branch`/`git_status` are spaces-sidebar tokens only: an unknown token here fails
+    # the whole-file parse and silently drops every setting back to herdr's defaults.
     [ui.sidebar.agents]
     rows = [
       ["state_icon", "agent", "state_text"],
-      ["workspace", "branch"],
+      ["workspace", "tab"],
     ]
 
     [keys]
     split_vertical = "prefix+'"
     split_horizontal = "prefix+minus"
 
+    # Cmd+R, by way of the terminal. A `cmd+r` binding here parses but never fires: macOS
+    # terminals keep Cmd chords for themselves, so the key never reaches herdr. Ghostty and
+    # wezterm both relay super+r as F12, which herdr picks up here. Not prefix+r either:
+    # that is herdr's built-in resize_mode, which wins over a command binding.
+    #
+    # The plugin's own `persiyanov.reviewr.toggle` is deliberately not bound: it takes its
+    # cwd from the focused pane, which in a layout workspace is Claude's — sitting in the
+    # main checkout, so reviewr would open on the wrong tree. The wrapper resolves the
+    # worktree from the workspace instead.
     [[keys.command]]
-    key = "prefix+r"
-    type = "plugin_action"
-    command = "persiyanov.reviewr.toggle"
+    key = "f12"
+    type = "shell"
+    command = "${workspaceLayout}/bin/herdr-workspace-layout toggle"
 
     [experimental]
     pane_history = true
@@ -259,11 +350,11 @@ in
   # per *repo*, so it is shared by every worktree of that repo; for a stacked branch whose
   # base is not main, reach for `tuicr -r <base>...HEAD` rather than fighting the pick.
   home.file.".config/herdr/plugins/config/persiyanov.reviewr/config.toml".text = ''
-    theme = "tokyo-night"
+    theme = "gruvbox"
     default_scope = "branch"
     navigator_position = "right"
     toggle_placement = "split"
-    toggle_direction = "down"
+    toggle_direction = "right"
     auto_open = false
   '';
 }

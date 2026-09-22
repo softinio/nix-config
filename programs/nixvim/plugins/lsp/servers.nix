@@ -30,6 +30,20 @@
       metals = {
         enable = true;
         config = {
+          # lspconfig's defaults omit Mill 1.x (build.mill), which leaves Metals
+          # with no workspace root and in single-file fallback mode. Setting this
+          # replaces the defaults, so they are restated here.
+          root_markers = [
+            "build.mill"
+            ".mill-version"
+            "build.sc"
+            "build.sbt"
+            [
+              "build.gradle"
+              "build.gradle.kts"
+            ]
+            "pom.xml"
+          ];
           # Workaround for Neovim 0.12 vim/glob.lua rejecting file:/// URI globs
           # sent by metals for workspace file watching (upstream Neovim bug)
           capabilities.__raw = ''

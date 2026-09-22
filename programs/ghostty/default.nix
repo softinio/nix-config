@@ -21,6 +21,9 @@ let
       "super+k=toggle_split_zoom"
       "super+b>'=new_split:right"
       "super+b>-=new_split:down"
+      # macOS keeps Cmd chords out of the pty, so herdr never sees cmd+r on its own.
+      # Relay it as F12 (CSI 24~) instead; herdr binds f12 to the reviewr toggle.
+      "super+r=csi:24~"
     ];
   };
 in
